@@ -1,6 +1,8 @@
 # qemuwithdockerWindowsTesting
 This is set of configured tools to perform automatic portable docker testing on Windows Computer
 
+root password for CentOS7: osboxes.org
+
 Tested on Windows 10 x64.
 *shows issues for Angular app (need help)
 
