@@ -1,0 +1,15 @@
+mkdir deployfolder
+
+cd deployfolder
+
+echo 'osboxes.org' | sudo -kS  yum install -y git
+
+sh -c 'git clone https://username:password@host.git .' 
+
+echo 'osboxes.org' | sudo -kS  docker build -t prodimage .
+
+echo 'osboxes.org' | sudo -kS  docker image ls
+
+echo 'osboxes.org' | sudo -kS  docker container ls
+
+echo 'osboxes.org' | sudo -kS  docker run -p 80:80 prodimage
