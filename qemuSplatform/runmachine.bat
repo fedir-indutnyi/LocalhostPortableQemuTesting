@@ -1,3 +1,6 @@
+rem map temporary b drive
+subst q: .
+
 Q:
 cd vmachine
 
@@ -32,7 +35,7 @@ rem -display sdl -vga none -device virtio-vga,xres=800,yres=600
 
 
 rem correct
-%QEMUDIR%\%QEMUBIN% -L %QEMUDIR% -m 3592M  -hda Q:\vmachine\hdd.vmdk -display sdl -vga none -device virtio-vga,xres=800,yres=600 -boot c -usb -usbdevice keyboard   -net nic -net user,hostfwd=tcp::10022-:22  -parallel none -serial none -device usb-kbd -usbdevice tablet
+%QEMUDIR%\%QEMUBIN% -L %QEMUDIR% -m 4G  -hda Q:\vmachine\hdd.vmdk -display sdl -vga none -device virtio-vga,xres=800,yres=600 -boot c -usb -usbdevice keyboard  -net nic,model=rtl8139  -net user,hostfwd=tcp::10022-:22,hostfwd=tcp::10080-:80,hostfwd=tcp::18080-:8080,hostfwd=tcp::3000-:3000 -parallel none -serial none -device usb-kbd -usbdevice tablet 
 
 
 

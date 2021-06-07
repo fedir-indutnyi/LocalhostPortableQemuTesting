@@ -1,15 +1,24 @@
+sudo su
+
+rm -r deployfolder
+
 mkdir deployfolder
 
 cd deployfolder
 
 echo 'osboxes.org' | sudo -kS  yum install -y git
 
-sh -c 'git clone https://username:password@host.git .' 
+sh -c 'git clone https://########:####@versioning.kendart-systems.com/scm/tpf/frontendprod.git .' 
 
-echo 'osboxes.org' | sudo -kS  docker build -t prodimage .
+echo 'osboxes.org' | sudo -kS  docker build -t prodimage . 
 
 echo 'osboxes.org' | sudo -kS  docker image ls
 
 echo 'osboxes.org' | sudo -kS  docker container ls
 
-echo 'osboxes.org' | sudo -kS  docker run -p 80:80 prodimage
+echo 'osboxes.org' | sudo -kS  docker run -p 127.0.0.1:3000:3000/tcp --expose 3000 prodimage & echo 'osboxes.org' | sudo -kS  jobs
+
+echo 'osboxes.org' | sudo -kS  docker container ls
+
+_docker container stop 49db5d59e25e
+_docker kill $(docker ps -q)
