@@ -1,7 +1,7 @@
 rem map temporary b drive
 subst q: .\qemu_windows
 
-Q:
+:
 cd vmachine
 
 
@@ -47,5 +47,6 @@ rem %QEMUDIR%\%QEMUBIN% -L %QEMUDIR% -m 4G  -hda "Q:\vmachine\Ubuntu 20.04.4 (64
 
 rem qemu-img convert -O vmdk Q:\vmachine\mybackup.img vmdkname.vmdk 
 
+subst q: /D
 
 pause
