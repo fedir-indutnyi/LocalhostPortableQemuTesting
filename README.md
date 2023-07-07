@@ -5,6 +5,35 @@ Tested on Windows 10 x64.
 login osboxes
 pass osboxes.org
 
+Initial set of commands to patch OsBoxes Image to be able to support more flexible operations:
+
+``` sh
+echo 'Setup permanent Proxy (if needed):'
+sudo cat /etc/environment
+sudo bash -c 'grep -q FTP_PROXY /etc/environment || echo 'FTP_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q HTTPS_PROXY /etc/environment || echo 'HTTPS_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q HTTP_PROXY /etc/environment || echo 'HTTP_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q NO_PROXY /etc/environment || echo 'NO_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q ftp_proxy /etc/environment || echo 'ftp_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q http_proxy /etc/environment || echo 'http_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q https_proxy /etc/environment || echo 'https_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
+sudo bash -c 'grep -q no_proxy /etc/environment || echo 'no_proxy="localhost,127.0.0.0/8,::1"' >> /etc/environment'
+sudo cat /etc/systemd/system.conf
+sudo bash -c 'sed -i -e 's/#DefaultEnvironment=//g' /etc/systemd/system.conf'
+export DefaultEnvironment='"FTP_PROXY=http://10.0.2.2:3128/" "HTTPS_PROXY=http://10.0.2.2:3128/" "HTTP_PROXY=http://10.0.2.2:3128/" "NO_PROXY=localhost,127.0.0.0/8,::1" "ftp_proxy=http://10.0.2.2:3128/" "http_proxy=http://10.0.2.2:3128/" "https_proxy=http://10.0.2.2:3128/" "no_proxy=localhost,127.0.0.0/8,::1"'
+echo "DefaultEnvironment=$DefaultEnvironment" | sudo tee -a /etc/systemd/system.conf
+
+echo 'Install Taskfile utility:'
+sudo apt update
+
+
+```
+
+
+
+Accessing virtual machine from Windows:
+ssh osboxes@127.0.0.1 -p10022
+
 After deployment:
 http://127.0.0.1:8080/ (inside qemu)
 http://127.0.0.1:80/ (inside windows)

@@ -1,4 +1,5 @@
 rem map temporary b drive
+subst q: /D
 subst q: .\qemu_windows
 
 :
