@@ -23,10 +23,37 @@ sudo bash -c 'sed -i -e 's/#DefaultEnvironment=//g' /etc/systemd/system.conf'
 export DefaultEnvironment='"FTP_PROXY=http://10.0.2.2:3128/" "HTTPS_PROXY=http://10.0.2.2:3128/" "HTTP_PROXY=http://10.0.2.2:3128/" "NO_PROXY=localhost,127.0.0.0/8,::1" "ftp_proxy=http://10.0.2.2:3128/" "http_proxy=http://10.0.2.2:3128/" "https_proxy=http://10.0.2.2:3128/" "no_proxy=localhost,127.0.0.0/8,::1"'
 echo "DefaultEnvironment=$DefaultEnvironment" | sudo tee -a /etc/systemd/system.conf
 
-echo 'Install Taskfile utility:'
+echo 'Get  latest updates:'
 sudo apt update
 
+echo 'Disable GUI:'
+sudo systemctl set-default multi-user
 
+echo 'Install git:'
+sudo apt install git -y
+
+echo 'Install Taskfile utility: (similar like ansible)'
+cd ~
+sudo apt update
+sudo apt-get install build-essential
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew doctor
+brew install go-task
+task --version
+
+echo 'Install Sftp shared access to host windows'
+cd ~
+sudo apt install sshfs
+mkdir shared
+echo 'password' | sshfs tester@10.0.2.2:/ ./shared -p2222
+
+
+
+
+
+sudo reboot
 ```
 
 
