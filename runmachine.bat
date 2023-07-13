@@ -1,8 +1,8 @@
-rem map temporary b drive
+rem map temporary q drive
 subst q: /D
 subst q: .\qemu_windows
 
-:
+q:
 cd vmachine
 
 
