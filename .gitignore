@@ -1,3 +1,5 @@
 /.vscode
+
 qemu_windows/vmachine/hdd.vmdk
-qemu_windows/vmachine
+qemu_windows/vmachine/*
+!qemu_windows/vmachine/.info
