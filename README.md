@@ -6,55 +6,30 @@ login osboxes
 pass osboxes.org
 
 Initial set of commands to patch OsBoxes Image to be able to support more flexible operations:
+If you need Internet and not configured proxy, first create a file configureproxy.sh and run it manually
+or copy install scripts:
+
+q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureproxy.sh' osboxes@127.0.0.1:~ 
+q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureapplications.sh' osboxes@127.0.0.1:~ 
+
 
 ``` sh
-
-echo 'Setup permanent Proxy (if needed):'
-sudo cat /etc/environment
-sudo bash -c 'grep -q FTP_PROXY /etc/environment || echo 'FTP_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q HTTPS_PROXY /etc/environment || echo 'HTTPS_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q HTTP_PROXY /etc/environment || echo 'HTTP_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q NO_PROXY /etc/environment || echo 'NO_PROXY="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q ftp_proxy /etc/environment || echo 'ftp_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q http_proxy /etc/environment || echo 'http_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q https_proxy /etc/environment || echo 'https_proxy="http://10.0.2.2:3128/"' >> /etc/environment'
-sudo bash -c 'grep -q no_proxy /etc/environment || echo 'no_proxy="localhost,127.0.0.0/8,::1"' >> /etc/environment'
-sudo cat /etc/environment
-sudo cat /etc/systemd/system.conf
-sudo bash -c 'sed -i -e 's/#DefaultEnvironment=//g' /etc/systemd/system.conf'
-export DefaultEnvironment='"FTP_PROXY=http://10.0.2.2:3128/" "HTTPS_PROXY=http://10.0.2.2:3128/" "HTTP_PROXY=http://10.0.2.2:3128/" "NO_PROXY=localhost,127.0.0.0/8,::1" "ftp_proxy=http://10.0.2.2:3128/" "http_proxy=http://10.0.2.2:3128/" "https_proxy=http://10.0.2.2:3128/" "no_proxy=localhost,127.0.0.0/8,::1"'
-echo "DefaultEnvironment=$DefaultEnvironment" | sudo tee -a /etc/systemd/system.conf
-sudo cat /etc/systemd/system.conf
-
-echo 'Get  latest updates:'
-sudo apt update
 
 echo 'Disable GUI:'
 sudo systemctl set-default multi-user
 
-echo 'Install git:'
-sudo apt install git -y
+chmod +x configureproxy.sh
+sudo ./configureproxy.sh
+curl google.de
+sudo reboot
 
-echo 'Install Brew - to be able to install Task'
-cd ~
-sudo apt update
-sudo apt-get install build-essential
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew doctor
-echo 'Install Taskfile utility: (similar like ansible)'
-brew install go-task
-task --version
 
-echo 'Install Sftp shared access to host windows'
-cd ~
-sudo apt install sshfs
-mkdir shared
+chmod +x configureapplications.sh
+sudo ./configureapplications.sh
+
+
+echo 'Connect Sftp shared access to host windows'
 echo 'password' | sshfs tester@10.0.2.2:/ ./shared -p2222
-
-
-
 
 
 sudo reboot

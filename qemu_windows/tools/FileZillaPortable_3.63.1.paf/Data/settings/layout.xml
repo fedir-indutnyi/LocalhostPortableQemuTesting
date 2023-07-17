@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<FileZilla3 version="3.63.1" platform="windows">
+	<Layout Builddate="2023-01-26" Buildtime="12:36:50">
+		<Resources>
+			<xrc file="dialogs.xrc" date="1674736698" />
+			<xrc file="netconfwizard.xrc" date="1674736698" />
+		</Resources>
+		<Language id="pl_PL" date="1674736698">
+			<Font font="1;9;-12;0;0;0;400;0;0;0;1;0;0;0;0;Segoe UI" width="669" height="15" />
+			<Dialog name="Settings" width="519" />
+		</Language>
+		<Language id="en_US" date="">
+			<Font font="1;9;-12;0;0;0;400;0;0;0;1;0;0;0;0;Segoe UI" width="669" height="15" />
+		</Language>
+	</Layout>
+</FileZilla3>
