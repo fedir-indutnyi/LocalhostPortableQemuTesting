@@ -3,3 +3,4 @@
 qemu_windows/vmachine/hdd.vmdk
 qemu_windows/vmachine/*
 !qemu_windows/vmachine/.info
+qemu_windows/tools/RebexTinySftpServer-Binaries-Latest/server-private-key*
