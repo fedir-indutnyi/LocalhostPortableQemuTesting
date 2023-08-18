@@ -36,6 +36,43 @@ sudo reboot
 ```
 
 
+If Docker has proxy internet "misbehaving" issue:
+This is option for computer connected to internet via proxy, including docker setup:
+
+
+
+$ sudo unlink /etc/resolv.conf
+$ sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+$ ls -l /etc/resolv.conf
+
+lrwxrwxrwx 1 root root 32 May 29 08:48 /etc/resolv.conf -> /run/systemd/resolve/resolv.conf
+
+$ sudo reboot
+
+
+
+
+1. Create a drop-in
+mkdir /etc/systemd/system/docker.service.d
+2. Create a file with name /etc/systemd/system/docker.service.d/http-proxy.conf that adds the HTTP_PROXY environment variable:
+cd /etc/systemd/system/docker.service.d
+nano  http-proxy.conf
+cat http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=http://10.0.2.2:3128/"
+Environment="HTTPS_PROXY=http://10.0.2.2:3128/"
+Environment="NO_PROXY="localhost,127.0.0.1,::1"
+
+
+3. reload the systemd daemon
+systemctl daemon-reload
+4. restart docker
+systemctl restart docker
+5. Verify that the configuration has been loaded:
+systemctl show docker --property Environment
+
+
+
 
 Accessing virtual machine from Windows:
 
