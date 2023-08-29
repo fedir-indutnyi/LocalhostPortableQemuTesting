@@ -9,23 +9,23 @@ Initial set of commands to patch OsBoxes Image to be able to support more flexib
 If you need Internet and not configured proxy, first create a file configureproxy.sh and run it manually
 or copy install scripts:
 
+Manually run commands from configure proxy and applications.
+
 q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureproxy.sh' osboxes@127.0.0.1:~ 
 q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureapplications.sh' osboxes@127.0.0.1:~ 
 
 
 ``` sh
-
 echo 'Disable GUI:'
 sudo systemctl set-default multi-user
 
 chmod +x configureproxy.sh
-sudo ./configureproxy.sh
+sudo /bin/bash -c "./configureproxy.sh"
 curl google.de
 sudo reboot
 
-
 chmod +x configureapplications.sh
-sudo ./configureapplications.sh
+sudo /bin/bash -c "./configureapplications.sh"
 
 
 echo 'Connect Sftp shared access to host windows'
@@ -53,10 +53,10 @@ $ sudo reboot
 
 
 1. Create a drop-in
-mkdir /etc/systemd/system/docker.service.d
+sudo mkdir /etc/systemd/system/docker.service.d
 2. Create a file with name /etc/systemd/system/docker.service.d/http-proxy.conf that adds the HTTP_PROXY environment variable:
 cd /etc/systemd/system/docker.service.d
-nano  http-proxy.conf
+sudo nano  http-proxy.conf
 cat http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=http://10.0.2.2:3128/"
