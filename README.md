@@ -78,6 +78,7 @@ Accessing virtual machine from Windows:
 
 ``` sh
 ssh osboxes@127.0.0.1 -p10022
+sudo apt install mc
 ```
 
 Creating a tunnel (example of most used ports):
