@@ -1,0 +1,136 @@
+
+
+[y]
+ssh osboxes@127.0.0.1 -p10022
+
+[y]
+Tunnel:
+ssh -L 18080:127.0.0.1:18080 -L 8001:127.0.0.1:8001 -L 8443:192.168.67.2:8443 -L 30204:192.168.67.2:30204 -L 30252:192.168.67.2:30252 osboxes@127.0.0.1 -p10022 
+[y]
+K3s:
+	(dashboard) 			(argo)		                               (mongodb)        (custom app, f.e. stable links acess from 8081)  
+ssh -L 31191:127.0.0.1:31191 -L 30604:127.0.0.1:30604   -L 8001:127.0.0.1:8001  -L 27017:127.0.0.1:27017  -L 8081:127.0.0.1:8080                          -L 6443:127.0.0.1:6443 -L 8443:192.168.67.2:8443 osboxes@127.0.0.1 -p10022 
+
+recreate token:
+kubectl create token admin-user -n kubernetes-dashboard
+
+
+token dashboard:
+eyJhbG..... DIjiw
+kubectl minio proxy
+
+watch -n 10 kubectl get pods -A
+
+credentials argo:
+user:
+admin
+E2XjmeJc6yjkIcIC
+
+
+Wordpress:
+  echo Username: user
+  echo Password: $(kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+osboxes@osboxes:~$ (kubectl get secret --namespace default my-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d)
+DkHPuGNSoJ   osboxes@osboxes:~$
+
+
+ip r
+
+hostname -I
+
+DO NOT USE! eval $(minikube docker-env)
+
+minikube dashboard --port=18080
+
+[y]
+export KUBE_EDITOR="nano"
+
+
+for k3sup
+export KUBECONFIG=/home/osboxes/kubeconfig
+
+[y]
+# cd ~
+mkdir shared
+# sudo chmod -R 777 shared
+echo 'password' | sshfs tester@10.0.2.2:/ ./shared -p2222
+
+[not needed]
+cd shared
+cd repocode
+cd  'StableLinksMainRepo'
+ls
+
+
+docker save stablelinks -o stablelinks.tar
+cp  stablelinks_latest.tar ~
+sudo k3s ctr images import stablelinks_latest.tar
+sudo crictl images
+
+
+to bring ports:
+ssh -L 35601:127.0.0.1:35601 osboxes@127.0.0.1 -p10022
+ssh -L 8080:127.0.0.1:8080 osboxes@127.0.0.1 -p10022
+working:
+ssh -L 35601:127.0.0.1:35601 osboxes@127.0.0.1 -p10022
+
+
+export HTTP_PROXY=http://10.0.2.2:3128/
+export HTTPS_PROXY=$HTTP_PROXY 
+export FTP_PROXY=$HTTP_PROXY 
+export NO_PROXY=".bicadm.com,.bosch.com,.de.bosch.com,.bgn,.bosch.cloud,bosch-iot-cloud.com"
+
+export NO_PROXY="localhost,127.0.0.0/8,::1,192.168.67.2"
+
+persistent storage:
+    mkdir -p /var/tmp/hostpath-provisioner
+    mkdir /tmp/hostpath-provisioner
+    sudo mount --bind /var/tmp/hostpath-provisioner /tmp/hostpath-provisioner
+
+sudo minikube start --network-plugin=cni --cni=calico --driver=none
+
+minikube start
+minikube start --driver=none --network-plugin=cni --cni=calico
+ minikube start --driver=docker --memory=4G 
+
+--insecure-registry="registry-1.docker.io,registry.k8s.io"
+
+minikube dashboard --port=18080
+
+kubectl get pods --all-namespaces -o wide
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+QiIJJbXuNLS9rJl5
+kubectl port-forward svc/argocd-server -n argocd 8081:443
+ssh -L 8081:127.0.0.1:8081 osboxes@127.0.0.1 -p10022
+http://127.0.0.1:8081
+
+curl https://google.de
+
+sudo env | grep proxy
+
+This is to setup proxy globally:
+
+On ubuntu 18.04 ( my test machine )
+export ip="$(ifconfig | grep -v 'eth0:' | grep -A 1 'eth0' | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+
+export NO_PROXY="localhost,127.0.0.0/8,::1,192.168.58.2" 
+
+You must (Bosch):
+1)
+modify /etc/environment by adding these lines :
+
+KUBECONFIG="/home/osboxes/kubeconfig"
+
+[]
+FTP_PROXY="http://10.0.2.2:3128/"
+HTTPS_PROXY="http://10.0.2.2:3128/"
+HTTP_PROXY="http://10.0.2.2:3128/"
+NO_PROXY="localhost,127.0.0.0/8,::1"
+ftp_proxy="http://10.0.2.2:3128/"
+http_proxy="http://10.0.2.2:3128/"
+https_proxy="http://10.0.2.2:3128/"
+no_proxy="localhost,127.0.0.0/8,::1"
+2)
+[]
+modify /etc/systemd/system.conf in the section [Manager] by adding this one big line :
+DefaultEnvironment="FTP_PROXY=http://10.0.2.2:3128/" "HTTPS_PROXY=http://10.0.2.2:3128/" "HTTP_PROXY=http://10.0.2.2:3128/" "NO_PROXY=localhost,127.0.0.0/8,::1" "ftp_proxy=http://10.0.2.2:3128/" "http_proxy=http://10.0.2.2:3128/" "https_proxy=http://10.0.2.2:3128/" "no_proxy=localhost,127.0.0.0/8,::1"
