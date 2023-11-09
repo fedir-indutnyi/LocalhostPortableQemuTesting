@@ -15,6 +15,18 @@ q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:
 q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureapplications.sh' osboxes@127.0.0.1:~ 
 
 
+Accessing virtual machine from Windows:
+
+``` sh
+ssh osboxes@127.0.0.1 -p10022
+sudo apt install mc
+```
+
+Creating a tunnel (example of most used ports):
+``` sh
+ssh -L 34200:127.0.0.1:34200 -L 33000:127.0.0.1:33000 -L 41060:127.0.0.1:41060 -L 41061:127.0.0.1:41061 -L 41062:127.0.0.1:41062 -L 41063:127.0.0.1:41063 -L 8334:127.0.0.1:8334 -L 3306:127.0.0.1:3306 -L 22:127.0.0.1:22 -L 80:127.0.0.1:80 -L 31191:127.0.0.1:31191 -L 30604:127.0.0.1:30604  -L 8001:127.0.0.1:8001 -L 27017:127.0.0.1:27017 -L 8081:127.0.0.1:8080 -L 6443:127.0.0.1:6443 -L 3000:127.0.0.1:3000 -L 4200:127.0.0.1:4200 -L 8443:192.168.67.2:8443  osboxes@127.0.0.1 -p10022 
+```
+
 ``` sh
 echo 'Disable GUI:'
 sudo systemctl set-default multi-user
