@@ -32,6 +32,10 @@ export DefaultEnvironment='"FTP_PROXY=http://$proxy_host:$proxy_port/" "HTTPS_PR
 echo "DefaultEnvironment=$DefaultEnvironment" | sudo tee -a /etc/systemd/system.conf
 sudo cat /etc/systemd/system.conf
 
+echo "Check k3s proxy settings"
+sudo cat /etc/systemd/system/k3s.service.env
+sudo cat /etc/systemd/system/k3s-agent.service.env
+
 
 
 if [ -n "$proxy_username" ] && [ -n "$proxy_password" ]; then
