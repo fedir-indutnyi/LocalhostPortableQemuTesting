@@ -14,11 +14,27 @@ Manually run commands from configure proxy and applications.
 q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureproxy.sh' osboxes@127.0.0.1:~ 
 q:\tools\PuTTYPortable\App\putty\pscp.exe -C -agent -P 10022 -pw oxboxes.org 'q:\qemu_windows\configureapplications.sh' osboxes@127.0.0.1:~ 
 
+To enable SSH Access:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install openssh-server
+sudo systemctl status ssh
+sudo ufw allow ssh
+
+
+install docker:
+https://docs.docker.com/engine/install/ubuntu/
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+https://docs.docker.com/engine/install/linux-postinstall/
+ sudo systemctl enable docker.service
+ sudo systemctl enable containerd.service
+
 
 Accessing virtual machine from Windows:
 
 ``` sh
 ssh osboxes@127.0.0.1 -p10022
+sudo apt install sshfs
 sudo apt install mc
 ```
 
@@ -29,7 +45,10 @@ ssh -L 34200:127.0.0.1:34200 -L 33000:127.0.0.1:33000 -L 41060:127.0.0.1:41060 -
 
 ``` sh
 echo 'Disable GUI:'
+sudo systemctl get-default
+echo 'graphical.target'
 sudo systemctl set-default multi-user
+sudo reboot
 
 chmod +x configureproxy.sh
 sudo /bin/bash -c "./configureproxy.sh"
