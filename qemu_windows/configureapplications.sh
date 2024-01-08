@@ -12,6 +12,8 @@ sudo apt install mc
 
 echo 'Install Sftp shared access to host windows'
 cd ~
+sudo add-apt-repository universe
+sudo apt-get install sshfs
 sudo apt install sshfs
 mkdir shared
 

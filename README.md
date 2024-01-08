@@ -33,13 +33,16 @@ https://docs.docker.com/engine/install/linux-postinstall/
 Accessing virtual machine from Windows:
 
 ``` sh
+ssh osboxes@localhost -p10022
+or
 ssh osboxes@127.0.0.1 -p10022
-sudo apt install sshfs
+s
+udo apt install sshfs
 sudo apt install mc
 ```
 
 if this happens:
-The authenticity of host '[127.0.0.1]:10022 ([127.0.0.1]:10022)' can't be established.
+The authenticity of host ...  can't be established.
 then delete c:\users\cuurent user\.shh
 
 Creating a tunnel (example of most used ports):
