@@ -5,7 +5,7 @@ rem ==================================
 rem Replace with your values
 rem ==================================
 set "QEMUDIR=qemu_windows\qemu"
-set "QEMUHDD=C:\temp\Ubuntu-minimal-server-22.vmdk"
+set "QEMUHDD=qemu_windows\vmachine\Ubuntu-minimal-server-22.vmdk"
 rem ==================================
 rem You can add a w suffix to this if 
 rem you don't want a console
