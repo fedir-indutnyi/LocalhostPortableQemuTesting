@@ -36,6 +36,13 @@ echo "Check k3s proxy settings"
 sudo cat /etc/systemd/system/k3s.service.env
 sudo cat /etc/systemd/system/k3s-agent.service.env
 
+sudo bash -c 'grep -q FTP_PROXY /etc/systemd/system/k3s.service.env || echo 'FTP_PROXY="http://$proxy_host:$proxy_port/"' >> /etc/systemd/system/k3s.service.env'
+sudo bash -c 'grep -q HTTPS_PROXY /etc/systemd/system/k3s.service.env || echo 'HTTPS_PROXY="http://$proxy_host:$proxy_port/"' >> /etc/systemd/system/k3s.service.env'
+sudo bash -c 'grep -q HTTP_PROXY /etc/systemd/system/k3s.service.env || echo 'HTTP_PROXY="http://$proxy_host:$proxy_port/"' >> /etc/systemd/system/k3s.service.env'
+sudo bash -c 'grep -q NO_PROXY /etc/systemd/system/k3s.service.env || echo 'NO_PROXY="http://$proxy_host:$proxy_port/"' >> /etc/systemd/system/k3s.service.env'
+
+sudo cat /etc/systemd/system/k3s.service.env
+
 
 
 if [ -n "$proxy_username" ] && [ -n "$proxy_password" ]; then
