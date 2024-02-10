@@ -85,4 +85,27 @@ autok3s --help
 # Expose port 8080
 # iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 
-autok3s   create --provider  k3d --master  1 --name  naaadoker --worker  0 --k3s-install-script  https://get.k3s.io --api-port  0.0.0.0:0 --image  docker.io/rancher/k3s:v1.28.5-k3s1 --no-image-volume --no-lb
+autok3s -d  create --provider  k3d --master  1 --name  naaadoker --worker  0 --k3s-install-script  https://get.k3s.io --api-port  0.0.0.0:0 --image  docker.io/rancher/k3s:v1.28.5-k3s1 --no-image-volume --no-lb
+autok3s -d create -p k3d --name myk3s --master 1
+autok3s   create --provider  native --docker-script  https://get.docker.com --k3s-channel  stable --k3s-install-mirror  INSTALL_K3S_MIRROR=cn --k3s-install-script  https://rancher-mirror.rancher.cn/k3s/k3s-install.sh --master-extra-args  '--disable coredns,local-storage,servicelb,metrics-server,traefik' --rollback --ssh-port  22 --ssh-user  osboxes --master-ips  127.0.0.1
+autok3s   create --provider  native --master 1 --name mytempk3s --docker-script  https://get.docker.com --k3s-channel  stable --k3s-install-mirror  INSTALL_K3S_MIRROR=cn --k3s-install-script  https://rancher-mirror.rancher.cn/k3s/k3s-install.sh --master-extra-args  '--disable coredns,local-storage,servicelb,metrics-server,traefik' 
+
+autok3s -d create \
+    --provider native \
+    --name myk3stemp1 \
+    --ssh-user osboxes \
+    --ssh-port 22 \
+    --ssh-password osboxes.org \
+    --ssh-key-path /home/osboxes/.ssh/id_rsa \
+    --master-ips 127.0.0.1
+
+# Without this it will block passwords in terminal
+sudo visudo
+osboxes ALL=(ALL) NOPASSWD:ALL
+
+autok3s -d create --provider native  --name myk3stemp1 --ssh-user osboxes  --ssh-port 22  --ssh-password osboxes.org --ssh-key-path /home/osboxes/.ssh/id_rsa  --master-ips 127.0.0.1
+echo "osboxes.org" | sudo -S autok3s -d create --provider native  --name myk3stemp1 --ssh-user osboxes  --ssh-port 22  --ssh-password osboxes.org --ssh-key-path /home/osboxes/.ssh/id_rsa  --master-ips 127.0.0.1
+
+
+seems successfull
+autok3s   create --provider  native --docker-script  https://get.docker.com --k3s-channel  stable --k3s-install-script  https://get.k3s.io --master-extra-args  '--disable coredns,local-storage,servicelb,traefik,metrics-server' --name  twertwer --rollback --set  {} --ssh-password  osboxes.org --ssh-port  22 --ssh-user  osboxes --master-ips  127.0.0.1
