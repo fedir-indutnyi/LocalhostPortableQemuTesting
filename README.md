@@ -145,6 +145,6 @@ It has following Free Components:
 This Kit contains no sofware that cannot be used for free.
 All usage at your own risk
 
-copy to home
-chmod +x install_autok3s.sh
-sudo sh install_autok3s.sh
+
+
+
