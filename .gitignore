@@ -1,4 +1,5 @@
-/.vscode
+/.vscode/*
+!.vscode/restore-terminals.json
 
 qemu_windows/vmachine/hdd.vmdk
 qemu_windows/vmachine/*
