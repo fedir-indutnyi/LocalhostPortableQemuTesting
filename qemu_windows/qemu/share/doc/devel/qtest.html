@@ -1,37 +1,132 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QTest Device Emulation Testing Framework &#8212; QEMU  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QTest Device Emulation Testing Framework &mdash; QEMU  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Qtest Driver Framework" href="qgraph.html" />
-    <link rel="prev" title="QEMU and the stable process" href="stable-process.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="ACPI/SMBIOS avocado tests using biosbits" href="acpi-bits.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="qtest-device-emulation-testing-framework">
-<h1>QTest Device Emulation Testing Framework<a class="headerlink" href="#qtest-device-emulation-testing-framework" title="Permalink to this headline">¶</a></h1>
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                9.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Information</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index-process.html">QEMU Community Processes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index-build.html">QEMU Build and Test System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs.html">QEMU Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="acpi-bits.html">ACPI/SMBIOS avocado tests using biosbits</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">QTest Device Emulation Testing Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qgraph.html">Qtest Driver Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qtest-protocol">QTest Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#libqtest-api-reference">libqtest API reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ci.html">CI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qapi-code-gen.html">How to use the QAPI code generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control-flow-integrity.html">Control-Flow Integrity (CFI)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index-api.html">Internal QEMU APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-internals.html">Internal Subsystem Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-tcg.html">TCG Emulation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Information</a></li>
+          <li class="breadcrumb-item"><a href="index-build.html">QEMU Build and Test System</a></li>
+      <li class="breadcrumb-item active">QTest Device Emulation Testing Framework</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://gitlab.com/qemu-project/qemu/blob/master/docs/devel/qtest.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qtest-device-emulation-testing-framework">
+<h1>QTest Device Emulation Testing Framework<a class="headerlink" href="#qtest-device-emulation-testing-framework" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="qgraph.html">Qtest Driver Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qgraph.html#qgraph-concepts">QGraph concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qgraph.html#nodes">Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgraph.html#edges">Edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgraph.html#execution-steps">Execution steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgraph.html#command-line">Command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qgraph.html#troubleshooting-unavailable-tests">Troubleshooting unavailable tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qgraph.html#creating-a-new-driver-and-its-interface">Creating a new driver and its interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgraph.html#adding-a-new-test">Adding a new test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgraph.html#qgraph-api-reference">Qgraph API reference</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <p>QTest is a device emulation testing framework.  It can be very useful to test
 device models; it could also control certain aspects of QEMU (such as virtual
@@ -94,15 +189,15 @@ from the output of</p>
 </pre></div>
 </div>
 <p>which you can run manually.</p>
-<div class="section" id="qtest-protocol">
-<span id="id1"></span><h2>QTest Protocol<a class="headerlink" href="#qtest-protocol" title="Permalink to this headline">¶</a></h2>
+<section id="qtest-protocol">
+<span id="id1"></span><h2>QTest Protocol<a class="headerlink" href="#qtest-protocol" title="Permalink to this heading"></a></h2>
 <p>Line based protocol, request/response based.  Server can send async messages
 so clients should always handle many async messages before the response
 comes in.</p>
-<div class="section" id="valid-requests">
-<h3>Valid requests<a class="headerlink" href="#valid-requests" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="clock-management">
-<h4>Clock management:<a class="headerlink" href="#clock-management" title="Permalink to this headline">¶</a></h4>
+<section id="valid-requests">
+<h3>Valid requests<a class="headerlink" href="#valid-requests" title="Permalink to this heading"></a></h3>
+<section id="clock-management">
+<h4>Clock management:<a class="headerlink" href="#clock-management" title="Permalink to this heading"></a></h4>
 <p>The qtest client is completely in charge of the QEMU_CLOCK_VIRTUAL.  qtest commands
 let you adjust the value of the clock (monotonically).  All the commands
 return the current value of the clock in nanoseconds.</p>
@@ -122,9 +217,9 @@ asynchronous events.</p>
 </pre></div>
 </div>
 <p>Advance the clock to NS nanoseconds (do nothing if it’s already past).</p>
-</div>
-<div class="section" id="pio-and-memory-access">
-<h4>PIO and memory access:<a class="headerlink" href="#pio-and-memory-access" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="pio-and-memory-access">
+<h4>PIO and memory access:<a class="headerlink" href="#pio-and-memory-access" title="Permalink to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; outb ADDR VALUE
 &lt; OK
 </pre></div>
@@ -208,9 +303,9 @@ than the expected size, the value will be zero filled at the end of the data
 sequence.</p>
 <p>B64_DATA is an arbitrarily long base64 encoded string.
 If the sizes do not match, the data will be truncated.</p>
-</div>
-<div class="section" id="irq-management">
-<h4>IRQ management:<a class="headerlink" href="#irq-management" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="irq-management">
+<h4>IRQ management:<a class="headerlink" href="#irq-management" title="Permalink to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; irq_intercept_in QOM-PATH
 &lt; OK
 </pre></div>
@@ -229,9 +324,9 @@ will be printed to the qtest stream:</p>
 <p>where NUM is an IRQ number.  For the PC, interrupts can be intercepted
 simply with “irq_intercept_in ioapic” (note that IRQ0 comes out with
 NUM=0 even though it is remapped to GSI 2).</p>
-</div>
-<div class="section" id="setting-interrupt-level">
-<h4>Setting interrupt level:<a class="headerlink" href="#setting-interrupt-level" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="setting-interrupt-level">
+<h4>Setting interrupt level:<a class="headerlink" href="#setting-interrupt-level" title="Permalink to this heading"></a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; set_irq_in QOM-PATH NAME NUM LEVEL
 &lt; OK
 </pre></div>
@@ -239,14 +334,14 @@ NUM=0 even though it is remapped to GSI 2).</p>
 <p>where NAME is the name of the irq/gpio list, NUM is an IRQ number and
 LEVEL is an signed integer IRQ level.</p>
 <p>Forcibly set the given interrupt pin to the given level.</p>
-</div>
-</div>
-</div>
-<div class="section" id="libqtest-api-reference">
-<h2>libqtest API reference<a class="headerlink" href="#libqtest-api-reference" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="libqtest-api-reference">
+<h2>libqtest API reference<a class="headerlink" href="#libqtest-api-reference" title="Permalink to this heading"></a></h2>
 <dl class="c function">
-<dt id="c.qtest_initf">
-QTestState *<code class="sig-name descname">qtest_initf</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_initf" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_initf">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_initf</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_initf" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -262,8 +357,8 @@ like sprintf().</p>
 <p><strong>Return</strong></p>
 <p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
 <dl class="c function">
-<dt id="c.qtest_vinitf">
-QTestState *<code class="sig-name descname">qtest_vinitf</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vinitf" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_vinitf">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vinitf</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vinitf" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -279,8 +374,8 @@ like vsprintf().</p>
 <p><strong>Return</strong></p>
 <p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
 <dl class="c function">
-<dt id="c.qtest_init">
-QTestState *<code class="sig-name descname">qtest_init</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>extra_args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_init">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_init</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">extra_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -292,8 +387,26 @@ arguments are subject to word splitting and shell evaluation.</p>
 <p><strong>Return</strong></p>
 <p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
 <dl class="c function">
-<dt id="c.qtest_init_without_qmp_handshake">
-QTestState *<code class="sig-name descname">qtest_init_without_qmp_handshake</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>extra_args</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init_without_qmp_handshake" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_init_with_env">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_init_with_env</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">var</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">extra_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init_with_env" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*var</span></code></dt><dd><p>Environment variable from where to take the QEMU binary</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*extra_args</span></code></dt><dd><p>Other arguments to pass to QEMU.  CAUTION: these
+arguments are subject to word splitting and shell evaluation.</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Like qtest_init(), but use a different environment variable for the
+QEMU binary.</p>
+<p><strong>Return</strong></p>
+<p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_init_without_qmp_handshake">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_init_without_qmp_handshake</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">extra_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init_without_qmp_handshake" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -305,8 +418,8 @@ arguments are subject to word splitting and shell evaluation.</p>
 <p><strong>Return</strong></p>
 <p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
 <dl class="c function">
-<dt id="c.qtest_init_with_serial">
-QTestState *<code class="sig-name descname">qtest_init_with_serial</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>extra_args</em>, int *<em>sock_fd</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init_with_serial" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_init_with_serial">
+<span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_init_with_serial</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">extra_args</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">sock_fd</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_init_with_serial" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -321,8 +434,21 @@ connection with serial.</p>
 <p><strong>Return</strong></p>
 <p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance.</p>
 <dl class="c function">
-<dt id="c.qtest_kill_qemu">
-void <code class="sig-name descname">qtest_kill_qemu</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_kill_qemu" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_wait_qemu">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_wait_qemu</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_wait_qemu" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance to operate on.</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Wait for the QEMU process to terminate. It is safe to call this function
+multiple times.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_kill_qemu">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_kill_qemu</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_kill_qemu" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -336,8 +462,8 @@ function multiple times. Normally qtest_quit() is used instead because it
 also frees QTestState. Use qtest_kill_qemu() when you just want to kill QEMU
 and qtest_quit() will be called later.</p>
 <dl class="c function">
-<dt id="c.qtest_quit">
-void <code class="sig-name descname">qtest_quit</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_quit" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_quit">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_quit</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_quit" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -348,8 +474,8 @@ void <code class="sig-name descname">qtest_quit</code><span class="sig-paren">(<
 <p><strong>Description</strong></p>
 <p>Shut down the QEMU process associated to <strong>s</strong>.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_fds">
-QDict *<code class="sig-name descname">qtest_qmp_fds</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int *<em>fds</em>, size_t <em>fds_num</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_fds" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_fds">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_fds</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">fds_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_fds" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -370,8 +496,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU with fds and returns the response.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp">
-QDict *<code class="sig-name descname">qtest_qmp</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -388,8 +514,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU and returns the response.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_send">
-void <code class="sig-name descname">qtest_qmp_send</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_send" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_send">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_send</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_send" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -406,8 +532,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU and leaves the response in the stream.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_send_raw">
-void <code class="sig-name descname">qtest_qmp_send_raw</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_send_raw" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_send_raw">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_send_raw</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_send_raw" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -423,8 +549,8 @@ void <code class="sig-name descname">qtest_qmp_send_raw</code><span class="sig-p
 <p>Sends text to the QMP monitor verbatim.  Need not be valid JSON;
 this is useful for negative tests.</p>
 <dl class="c function">
-<dt id="c.qtest_socket_server">
-int <code class="sig-name descname">qtest_socket_server</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>socket_path</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_socket_server" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_socket_server">
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_socket_server</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">socket_path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_socket_server" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -435,8 +561,8 @@ int <code class="sig-name descname">qtest_socket_server</code><span class="sig-p
 <p><strong>Description</strong></p>
 <p>Create and return a listen socket file descriptor, or abort on failure.</p>
 <dl class="c function">
-<dt id="c.qtest_vqmp_fds">
-QDict *<code class="sig-name descname">qtest_vqmp_fds</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int *<em>fds</em>, size_t <em>fds_num</em>, <em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_fds" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_vqmp_fds">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_fds</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">fds_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_fds" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -457,8 +583,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU with fds and returns the response.</p>
 <dl class="c function">
-<dt id="c.qtest_vqmp">
-QDict *<code class="sig-name descname">qtest_vqmp</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_vqmp">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -475,8 +601,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU and returns the response.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_vsend_fds">
-void <code class="sig-name descname">qtest_qmp_vsend_fds</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int *<em>fds</em>, size_t <em>fds_num</em>, <em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_vsend_fds" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_vsend_fds">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_vsend_fds</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">fds_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_vsend_fds" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -497,8 +623,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU and leaves the response in the stream.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_vsend">
-void <code class="sig-name descname">qtest_qmp_vsend</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_vsend" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_vsend">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_vsend</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_vsend" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -515,8 +641,8 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Sends a QMP message to QEMU and leaves the response in the stream.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_receive_dict">
-QDict *<code class="sig-name descname">qtest_qmp_receive_dict</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_receive_dict" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_receive_dict">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_receive_dict</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_receive_dict" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -527,8 +653,8 @@ QDict *<code class="sig-name descname">qtest_qmp_receive_dict</code><span class=
 <p><strong>Description</strong></p>
 <p>Reads a QMP message from QEMU and returns the response.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_receive">
-QDict *<code class="sig-name descname">qtest_qmp_receive</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_receive" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_receive">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_receive</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_receive" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -537,12 +663,30 @@ QDict *<code class="sig-name descname">qtest_qmp_receive</code><span class="sig-
 </dd>
 </dl>
 <p><strong>Description</strong></p>
-<p>Reads a QMP message from QEMU and returns the response.
-Buffers all the events received meanwhile, until a
-call to qtest_qmp_eventwait</p>
+<p>Reads a QMP message from QEMU and returns the response.</p>
+<p>If a callback is registered with qtest_qmp_set_event_callback,
+it will be invoked for every event seen, otherwise events
+will be buffered until a call to one of the qtest_qmp_eventwait
+family of functions.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_eventwait">
-void <code class="sig-name descname">qtest_qmp_eventwait</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_eventwait" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_set_event_callback">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_set_event_callback</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">QTestQMPEventCallback</span></span><span class="w"> </span><span class="n"><span class="pre">cb</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">opaque</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_set_event_callback" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestSTate</span></code> instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">QTestQMPEventCallback</span> <span class="pre">cb</span></code></dt><dd><p>callback to invoke for events</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*opaque</span></code></dt><dd><p>data to pass to <strong>cb</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Register a callback to be invoked whenever an event arrives</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_eventwait">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_eventwait</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_eventwait" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -554,9 +698,11 @@ void <code class="sig-name descname">qtest_qmp_eventwait</code><span class="sig-
 </dl>
 <p><strong>Description</strong></p>
 <p>Continuously polls for QMP responses until it receives the desired event.</p>
+<p>Any callback registered with qtest_qmp_set_event_callback will
+be invoked for every event seen.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_eventwait_ref">
-QDict *<code class="sig-name descname">qtest_qmp_eventwait_ref</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_eventwait_ref" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_eventwait_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_eventwait_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_eventwait_ref" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -567,11 +713,13 @@ QDict *<code class="sig-name descname">qtest_qmp_eventwait_ref</code><span class
 </dd>
 </dl>
 <p><strong>Description</strong></p>
-<p>Continuously polls for QMP responses until it receives the desired event.
-Returns a copy of the event for further investigation.</p>
+<p>Continuously polls for QMP responses until it receives the desired event.</p>
+<p>Any callback registered with qtest_qmp_set_event_callback will
+be invoked for every event seen.</p>
+<p>Returns a copy of the event for further investigation.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_event_ref">
-QDict *<code class="sig-name descname">qtest_qmp_event_ref</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_event_ref" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_event_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_event_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_event_ref" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -587,8 +735,8 @@ qtest_qmp_receive, until an event bearing the given name is found,
 and returns it.
 If no event matches, clears the buffer and returns NULL.</p>
 <dl class="c function">
-<dt id="c.qtest_hmp">
-char *<code class="sig-name descname">qtest_hmp</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_hmp" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_hmp">
+<span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_hmp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_hmp" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -606,8 +754,8 @@ QMP events are discarded.</p>
 <p><strong>Return</strong></p>
 <p>the command’s output.  The caller should g_free() it.</p>
 <dl class="c function">
-<dt id="c.qtest_vhmp">
-char *<code class="sig-name descname">qtest_vhmp</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>fmt</em>, va_list <em>ap</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vhmp" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_vhmp">
+<span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vhmp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">ap</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vhmp" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -625,8 +773,8 @@ QMP events are discarded.</p>
 <p><strong>Return</strong></p>
 <p>the command’s output.  The caller should g_free() it.</p>
 <dl class="c function">
-<dt id="c.qtest_get_irq">
-bool <code class="sig-name descname">qtest_get_irq</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_get_irq" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_get_irq">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_get_irq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_get_irq" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -639,8 +787,8 @@ bool <code class="sig-name descname">qtest_get_irq</code><span class="sig-paren"
 <p><strong>Return</strong></p>
 <p>The level of the <strong>num</strong> interrupt.</p>
 <dl class="c function">
-<dt id="c.qtest_irq_intercept_in">
-void <code class="sig-name descname">qtest_irq_intercept_in</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>string</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_irq_intercept_in" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_irq_intercept_in">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_irq_intercept_in</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">string</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_irq_intercept_in" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -654,8 +802,8 @@ void <code class="sig-name descname">qtest_irq_intercept_in</code><span class="s
 <p>Associate qtest irqs with the GPIO-in pins of the device
 whose path is specified by <strong>string</strong>.</p>
 <dl class="c function">
-<dt id="c.qtest_irq_intercept_out">
-void <code class="sig-name descname">qtest_irq_intercept_out</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>string</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_irq_intercept_out" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_irq_intercept_out">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_irq_intercept_out</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">string</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_irq_intercept_out" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -669,8 +817,25 @@ void <code class="sig-name descname">qtest_irq_intercept_out</code><span class="
 <p>Associate qtest irqs with the GPIO-out pins of the device
 whose path is specified by <strong>string</strong>.</p>
 <dl class="c function">
-<dt id="c.qtest_set_irq_in">
-void <code class="sig-name descname">qtest_set_irq_in</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>string</em>, <em class="property">const</em> char *<em>name</em>, int <em>irq</em>, int <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_set_irq_in" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_irq_intercept_out_named">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_irq_intercept_out_named</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qom_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_irq_intercept_out_named" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p><code class="xref c c-type docutils literal notranslate"><span class="pre">QTestState</span></code> instance to operate on.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*qom_path</span></code></dt><dd><p>QOM path of a device.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*name</span></code></dt><dd><p>Name of the GPIO out pin</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Associate a qtest irq with the named GPIO-out pin of the device
+whose path is specified by <strong>string</strong> and whose name is <strong>name</strong>.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_set_irq_in">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_set_irq_in</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">string</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">irq</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_set_irq_in" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -689,8 +854,8 @@ void <code class="sig-name descname">qtest_set_irq_in</code><span class="sig-par
 <p><strong>Description</strong></p>
 <p>Force given device/irq GPIO-in pin to the given level.</p>
 <dl class="c function">
-<dt id="c.qtest_outb">
-void <code class="sig-name descname">qtest_outb</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em>, uint8_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outb" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_outb">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_outb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outb" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -705,8 +870,8 @@ void <code class="sig-name descname">qtest_outb</code><span class="sig-paren">(<
 <p><strong>Description</strong></p>
 <p>Write an 8-bit value to an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_outw">
-void <code class="sig-name descname">qtest_outw</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em>, uint16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outw" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_outw">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_outw</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outw" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -721,8 +886,8 @@ void <code class="sig-name descname">qtest_outw</code><span class="sig-paren">(<
 <p><strong>Description</strong></p>
 <p>Write a 16-bit value to an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_outl">
-void <code class="sig-name descname">qtest_outl</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outl" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_outl">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_outl</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_outl" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -737,8 +902,8 @@ void <code class="sig-name descname">qtest_outl</code><span class="sig-paren">(<
 <p><strong>Description</strong></p>
 <p>Write a 32-bit value to an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_inb">
-uint8_t <code class="sig-name descname">qtest_inb</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inb" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_inb">
+<span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_inb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inb" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -751,8 +916,8 @@ uint8_t <code class="sig-name descname">qtest_inb</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Returns an 8-bit value from an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_inw">
-uint16_t <code class="sig-name descname">qtest_inw</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inw" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_inw">
+<span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_inw</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inw" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -765,8 +930,8 @@ uint16_t <code class="sig-name descname">qtest_inw</code><span class="sig-paren"
 <p><strong>Description</strong></p>
 <p>Returns a 16-bit value from an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_inl">
-uint32_t <code class="sig-name descname">qtest_inl</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint16_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inl" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_inl">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_inl</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_inl" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -779,8 +944,8 @@ uint32_t <code class="sig-name descname">qtest_inl</code><span class="sig-paren"
 <p><strong>Description</strong></p>
 <p>Returns a 32-bit value from an I/O port.</p>
 <dl class="c function">
-<dt id="c.qtest_writeb">
-void <code class="sig-name descname">qtest_writeb</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, uint8_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writeb" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_writeb">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_writeb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writeb" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -795,8 +960,8 @@ void <code class="sig-name descname">qtest_writeb</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Writes an 8-bit value to memory.</p>
 <dl class="c function">
-<dt id="c.qtest_writew">
-void <code class="sig-name descname">qtest_writew</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, uint16_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writew" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_writew">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_writew</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writew" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -811,8 +976,8 @@ void <code class="sig-name descname">qtest_writew</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Writes a 16-bit value to memory.</p>
 <dl class="c function">
-<dt id="c.qtest_writel">
-void <code class="sig-name descname">qtest_writel</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, uint32_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writel" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_writel">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_writel</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writel" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -827,8 +992,8 @@ void <code class="sig-name descname">qtest_writel</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Writes a 32-bit value to memory.</p>
 <dl class="c function">
-<dt id="c.qtest_writeq">
-void <code class="sig-name descname">qtest_writeq</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, uint64_t <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writeq" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_writeq">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_writeq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_writeq" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -843,8 +1008,8 @@ void <code class="sig-name descname">qtest_writeq</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Writes a 64-bit value to memory.</p>
 <dl class="c function">
-<dt id="c.qtest_readb">
-uint8_t <code class="sig-name descname">qtest_readb</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readb" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_readb">
+<span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_readb</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readb" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -859,8 +1024,8 @@ uint8_t <code class="sig-name descname">qtest_readb</code><span class="sig-paren
 <p><strong>Return</strong></p>
 <p>Value read.</p>
 <dl class="c function">
-<dt id="c.qtest_readw">
-uint16_t <code class="sig-name descname">qtest_readw</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readw" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_readw">
+<span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_readw</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readw" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -875,8 +1040,8 @@ uint16_t <code class="sig-name descname">qtest_readw</code><span class="sig-pare
 <p><strong>Return</strong></p>
 <p>Value read.</p>
 <dl class="c function">
-<dt id="c.qtest_readl">
-uint32_t <code class="sig-name descname">qtest_readl</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readl" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_readl">
+<span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_readl</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readl" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -891,8 +1056,8 @@ uint32_t <code class="sig-name descname">qtest_readl</code><span class="sig-pare
 <p><strong>Return</strong></p>
 <p>Value read.</p>
 <dl class="c function">
-<dt id="c.qtest_readq">
-uint64_t <code class="sig-name descname">qtest_readq</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readq" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_readq">
+<span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_readq</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_readq" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -907,8 +1072,8 @@ uint64_t <code class="sig-name descname">qtest_readq</code><span class="sig-pare
 <p><strong>Return</strong></p>
 <p>Value read.</p>
 <dl class="c function">
-<dt id="c.qtest_memread">
-void <code class="sig-name descname">qtest_memread</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memread" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_memread">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_memread</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memread" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -925,8 +1090,8 @@ void <code class="sig-name descname">qtest_memread</code><span class="sig-paren"
 <p><strong>Description</strong></p>
 <p>Read guest memory into a buffer.</p>
 <dl class="c function">
-<dt id="c.qtest_rtas_call">
-uint64_t <code class="sig-name descname">qtest_rtas_call</code><span class="sig-paren">(</span>QTestState *<em>s</em>, <em class="property">const</em> char *<em>name</em>, uint32_t <em>nargs</em>, uint64_t <em>args</em>, uint32_t <em>nret</em>, uint64_t <em>ret</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_rtas_call" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_rtas_call">
+<span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_rtas_call</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">nargs</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">nret</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">ret</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_rtas_call" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -947,8 +1112,8 @@ uint64_t <code class="sig-name descname">qtest_rtas_call</code><span class="sig-
 <p><strong>Description</strong></p>
 <p>Call an RTAS function</p>
 <dl class="c function">
-<dt id="c.qtest_bufread">
-void <code class="sig-name descname">qtest_bufread</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_bufread" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_bufread">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_bufread</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_bufread" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -965,8 +1130,8 @@ void <code class="sig-name descname">qtest_bufread</code><span class="sig-paren"
 <p><strong>Description</strong></p>
 <p>Read guest memory into a buffer and receive using a base64 encoding.</p>
 <dl class="c function">
-<dt id="c.qtest_memwrite">
-void <code class="sig-name descname">qtest_memwrite</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, <em class="property">const</em> void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memwrite" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_memwrite">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_memwrite</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memwrite" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -983,8 +1148,8 @@ void <code class="sig-name descname">qtest_memwrite</code><span class="sig-paren
 <p><strong>Description</strong></p>
 <p>Write a buffer to guest memory.</p>
 <dl class="c function">
-<dt id="c.qtest_bufwrite">
-void <code class="sig-name descname">qtest_bufwrite</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, <em class="property">const</em> void *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_bufwrite" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_bufwrite">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_bufwrite</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_bufwrite" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1001,8 +1166,8 @@ void <code class="sig-name descname">qtest_bufwrite</code><span class="sig-paren
 <p><strong>Description</strong></p>
 <p>Write a buffer to guest memory and transmit using a base64 encoding.</p>
 <dl class="c function">
-<dt id="c.qtest_memset">
-void <code class="sig-name descname">qtest_memset</code><span class="sig-paren">(</span>QTestState *<em>s</em>, uint64_t <em>addr</em>, uint8_t <em>patt</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memset" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_memset">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_memset</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">patt</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_memset" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1019,8 +1184,8 @@ void <code class="sig-name descname">qtest_memset</code><span class="sig-paren">
 <p><strong>Description</strong></p>
 <p>Write a pattern to guest memory.</p>
 <dl class="c function">
-<dt id="c.qtest_clock_step_next">
-int64_t <code class="sig-name descname">qtest_clock_step_next</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_step_next" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_clock_step_next">
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_clock_step_next</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_step_next" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1033,8 +1198,8 @@ int64_t <code class="sig-name descname">qtest_clock_step_next</code><span class=
 <p><strong>Return</strong></p>
 <p>The current value of the QEMU_CLOCK_VIRTUAL in nanoseconds.</p>
 <dl class="c function">
-<dt id="c.qtest_clock_step">
-int64_t <code class="sig-name descname">qtest_clock_step</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int64_t <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_step" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_clock_step">
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_clock_step</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n"><span class="pre">step</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_step" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1049,8 +1214,8 @@ int64_t <code class="sig-name descname">qtest_clock_step</code><span class="sig-
 <p><strong>Return</strong></p>
 <p>The current value of the QEMU_CLOCK_VIRTUAL in nanoseconds.</p>
 <dl class="c function">
-<dt id="c.qtest_clock_set">
-int64_t <code class="sig-name descname">qtest_clock_set</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int64_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_set" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_clock_set">
+<span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_clock_set</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_clock_set" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1065,8 +1230,8 @@ int64_t <code class="sig-name descname">qtest_clock_set</code><span class="sig-p
 <p><strong>Return</strong></p>
 <p>The current value of the QEMU_CLOCK_VIRTUAL in nanoseconds.</p>
 <dl class="c function">
-<dt id="c.qtest_big_endian">
-bool <code class="sig-name descname">qtest_big_endian</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_big_endian" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_big_endian">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_big_endian</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_big_endian" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1077,8 +1242,8 @@ bool <code class="sig-name descname">qtest_big_endian</code><span class="sig-par
 <p><strong>Return</strong></p>
 <p>True if the architecture under test has a big endian configuration.</p>
 <dl class="c function">
-<dt id="c.qtest_get_arch">
-<em class="property">const</em> char *<code class="sig-name descname">qtest_get_arch</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_get_arch" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_get_arch">
+<span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_get_arch</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_get_arch" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1089,8 +1254,20 @@ bool <code class="sig-name descname">qtest_big_endian</code><span class="sig-par
 <p><strong>Return</strong></p>
 <p>The architecture for the QEMU executable under test.</p>
 <dl class="c function">
-<dt id="c.qtest_add_func">
-void <code class="sig-name descname">qtest_add_func</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em>, void (*<em>fn</em>)<span class="sig-paren">(</span>void<span class="sig-paren">)</span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_func" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_has_accel">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_has_accel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">accel_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_has_accel" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*accel_name</span></code></dt><dd><p>Accelerator name to check for.</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>true if the accelerator is built in.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_add_func">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_add_func</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">str</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_func" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1105,8 +1282,8 @@ void <code class="sig-name descname">qtest_add_func</code><span class="sig-paren
 The path is prefixed with the architecture under test, as
 returned by qtest_get_arch().</p>
 <dl class="c function">
-<dt id="c.qtest_add_data_func">
-void <code class="sig-name descname">qtest_add_data_func</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em>, <em class="property">const</em> void *<em>data</em>, void (*<em>fn</em>)<span class="sig-paren">(</span><em class="property">const</em> void*<span class="sig-paren">)</span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_data_func" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_add_data_func">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_add_data_func</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">str</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_data_func" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1123,8 +1300,8 @@ void <code class="sig-name descname">qtest_add_data_func</code><span class="sig-
 The path is prefixed with the architecture under test, as
 returned by qtest_get_arch().</p>
 <dl class="c function">
-<dt id="c.qtest_add_data_func_full">
-void <code class="sig-name descname">qtest_add_data_func_full</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>str</em>, void *<em>data</em>, void (*<em>fn</em>)<span class="sig-paren">(</span><em class="property">const</em> void*<span class="sig-paren">)</span>, GDestroyNotify <em>data_free_func</em>, <span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_data_func_full" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_add_data_func_full">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_add_data_func_full</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">str</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">GDestroyNotify</span></span><span class="w"> </span><span class="n"><span class="pre">data_free_func</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_data_func_full" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1144,8 +1321,8 @@ The path is prefixed with the architecture under test, as
 returned by qtest_get_arch().</p>
 <p><strong>data</strong> is passed to <strong>data_free_func()</strong> on test completion.</p>
 <dl class="c macro">
-<dt id="c.qtest_add">
-<code class="sig-name descname">qtest_add</code><a class="headerlink" href="#c.qtest_add" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_add">
+<span class="sig-name descname"><span class="n"><span class="pre">qtest_add</span></span></span><a class="headerlink" href="#c.qtest_add" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><code class="docutils literal notranslate"><span class="pre">qtest_add</span> <span class="pre">(testpath,</span> <span class="pre">Fixture,</span> <span class="pre">tdata,</span> <span class="pre">fsetup,</span> <span class="pre">ftest,</span> <span class="pre">fteardown)</span></code></p>
@@ -1169,8 +1346,8 @@ returned by qtest_get_arch().</p>
 The path is prefixed with the architecture under test, as
 returned by qtest_get_arch().</p>
 <dl class="c function">
-<dt id="c.qtest_add_abrt_handler">
-void <code class="sig-name descname">qtest_add_abrt_handler</code><span class="sig-paren">(</span>GHookFunc <em>fn</em>, <em class="property">const</em> void *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_abrt_handler" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_add_abrt_handler">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_add_abrt_handler</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">GHookFunc</span></span><span class="w"> </span><span class="n"><span class="pre">fn</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_add_abrt_handler" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1185,8 +1362,8 @@ void <code class="sig-name descname">qtest_add_abrt_handler</code><span class="s
 terminate processes and perform other cleanup. The handler can be removed
 with qtest_remove_abrt_handler().</p>
 <dl class="c function">
-<dt id="c.qtest_remove_abrt_handler">
-void <code class="sig-name descname">qtest_remove_abrt_handler</code><span class="sig-paren">(</span>void *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_remove_abrt_handler" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_remove_abrt_handler">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_remove_abrt_handler</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_remove_abrt_handler" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1198,8 +1375,150 @@ void <code class="sig-name descname">qtest_remove_abrt_handler</code><span class
 <p>Remove an abrt handler that was previously added with
 qtest_add_abrt_handler().</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_assert_success">
-void <code class="sig-name descname">qtest_qmp_assert_success</code><span class="sig-paren">(</span>QTestState *<em>qts</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_assert_success" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_vqmp_assert_success_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_assert_success_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_assert_success_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">va_list</span> <span class="pre">args</span></code></dt><dd><p>variable arguments for <strong>fmt</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message to QEMU, asserts that a ‘return’ key is present in
+the response, and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_vqmp_assert_success">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_assert_success</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_assert_success" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">va_list</span> <span class="pre">args</span></code></dt><dd><p>variable arguments for <strong>fmt</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message to QEMU and asserts that a ‘return’ key is present in
+the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_vqmp_fds_assert_success_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_fds_assert_success_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nfds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_fds_assert_success_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*fds</span></code></dt><dd><p>the file descriptors to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">size_t</span> <span class="pre">nfds</span></code></dt><dd><p>number of <strong>fds</strong> to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">va_list</span> <span class="pre">args</span></code></dt><dd><p>variable arguments for <strong>fmt</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message with file descriptors to QEMU,
+asserts that a ‘return’ key is present in the response,
+and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_vqmp_fds_assert_success">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_fds_assert_success</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nfds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_fds_assert_success" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*fds</span></code></dt><dd><p>the file descriptors to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">size_t</span> <span class="pre">nfds</span></code></dt><dd><p>number of <strong>fds</strong> to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">va_list</span> <span class="pre">args</span></code></dt><dd><p>variable arguments for <strong>fmt</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message with file descriptors to QEMU and
+asserts that a ‘return’ key is present in the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_assert_failure_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_assert_failure_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_assert_failure_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">...</span></code></dt><dd><p>variable arguments</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message to QEMU, asserts that an ‘error’ key is present in
+the response, and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_vqmp_assert_failure_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_vqmp_assert_failure_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="n"><span class="pre">va_list</span></span><span class="w"> </span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_vqmp_assert_failure_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">va_list</span> <span class="pre">args</span></code></dt><dd><p>variable arguments for <strong>fmt</strong></p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message to QEMU, asserts that an ‘error’ key is present in
+the response, and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_assert_success_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_assert_success_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_assert_success_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">...</span></code></dt><dd><p>variable arguments</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message to QEMU, asserts that a ‘return’ key is present in
+the response, and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_assert_success">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_assert_success</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_assert_success" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1217,8 +1536,55 @@ supported after ‘%’.</p>
 <p>Sends a QMP message to QEMU and asserts that a ‘return’ key is present in
 the response.</p>
 <dl class="c function">
-<dt id="c.qtest_cb_for_every_machine">
-void <code class="sig-name descname">qtest_cb_for_every_machine</code><span class="sig-paren">(</span>void (*<em>cb</em>)<span class="sig-paren">(</span><em class="property">const</em> char *machine<span class="sig-paren">)</span>, bool <em>skip_old_versioned</em>, <span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_cb_for_every_machine" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_fds_assert_success_ref">
+<span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_fds_assert_success_ref</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nfds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_fds_assert_success_ref" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*fds</span></code></dt><dd><p>the file descriptors to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">size_t</span> <span class="pre">nfds</span></code></dt><dd><p>number of <strong>fds</strong> to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">...</span></code></dt><dd><p>variable arguments</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message with file descriptors to QEMU,
+asserts that a ‘return’ key is present in the response,
+and returns the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_fds_assert_success">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_fds_assert_success</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fds</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nfds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_fds_assert_success" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">*fds</span></code></dt><dd><p>the file descriptors to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">size_t</span> <span class="pre">nfds</span></code></dt><dd><p>number of <strong>fds</strong> to send</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>QMP message to send to qemu, formatted like
+qobject_from_jsonf_nofail().  See parse_interpolation() for what’s
+supported after ‘%’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">...</span></code></dt><dd><p>variable arguments</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Sends a QMP message with file descriptors to QEMU and
+asserts that a ‘return’ key is present in the response.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_cb_for_every_machine">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_cb_for_every_machine</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">machine</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">skip_old_versioned</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_cb_for_every_machine" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1230,8 +1596,61 @@ void <code class="sig-name descname">qtest_cb_for_every_machine</code><span clas
 </dd>
 </dl>
 <dl class="c function">
-<dt id="c.qtest_qmp_device_add_qdict">
-void <code class="sig-name descname">qtest_qmp_device_add_qdict</code><span class="sig-paren">(</span>QTestState *<em>qts</em>, <em class="property">const</em> char *<em>drv</em>, <em class="property">const</em> QDict *<em>arguments</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_add_qdict" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_resolve_machine_alias">
+<span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">qtest_resolve_machine_alias</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">var</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">alias</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_resolve_machine_alias" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*var</span></code></dt><dd><p>Environment variable from where to take the QEMU binary</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*alias</span></code></dt><dd><p>The alias to resolve</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>the machine type corresponding to the alias if any,
+otherwise NULL.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_has_machine">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_has_machine</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">machine</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_has_machine" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*machine</span></code></dt><dd><p>The machine to look for</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>true if the machine is available in the target binary.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_has_machine_with_env">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_has_machine_with_env</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">var</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">machine</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_has_machine_with_env" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*var</span></code></dt><dd><p>Environment variable from where to take the QEMU binary</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*machine</span></code></dt><dd><p>The machine to look for</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>true if the machine is available in the specified binary.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_has_device">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_has_device</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">device</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_has_device" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*device</span></code></dt><dd><p>The device to look for</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>true if the device is available in the target binary.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_device_add_qdict">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_device_add_qdict</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">drv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">QDict</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">arguments</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_add_qdict" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1240,15 +1659,15 @@ void <code class="sig-name descname">qtest_qmp_device_add_qdict</code><span clas
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*drv</span></code></dt><dd><p>Name of the device that should be added</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">QDict</span> <span class="pre">*arguments</span></code></dt><dd><p>QDict with properties for the device to intialize</p>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">QDict</span> <span class="pre">*arguments</span></code></dt><dd><p>QDict with properties for the device to initialize</p>
 </dd>
 </dl>
 <p><strong>Description</strong></p>
 <p>Generic hot-plugging test via the device_add QMP command with properties
 supplied in form of QDict. Use NULL for empty properties list.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_device_add">
-void <code class="sig-name descname">qtest_qmp_device_add</code><span class="sig-paren">(</span>QTestState *<em>qts</em>, <em class="property">const</em> char *<em>driver</em>, <em class="property">const</em> char *<em>id</em>, <em class="property">const</em> char *<em>fmt</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_add" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_device_add">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_device_add</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">driver</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_add" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1269,8 +1688,25 @@ supported after ‘%’.</p>
 <p><strong>Description</strong></p>
 <p>Generic hot-plugging test via the device_add QMP command.</p>
 <dl class="c function">
-<dt id="c.qtest_qmp_device_del">
-void <code class="sig-name descname">qtest_qmp_device_del</code><span class="sig-paren">(</span>QTestState *<em>qts</em>, <em class="property">const</em> char *<em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_del" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_add_client">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_add_client</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">protocol</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">fd</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_add_client" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*protocol</span></code></dt><dd><p>the protocol to add to</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">fd</span></code></dt><dd><p>the client file-descriptor</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Call QMP <code class="docutils literal notranslate"><span class="pre">getfd</span></code> (on Windows <code class="docutils literal notranslate"><span class="pre">get-win32-socket</span></code>) followed by
+<code class="docutils literal notranslate"><span class="pre">add_client</span></code> with the given <strong>fd</strong>.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qmp_device_del_send">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_device_del_send</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_del_send" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1283,35 +1719,23 @@ void <code class="sig-name descname">qtest_qmp_device_del</code><span class="sig
 <p><strong>Description</strong></p>
 <p>Generic hot-unplugging test via the device_del QMP command.</p>
 <dl class="c function">
-<dt id="c.qmp_rsp_is_err">
-bool <code class="sig-name descname">qmp_rsp_is_err</code><span class="sig-paren">(</span>QDict *<em>rsp</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qmp_rsp_is_err" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_qmp_device_del">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qmp_device_del</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qts</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qmp_device_del" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">QDict</span> <span class="pre">*rsp</span></code></dt><dd><p>QMP response to check for error</p>
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*qts</span></code></dt><dd><p>QTestState instance to operate on</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*id</span></code></dt><dd><p>Identification string</p>
 </dd>
 </dl>
 <p><strong>Description</strong></p>
-<p>Test <strong>rsp</strong> for error and discard <strong>rsp</strong>.
-Returns ‘true’ if there is error in <strong>rsp</strong> and ‘false’ otherwise.</p>
+<p>Generic hot-unplugging test via the device_del QMP command.
+Waiting for command completion event.</p>
 <dl class="c function">
-<dt id="c.qmp_expect_error_and_unref">
-void <code class="sig-name descname">qmp_expect_error_and_unref</code><span class="sig-paren">(</span>QDict *<em>rsp</em>, <em class="property">const</em> char *<em>class</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qmp_expect_error_and_unref" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<p><strong>Parameters</strong></p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">QDict</span> <span class="pre">*rsp</span></code></dt><dd><p>QMP response to check for error</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*class</span></code></dt><dd><p>an error class</p>
-</dd>
-</dl>
-<p><strong>Description</strong></p>
-<p>Assert the response has the given error class and discard <strong>rsp</strong>.</p>
-<dl class="c function">
-<dt id="c.qtest_probe_child">
-bool <code class="sig-name descname">qtest_probe_child</code><span class="sig-paren">(</span>QTestState *<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_probe_child" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_probe_child">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_probe_child</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_probe_child" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1322,8 +1746,8 @@ bool <code class="sig-name descname">qtest_probe_child</code><span class="sig-pa
 <p><strong>Return</strong></p>
 <p>true if the child is still alive.</p>
 <dl class="c function">
-<dt id="c.qtest_set_expected_status">
-void <code class="sig-name descname">qtest_set_expected_status</code><span class="sig-paren">(</span>QTestState *<em>s</em>, int <em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_set_expected_status" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object c" id="c.qtest_set_expected_status">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_set_expected_status</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">status</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_set_expected_status" title="Permalink to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <p><strong>Parameters</strong></p>
@@ -1335,98 +1759,127 @@ void <code class="sig-name descname">qtest_set_expected_status</code><span class
 </dl>
 <p><strong>Description</strong></p>
 <p>Set expected exit status of the child.</p>
-</div>
-</div>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qom_set_bool">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qom_set_bool</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">property</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qom_set_bool" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p>QTestState instance to operate on.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*path</span></code></dt><dd><p>Path to the property being set.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*property</span></code></dt><dd><p>Property being set.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">value</span></code></dt><dd><p>Value to set the property.</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Set the property with passed in value.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_qom_get_bool">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_qom_get_bool</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">property</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_qom_get_bool" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p>QTestState instance to operate on.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*path</span></code></dt><dd><p>Path to the property being retrieved.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*property</span></code></dt><dd><p>Property from where the value is being retrieved.</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>Value retrieved from property.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.qtest_pid">
+<span class="n"><span class="pre">pid_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">qtest_pid</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">QTestState</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.qtest_pid" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">QTestState</span> <span class="pre">*s</span></code></dt><dd><p>QTestState instance to operate on.</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>the PID of the QEMU process, or &lt;= 0</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.have_qemu_img">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">have_qemu_img</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.have_qemu_img" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">void</span></code></dt><dd><p>no arguments</p>
+</dd>
+</dl>
+<p><strong>Return</strong></p>
+<p>true if “qemu-img” is available.</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.mkimg">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mkimg</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n"><span class="pre">size_mb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.mkimg" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<p><strong>Parameters</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*file</span></code></dt><dd><p>File name of the image that should be created</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">*fmt</span></code></dt><dd><p>Format, e.g. “qcow2” or “raw”</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">size_mb</span></code></dt><dd><p>Size of the image in megabytes</p>
+</dd>
+</dl>
+<p><strong>Description</strong></p>
+<p>Create a disk image with qemu-img. Note that the QTEST_QEMU_IMG
+environment variable must point to the qemu-img file.</p>
+<p><strong>Return</strong></p>
+<p>true if the image has been created successfully.</p>
+</section>
+</section>
 
 
+           </div>
           </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="acpi-bits.html" class="btn btn-neutral float-left" title="ACPI/SMBIOS avocado tests using biosbits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qgraph.html" class="btn btn-neutral float-right" title="Qtest Driver Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version 9.0.0.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<div id="editpage">
-  <ul>
-    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/qtest.rst">Page source</a></li>
-  </ul>
-</div><h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Information</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conflict-resolution.html">Conflict Resolution Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style.html">QEMU Coding Style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="control-flow-integrity.html">Control-Flow Integrity (CFI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="memory.html">The memory API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">QTest Device Emulation Testing Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-process.html">Multi-process QEMU</a></li>
-</ul>
-</li>
-</ul>
-
-
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, The QEMU Project Developers.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

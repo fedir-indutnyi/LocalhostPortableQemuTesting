@@ -1,37 +1,115 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QEMU Coding Style &#8212; QEMU  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QEMU Coding Style &mdash; QEMU  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="QEMU and Kconfig" href="kconfig.html" />
-    <link rel="prev" title="The QEMU build system architecture" href="build-system.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="next" title="Submitting a Patch" href="submitting-a-patch.html" />
+    <link rel="prev" title="The Role of Maintainers" href="maintainers.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="qemu-coding-style">
-<h1><a class="toc-backref" href="#id1">QEMU Coding Style</a><a class="headerlink" href="#qemu-coding-style" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="table-of-contents">
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                9.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Information</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index-process.html">QEMU Community Processes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conflict-resolution.html">Conflict Resolution Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintainers.html">The Role of Maintainers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">QEMU Coding Style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#formatting-and-style">Formatting and style</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#language-usage">Language usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qemu-specific-idioms">QEMU Specific Idioms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="submitting-a-patch.html">Submitting a Patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trivial-patches.html">Trivial Patches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submitting-a-pull-request.html">Submitting a Pull Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index-build.html">QEMU Build and Test System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-api.html">Internal QEMU APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-internals.html">Internal Subsystem Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-tcg.html">TCG Emulation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Developer Information</a></li>
+          <li class="breadcrumb-item"><a href="index-process.html">QEMU Community Processes</a></li>
+      <li class="breadcrumb-item active">QEMU Coding Style</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://gitlab.com/qemu-project/qemu/blob/master/docs/devel/style.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qemu-coding-style">
+<span id="coding-style"></span><h1><a class="toc-backref" href="#id1" role="doc-backlink">QEMU Coding Style</a><a class="headerlink" href="#qemu-coding-style" title="Permalink to this heading"></a></h1>
+<nav class="contents" id="table-of-contents">
 <p class="topic-title">Table of Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#qemu-coding-style" id="id1">QEMU Coding Style</a></p>
@@ -62,36 +140,39 @@
 <ul>
 <li><p><a class="reference internal" href="#variadic-macros" id="id15">Variadic macros</a></p></li>
 <li><p><a class="reference internal" href="#include-directives" id="id16">Include directives</a></p></li>
+<li><p><a class="reference internal" href="#generative-includes" id="id17">Generative Includes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#c-types" id="id17">C types</a></p>
+<li><p><a class="reference internal" href="#c-types" id="id18">C types</a></p>
 <ul>
-<li><p><a class="reference internal" href="#scalars" id="id18">Scalars</a></p></li>
-<li><p><a class="reference internal" href="#pointers" id="id19">Pointers</a></p></li>
-<li><p><a class="reference internal" href="#typedefs" id="id20">Typedefs</a></p></li>
-<li><p><a class="reference internal" href="#reserved-namespaces-in-c-and-posix" id="id21">Reserved namespaces in C and POSIX</a></p></li>
+<li><p><a class="reference internal" href="#scalars" id="id19">Scalars</a></p></li>
+<li><p><a class="reference internal" href="#pointers" id="id20">Pointers</a></p></li>
+<li><p><a class="reference internal" href="#typedefs" id="id21">Typedefs</a></p></li>
+<li><p><a class="reference internal" href="#reserved-namespaces-in-c-and-posix" id="id22">Reserved namespaces in C and POSIX</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#low-level-memory-management" id="id22">Low level memory management</a></p></li>
-<li><p><a class="reference internal" href="#string-manipulation" id="id23">String manipulation</a></p></li>
-<li><p><a class="reference internal" href="#printf-style-functions" id="id24">Printf-style functions</a></p></li>
-<li><p><a class="reference internal" href="#c-standard-implementation-defined-and-undefined-behaviors" id="id25">C standard, implementation defined and undefined behaviors</a></p></li>
-<li><p><a class="reference internal" href="#automatic-memory-deallocation" id="id26">Automatic memory deallocation</a></p></li>
+<li><p><a class="reference internal" href="#low-level-memory-management" id="id23">Low level memory management</a></p></li>
+<li><p><a class="reference internal" href="#string-manipulation" id="id24">String manipulation</a></p></li>
+<li><p><a class="reference internal" href="#printf-style-functions" id="id25">Printf-style functions</a></p></li>
+<li><p><a class="reference internal" href="#c-standard-implementation-defined-and-undefined-behaviors" id="id26">C standard, implementation defined and undefined behaviors</a></p></li>
+<li><p><a class="reference internal" href="#automatic-memory-deallocation" id="id27">Automatic memory deallocation</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#qemu-specific-idioms" id="id27">QEMU Specific Idioms</a></p>
+<li><p><a class="reference internal" href="#qemu-specific-idioms" id="id28">QEMU Specific Idioms</a></p>
 <ul>
-<li><p><a class="reference internal" href="#error-handling-and-reporting" id="id28">Error handling and reporting</a></p>
+<li><p><a class="reference internal" href="#qemu-object-model-declarations" id="id29">QEMU Object Model Declarations</a></p></li>
+<li><p><a class="reference internal" href="#qemu-guard-macros" id="id30">QEMU GUARD macros</a></p></li>
+<li><p><a class="reference internal" href="#error-handling-and-reporting" id="id31">Error handling and reporting</a></p>
 <ul>
-<li><p><a class="reference internal" href="#reporting-errors-to-the-human-user" id="id29">Reporting errors to the human user</a></p></li>
-<li><p><a class="reference internal" href="#propagating-errors" id="id30">Propagating errors</a></p></li>
-<li><p><a class="reference internal" href="#handling-errors" id="id31">Handling errors</a></p></li>
+<li><p><a class="reference internal" href="#reporting-errors-to-the-human-user" id="id32">Reporting errors to the human user</a></p></li>
+<li><p><a class="reference internal" href="#propagating-errors" id="id33">Propagating errors</a></p></li>
+<li><p><a class="reference internal" href="#handling-errors" id="id34">Handling errors</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#trace-events-style" id="id32">trace-events style</a></p>
+<li><p><a class="reference internal" href="#trace-events-style" id="id35">trace-events style</a></p>
 <ul>
-<li><p><a class="reference internal" href="#x-prefix" id="id33">0x prefix</a></p></li>
-<li><p><a class="reference internal" href="#printf-flag" id="id34">‘#’ printf flag</a></p></li>
+<li><p><a class="reference internal" href="#x-prefix" id="id36">0x prefix</a></p></li>
+<li><p><a class="reference internal" href="#printf-flag" id="id37">‘#’ printf flag</a></p></li>
 </ul>
 </li>
 </ul>
@@ -99,13 +180,16 @@
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>Please use the script checkpatch.pl in the scripts directory to check
 patches before submitting.</p>
-<div class="section" id="formatting-and-style">
-<h2><a class="toc-backref" href="#id2">Formatting and style</a><a class="headerlink" href="#formatting-and-style" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="whitespace">
-<h3><a class="toc-backref" href="#id3">Whitespace</a><a class="headerlink" href="#whitespace" title="Permalink to this headline">¶</a></h3>
+<section id="formatting-and-style">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Formatting and style</a><a class="headerlink" href="#formatting-and-style" title="Permalink to this heading"></a></h2>
+<p>The repository includes a <code class="docutils literal notranslate"><span class="pre">.editorconfig</span></code> file which can help with
+getting the right settings for your preferred $EDITOR. See
+<a class="reference external" href="https://editorconfig.org/">https://editorconfig.org/</a> for details.</p>
+<section id="whitespace">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Whitespace</a><a class="headerlink" href="#whitespace" title="Permalink to this heading"></a></h3>
 <p>Of course, the most important aspect in any coding style is whitespace.
 Crusty old coders who have trouble spotting the glasses on their noses
 can tell the difference between a tab and eight spaces from a distance
@@ -127,8 +211,8 @@ every line.</p></li>
 <li><p>It is the QEMU coding style.</p></li>
 </ul>
 <p>Do not leave whitespace dangling off the ends of lines.</p>
-<div class="section" id="multiline-indent">
-<h4><a class="toc-backref" href="#id4">Multiline Indent</a><a class="headerlink" href="#multiline-indent" title="Permalink to this headline">¶</a></h4>
+<section id="multiline-indent">
+<h4><a class="toc-backref" href="#id4" role="doc-backlink">Multiline Indent</a><a class="headerlink" href="#multiline-indent" title="Permalink to this heading"></a></h4>
 <p>There are several places where indent is necessary:</p>
 <ul class="simple">
 <li><p>if/else</p></li>
@@ -140,11 +224,11 @@ for the following lines.</p>
 <p>In case of if/else, while/for, align the secondary lines just after the
 opening parenthesis of the first.</p>
 <p>For example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>
-    <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>
-       <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">       </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </pre></div>
 </div>
 <p>In case of function, there are several variants:</p>
@@ -153,20 +237,20 @@ opening parenthesis of the first.</p>
 <li><p>align the secondary lines just after the opening parenthesis of the first</p></li>
 </ul>
 <p>For example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
-    <span class="n">z</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span>
+<span class="w">    </span><span class="n">z</span><span class="p">);</span>
 
-<span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
-             <span class="n">z</span><span class="p">);</span>
+<span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span>
+<span class="w">             </span><span class="n">z</span><span class="p">);</span>
 
-<span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">do_another</span><span class="p">(</span><span class="n">y</span><span class="p">,</span>
-                           <span class="n">z</span><span class="p">));</span>
+<span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">do_another</span><span class="p">(</span><span class="n">y</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">z</span><span class="p">));</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="line-width">
-<h3><a class="toc-backref" href="#id5">Line width</a><a class="headerlink" href="#line-width" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="line-width">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Line width</a><a class="headerlink" href="#line-width" title="Permalink to this heading"></a></h3>
 <p>Lines should be 80 characters; try not to make them longer.</p>
 <p>Sometimes it is hard to do, especially when dealing with QEMU subsystems
 that use long function or symbol names. If wrapping the line at 80 columns
@@ -186,26 +270,26 @@ line length.  Eighty is traditional.</p></li>
 at all that white space on the left!”) moot.</p></li>
 <li><p>It is the QEMU coding style.</p></li>
 </ul>
-</div>
-<div class="section" id="naming">
-<h3><a class="toc-backref" href="#id6">Naming</a><a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="naming">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Naming</a><a class="headerlink" href="#naming" title="Permalink to this heading"></a></h3>
 <p>Variables are lower_case_with_underscores; easy to type and read.  Structured
 type names are in CamelCase; harder to type but standing out.  Enum type
 names and function type names should also be in CamelCase.  Scalar type
 names are lower_case_with_underscores_ending_with_a_t, like the POSIX
 uint64_t and family.  Note that this last convention contradicts POSIX
 and is therefore likely to be changed.</p>
-<div class="section" id="variable-naming-conventions">
-<h4><a class="toc-backref" href="#id7">Variable Naming Conventions</a><a class="headerlink" href="#variable-naming-conventions" title="Permalink to this headline">¶</a></h4>
+<section id="variable-naming-conventions">
+<h4><a class="toc-backref" href="#id7" role="doc-backlink">Variable Naming Conventions</a><a class="headerlink" href="#variable-naming-conventions" title="Permalink to this heading"></a></h4>
 <p>A number of short naming conventions exist for variables that use
 common QEMU types. For example, the architecture independent CPUState
 is often held as a <code class="docutils literal notranslate"><span class="pre">cs</span></code> pointer variable, whereas the concrete
 CPUArchState is usually held in a pointer called <code class="docutils literal notranslate"><span class="pre">env</span></code>.</p>
 <p>Likewise, in device emulation code the common DeviceState is usually
 called <code class="docutils literal notranslate"><span class="pre">dev</span></code>.</p>
-</div>
-<div class="section" id="function-naming-conventions">
-<h4><a class="toc-backref" href="#id8">Function Naming Conventions</a><a class="headerlink" href="#function-naming-conventions" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="function-naming-conventions">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">Function Naming Conventions</a><a class="headerlink" href="#function-naming-conventions" title="Permalink to this heading"></a></h4>
 <p>Wrapped version of standard library or GLib functions use a <code class="docutils literal notranslate"><span class="pre">qemu_</span></code>
 prefix to alert readers that they are seeing a wrapped version, for
 example <code class="docutils literal notranslate"><span class="pre">qemu_strtol</span></code> or <code class="docutils literal notranslate"><span class="pre">qemu_mutex_lock</span></code>.  Other utility functions
@@ -223,21 +307,27 @@ from cpus.c.</p>
 <p>If there are two versions of a function to be called with or without a
 lock held, the function that expects the lock to be already held
 usually uses the suffix <code class="docutils literal notranslate"><span class="pre">_locked</span></code>.</p>
-</div>
-</div>
-<div class="section" id="block-structure">
-<h3><a class="toc-backref" href="#id9">Block structure</a><a class="headerlink" href="#block-structure" title="Permalink to this headline">¶</a></h3>
+<p>If a function is a shim designed to deal with compatibility
+workarounds we use the suffix <code class="docutils literal notranslate"><span class="pre">_compat</span></code>. These are generally not
+called directly and aliased to the plain function name via the
+pre-processor. Another common suffix is <code class="docutils literal notranslate"><span class="pre">_impl</span></code>; it is used for the
+concrete implementation of a function that will not be called
+directly, but rather through a macro or an inline function.</p>
+</section>
+</section>
+<section id="block-structure">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Block structure</a><a class="headerlink" href="#block-structure" title="Permalink to this heading"></a></h3>
 <p>Every indented statement is braced; even if the block contains just one
 statement.  The opening brace is on the line that contains the control
 flow statement that introduces the new block; the closing brace is on the
 same line as the else keyword, or on a line by itself if there is no else
 keyword.  Example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was 5.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was 6.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was something else entirely.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was 5.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was 6.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a was something else entirely.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -246,43 +336,49 @@ else if/else if/…/else sequence would need an indent for every else
 statement.</p>
 <p>An exception is the opening brace for a function; for reasons of tradition
 and clarity it comes on a line by itself:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">a_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">a_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">do_something</span><span class="p">();</span>
+<span class="w">    </span><span class="n">do_something</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Rationale: a consistent (except for functions…) bracing style reduces
 ambiguity and avoids needless churn when lines are added or removed.
 Furthermore, it is the QEMU coding style.</p>
-</div>
-<div class="section" id="declarations">
-<h3><a class="toc-backref" href="#id10">Declarations</a><a class="headerlink" href="#declarations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="declarations">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Declarations</a><a class="headerlink" href="#declarations" title="Permalink to this heading"></a></h3>
 <p>Mixed declarations (interleaving statements and declarations within
 blocks) are generally not allowed; declarations should be at the beginning
-of blocks.</p>
+of blocks. To avoid accidental re-use it is permissible to declare
+loop variables inside for loops:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_SIZE</span><span class="p">(</span><span class="n">thing</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* do something loopy */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>Every now and then, an exception is made for declarations inside a
 #ifdef or #ifndef block: if the code looks nicer, such declarations can
 be placed at the top of the block even if there are statements above.
 On the other hand, however, it’s often best to move that #ifdef/#ifndef
 block to a separate function altogether.</p>
-</div>
-<div class="section" id="conditional-statements">
-<h3><a class="toc-backref" href="#id11">Conditional statements</a><a class="headerlink" href="#conditional-statements" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="conditional-statements">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Conditional statements</a><a class="headerlink" href="#conditional-statements" title="Permalink to this heading"></a></h3>
 <p>When comparing a variable for (in)equality with a constant, list the
 constant on the right, as in:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/* Reads like: &quot;If a equals 1&quot; */</span>
-    <span class="n">do_something</span><span class="p">();</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Reads like: &quot;If a equals 1&quot; */</span>
+<span class="w">    </span><span class="n">do_something</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Rationale: Yoda conditions (as in ‘if (1 == a)’) are awkward to read.
 Besides, good compilers already warn users when ‘==’ is mis-typed as ‘=’,
 even when the constant is on the right.</p>
-</div>
-<div class="section" id="comment-style">
-<h3><a class="toc-backref" href="#id12">Comment style</a><a class="headerlink" href="#comment-style" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="comment-style">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Comment style</a><a class="headerlink" href="#comment-style" title="Permalink to this heading"></a></h3>
 <p>We use traditional C-style /<code class="docutils literal notranslate"><span class="pre">*</span></code> <code class="docutils literal notranslate"><span class="pre">*</span></code>/ comments and avoid // comments.</p>
 <p>Rationale: The // form is valid in C99, so this is purely a matter of
 consistency of style. The checkpatch script will warn you about this.</p>
@@ -302,26 +398,26 @@ about converting to the preferred form unless you’re editing that
 comment anyway.)</p>
 <p>Rationale: Consistency, and ease of visually picking out a multiline
 comment from the surrounding code.</p>
-</div>
-</div>
-<div class="section" id="language-usage">
-<h2><a class="toc-backref" href="#id13">Language usage</a><a class="headerlink" href="#language-usage" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="preprocessor">
-<h3><a class="toc-backref" href="#id14">Preprocessor</a><a class="headerlink" href="#preprocessor" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="variadic-macros">
-<h4><a class="toc-backref" href="#id15">Variadic macros</a><a class="headerlink" href="#variadic-macros" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="language-usage">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Language usage</a><a class="headerlink" href="#language-usage" title="Permalink to this heading"></a></h2>
+<section id="preprocessor">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Preprocessor</a><a class="headerlink" href="#preprocessor" title="Permalink to this heading"></a></h3>
+<section id="variadic-macros">
+<h4><a class="toc-backref" href="#id15" role="doc-backlink">Variadic macros</a><a class="headerlink" href="#variadic-macros" title="Permalink to this heading"></a></h4>
 <p>For variadic macros, stick with this C99-like syntax:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define DPRINTF(fmt, ...)                                       \</span>
 <span class="cp">    do { printf(&quot;IRQ: &quot; fmt, ## __VA_ARGS__); } while (0)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="include-directives">
-<h4><a class="toc-backref" href="#id16">Include directives</a><a class="headerlink" href="#include-directives" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="include-directives">
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">Include directives</a><a class="headerlink" href="#include-directives" title="Permalink to this heading"></a></h4>
 <p>Order include directives as follows:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;qemu/osdep.h&quot;</span><span class="c1">  /* Always first... */</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;...&gt;</span><span class="c1">           /* then system headers... */</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;...&quot;</span><span class="c1">           /* and finally QEMU headers. */</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;qemu/osdep.h&quot;</span><span class="c1">  /* Always first... */</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;...&gt;</span><span class="c1">           /* then system headers... */</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;...&quot;</span><span class="c1">           /* and finally QEMU headers. */</span>
 </pre></div>
 </div>
 <p>The “qemu/osdep.h” header contains preprocessor macros that affect the behavior
@@ -330,14 +426,31 @@ core system headers included by external libraries get the preprocessor macros
 that QEMU depends on.</p>
 <p>Do not include “qemu/osdep.h” from header files since the .c file will have
 already included it.</p>
-</div>
-</div>
-<div class="section" id="c-types">
-<h3><a class="toc-backref" href="#id17">C types</a><a class="headerlink" href="#c-types" title="Permalink to this headline">¶</a></h3>
+<p>Headers should normally include everything they need beyond osdep.h.
+If exceptions are needed for some reason, they must be documented in
+the header.  If all that’s needed from a header is typedefs, consider
+putting those into qemu/typedefs.h instead of including the header.</p>
+<p>Cyclic inclusion is forbidden.</p>
+</section>
+<section id="generative-includes">
+<h4><a class="toc-backref" href="#id17" role="doc-backlink">Generative Includes</a><a class="headerlink" href="#generative-includes" title="Permalink to this heading"></a></h4>
+<p>QEMU makes fairly extensive use of the macro pre-processor to
+instantiate multiple similar functions. While such abuse of the macro
+processor isn’t discouraged it can make debugging and code navigation
+harder. You should consider carefully if the same effect can be
+achieved by making it easy for the compiler to constant fold or using
+python scripting to generate grep friendly code.</p>
+<p>If you do use template header files they should be named with the
+<code class="docutils literal notranslate"><span class="pre">.c.inc</span></code> or <code class="docutils literal notranslate"><span class="pre">.h.inc</span></code> suffix to make it clear they are being
+included for expansion.</p>
+</section>
+</section>
+<section id="c-types">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">C types</a><a class="headerlink" href="#c-types" title="Permalink to this heading"></a></h3>
 <p>It should be common sense to use the right type, but we have collected
 a few useful guidelines here.</p>
-<div class="section" id="scalars">
-<h4><a class="toc-backref" href="#id18">Scalars</a><a class="headerlink" href="#scalars" title="Permalink to this headline">¶</a></h4>
+<section id="scalars">
+<h4><a class="toc-backref" href="#id19" role="doc-backlink">Scalars</a><a class="headerlink" href="#scalars" title="Permalink to this heading"></a></h4>
 <p>If you’re using “int” or “long”, odds are good that there’s a better type.
 If a variable is counting something, it should be declared with an
 unsigned type.</p>
@@ -387,9 +500,9 @@ and fixing all related variables would be too invasive.</p>
 <p>Finally, while using descriptive types is important, be careful not to
 go overboard.  If whatever you’re doing causes warnings, or requires
 casts, then reconsider or ask for help.</p>
-</div>
-<div class="section" id="pointers">
-<h4><a class="toc-backref" href="#id19">Pointers</a><a class="headerlink" href="#pointers" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="pointers">
+<h4><a class="toc-backref" href="#id20" role="doc-backlink">Pointers</a><a class="headerlink" href="#pointers" title="Permalink to this heading"></a></h4>
 <p>Ensure that all of your pointers are “const-correct”.
 Unless a pointer is used to modify the pointed-to storage,
 give it the “const” attribute.  That way, the reader knows
@@ -397,9 +510,9 @@ up-front that this is a read-only pointer.  Perhaps more
 importantly, if we’re diligent about this, when you see a non-const
 pointer, you’re guaranteed that it is used to modify the storage
 it points to, or it is aliased to another pointer that is.</p>
-</div>
-<div class="section" id="typedefs">
-<h4><a class="toc-backref" href="#id20">Typedefs</a><a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="typedefs">
+<h4><a class="toc-backref" href="#id21" role="doc-backlink">Typedefs</a><a class="headerlink" href="#typedefs" title="Permalink to this heading"></a></h4>
 <p>Typedefs are used to eliminate the redundant ‘struct’ keyword, since type
 names have a different style than other identifiers (“CamelCase” versus
 “snake_case”).  Each named struct type should have a CamelCase name and a
@@ -411,15 +524,15 @@ of convenience it is also perfectly fine to use forward struct
 definitions instead of typedefs in headers and function prototypes; this
 avoids problems with duplicated typedefs and reduces the need to include
 headers from other headers.</p>
-</div>
-<div class="section" id="reserved-namespaces-in-c-and-posix">
-<h4><a class="toc-backref" href="#id21">Reserved namespaces in C and POSIX</a><a class="headerlink" href="#reserved-namespaces-in-c-and-posix" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="reserved-namespaces-in-c-and-posix">
+<h4><a class="toc-backref" href="#id22" role="doc-backlink">Reserved namespaces in C and POSIX</a><a class="headerlink" href="#reserved-namespaces-in-c-and-posix" title="Permalink to this heading"></a></h4>
 <p>Underscore capital, double underscore, and underscore ‘t’ suffixes should be
 avoided.</p>
-</div>
-</div>
-<div class="section" id="low-level-memory-management">
-<h3><a class="toc-backref" href="#id22">Low level memory management</a><a class="headerlink" href="#low-level-memory-management" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="low-level-memory-management">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Low level memory management</a><a class="headerlink" href="#low-level-memory-management" title="Permalink to this heading"></a></h3>
 <p>Use of the <code class="docutils literal notranslate"><span class="pre">malloc/free/realloc/calloc/valloc/memalign/posix_memalign</span></code>
 APIs is not allowed in the QEMU codebase. Instead of these routines,
 use the GLib memory allocation routines
@@ -452,55 +565,55 @@ reasons:</p>
 <li><p>It returns T <code class="docutils literal notranslate"><span class="pre">*</span></code> instead of void <code class="docutils literal notranslate"><span class="pre">*</span></code>, letting compiler catch more type errors.</p></li>
 </ul>
 <p>Declarations like</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">*</span><span class="n">v</span> <span class="o">=</span> <span class="n">g_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">))</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>are acceptable, though.</p>
 <p>Memory allocated by <code class="docutils literal notranslate"><span class="pre">qemu_memalign</span></code> or <code class="docutils literal notranslate"><span class="pre">qemu_blockalign</span></code> must be freed with
 <code class="docutils literal notranslate"><span class="pre">qemu_vfree</span></code>, since breaking this will cause problems on Win32.</p>
-</div>
-<div class="section" id="string-manipulation">
-<h3><a class="toc-backref" href="#id23">String manipulation</a><a class="headerlink" href="#string-manipulation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="string-manipulation">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">String manipulation</a><a class="headerlink" href="#string-manipulation" title="Permalink to this heading"></a></h3>
 <p>Do not use the strncpy function.  As mentioned in the man page, it does <em>not</em>
 guarantee a NULL-terminated buffer, which makes it extremely dangerous to use.
 It also zeros trailing destination bytes out to the specified length.  Instead,
 use this similar function when possible, but note its different signature:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">pstrcpy</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dest_buf_size</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">src</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">pstrcpy</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dest_buf_size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Don’t use strcat because it can’t check for buffer overflows, but:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="n">pstrcat</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">int</span> <span class="n">buf_size</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pstrcat</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">buf_size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The same limitation exists with sprintf and vsprintf, so use snprintf and
 vsnprintf.</p>
 <p>QEMU provides other useful string functions:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">strstart</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">ptr</span><span class="p">)</span>
-<span class="kt">int</span> <span class="n">stristart</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">ptr</span><span class="p">)</span>
-<span class="kt">int</span> <span class="n">qemu_strnlen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">max_len</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">strstart</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">ptr</span><span class="p">)</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">stristart</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">ptr</span><span class="p">)</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">qemu_strnlen</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">max_len</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>There are also replacement character processing macros for isxyz and toxyz,
 so instead of e.g. isalnum you should use qemu_isalnum.</p>
 <p>Because of the memory management rules, you must use g_strdup/g_strndup
 instead of plain strdup/strndup.</p>
-</div>
-<div class="section" id="printf-style-functions">
-<h3><a class="toc-backref" href="#id24">Printf-style functions</a><a class="headerlink" href="#printf-style-functions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="printf-style-functions">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Printf-style functions</a><a class="headerlink" href="#printf-style-functions" title="Permalink to this heading"></a></h3>
 <p>Whenever you add a new printf-style function, i.e., one with a format
 string argument and following “…” in its prototype, be sure to use
 gcc’s printf attribute directive in the prototype.</p>
 <p>This makes it so gcc’s -Wformat and -Wformat-security options can do
 their jobs and cross-check format strings with the number and types
 of arguments.</p>
-</div>
-<div class="section" id="c-standard-implementation-defined-and-undefined-behaviors">
-<h3><a class="toc-backref" href="#id25">C standard, implementation defined and undefined behaviors</a><a class="headerlink" href="#c-standard-implementation-defined-and-undefined-behaviors" title="Permalink to this headline">¶</a></h3>
-<p>C code in QEMU should be written to the C99 language specification. A copy
-of the final version of the C99 standard with corrigenda TC1, TC2, and TC3
-included, formatted as a draft, can be downloaded from:</p>
+</section>
+<section id="c-standard-implementation-defined-and-undefined-behaviors">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">C standard, implementation defined and undefined behaviors</a><a class="headerlink" href="#c-standard-implementation-defined-and-undefined-behaviors" title="Permalink to this heading"></a></h3>
+<p>C code in QEMU should be written to the C11 language specification. A
+copy of the final version of the C11 standard formatted as a draft,
+can be downloaded from:</p>
 <blockquote>
-<div><p><a class="reference external" href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf">http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf</a></p>
+<div><p><a class="reference external" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf">http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf</a></p>
 </div></blockquote>
 <p>The C language specification defines regions of undefined behavior and
 implementation defined behavior (to give compiler authors enough leeway to
@@ -519,10 +632,10 @@ the sign bit (ie it is an arithmetic shift, not a logical shift)</p></li>
 <p>In addition, QEMU assumes that the compiler does not use the latitude
 given in C99 and C11 to treat aspects of signed ‘&lt;&lt;’ as undefined, as
 documented in the GNU Compiler Collection manual starting at version 4.0.</p>
-</div>
-<div class="section" id="automatic-memory-deallocation">
-<span id="autofree-ref"></span><h3><a class="toc-backref" href="#id26">Automatic memory deallocation</a><a class="headerlink" href="#automatic-memory-deallocation" title="Permalink to this headline">¶</a></h3>
-<p>QEMU has a mandatory dependency either the GCC or CLang compiler. As
+</section>
+<section id="automatic-memory-deallocation">
+<span id="autofree-ref"></span><h3><a class="toc-backref" href="#id27" role="doc-backlink">Automatic memory deallocation</a><a class="headerlink" href="#automatic-memory-deallocation" title="Permalink to this heading"></a></h3>
+<p>QEMU has a mandatory dependency on either the GCC or the Clang compiler. As
 such it has the freedom to make use of a C language extension for
 automatically running a cleanup function when a stack variable goes
 out of scope. This can be used to simplify function cleanup paths,
@@ -541,34 +654,36 @@ by a previous use of G_DEFINE_AUTOPTR_CLEANUP_FUNC. This is
 supported for most GLib data types and GObjects</p></li>
 </ul>
 <p>For example, instead of</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span> <span class="s">&quot;wibble&quot;</span><span class="p">);</span>
-    <span class="n">GList</span> <span class="o">*</span><span class="n">bar</span> <span class="o">=</span> <span class="p">.....</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wibble&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GList</span><span class="w"> </span><span class="o">*</span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.....</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">eek</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">goto</span> <span class="n">cleanup</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eek</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="k">goto</span><span class="w"> </span><span class="n">cleanup</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-  <span class="nl">cleanup</span><span class="p">:</span>
-    <span class="n">g_free</span><span class="p">(</span><span class="n">foo</span><span class="p">);</span>
-    <span class="n">g_list_free</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="w">  </span><span class="nl">cleanup</span><span class="p">:</span>
+<span class="w">    </span><span class="n">g_free</span><span class="p">(</span><span class="n">foo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">g_list_free</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Using g_autofree/g_autoptr enables the code to be written as:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">g_autofree</span> <span class="kt">char</span> <span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span> <span class="s">&quot;wibble&quot;</span><span class="p">);</span>
-    <span class="n">g_autoptr</span> <span class="p">(</span><span class="n">GList</span><span class="p">)</span> <span class="n">bar</span> <span class="o">=</span> <span class="p">.....</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">g_autofree</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wibble&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">g_autoptr</span><span class="w"> </span><span class="p">(</span><span class="n">GList</span><span class="p">)</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.....</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">eek</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="mi">-1</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eek</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -582,26 +697,108 @@ live beyond the life of the function, that value must be saved
 and the original variable NULL’d out. This can be simpler using
 g_steal_pointer</p></li>
 </ul>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="o">*</span><span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">g_autofree</span> <span class="kt">char</span> <span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span> <span class="s">&quot;wibble&quot;</span><span class="p">);</span>
-    <span class="n">g_autoptr</span> <span class="p">(</span><span class="n">GList</span><span class="p">)</span> <span class="n">bar</span> <span class="o">=</span> <span class="p">.....</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">somefunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">g_autofree</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_strdup_printf</span><span class="p">(</span><span class="s">&quot;foo%&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wibble&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">g_autoptr</span><span class="w"> </span><span class="p">(</span><span class="n">GList</span><span class="p">)</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.....</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">eek</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eek</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">return</span> <span class="n">g_steal_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">foo</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">g_steal_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">foo</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="qemu-specific-idioms">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">QEMU Specific Idioms</a><a class="headerlink" href="#qemu-specific-idioms" title="Permalink to this heading"></a></h2>
+<section id="qemu-object-model-declarations">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">QEMU Object Model Declarations</a><a class="headerlink" href="#qemu-object-model-declarations" title="Permalink to this heading"></a></h3>
+<p>The QEMU Object Model (QOM) provides a framework for handling objects
+in the base C language. The first declaration of a storage or class
+structure should always be the parent and leave a visual space between
+that declaration and the new code. It is also useful to separate
+backing for properties (options driven by the user) and internal state
+to make navigation easier.</p>
+<p>For a storage structure the first declaration should always be called
+“parent_obj” and for a class structure the first member should always
+be called “parent_class” as below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">MyDeviceState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DeviceState</span><span class="w"> </span><span class="n">parent_obj</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Properties */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">prop_a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">prop_b</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/* Other stuff */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">internal_state</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">MyDeviceClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DeviceClass</span><span class="w"> </span><span class="n">parent_class</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">new_fn1</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">new_fn2</span><span class="p">)(</span><span class="n">CPUState</span><span class="w"> </span><span class="o">*</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
 </div>
+<p>Note that there is no need to provide typedefs for QOM structures
+since these are generated automatically by the QOM declaration macros.
+See <a class="reference internal" href="qom.html#qom"><span class="std std-ref">The QEMU Object Model (QOM)</span></a> for more details.</p>
+</section>
+<section id="qemu-guard-macros">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">QEMU GUARD macros</a><a class="headerlink" href="#qemu-guard-macros" title="Permalink to this heading"></a></h3>
+<p>QEMU provides a number of <code class="docutils literal notranslate"><span class="pre">_GUARD</span></code> macros intended to make the
+handling of multiple exit paths easier. For example using
+<code class="docutils literal notranslate"><span class="pre">QEMU_LOCK_GUARD</span></code> to take a lock will ensure the lock is released on
+exit from the function.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_critical_function</span><span class="p">(</span><span class="n">SomeState</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">QEMU_LOCK_GUARD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">    </span><span class="n">do_thing1</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check_state2</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">do_thing3</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="qemu-specific-idioms">
-<h2><a class="toc-backref" href="#id27">QEMU Specific Idioms</a><a class="headerlink" href="#qemu-specific-idioms" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="error-handling-and-reporting">
-<h3><a class="toc-backref" href="#id28">Error handling and reporting</a><a class="headerlink" href="#error-handling-and-reporting" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="reporting-errors-to-the-human-user">
-<h4><a class="toc-backref" href="#id29">Reporting errors to the human user</a><a class="headerlink" href="#reporting-errors-to-the-human-user" title="Permalink to this headline">¶</a></h4>
+<p>will ensure s-&gt;lock is released however the function is exited. The
+equivalent code without _GUARD macro makes us to carefully put
+qemu_mutex_unlock() on all exit points:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_critical_function</span><span class="p">(</span><span class="n">SomeState</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">qemu_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">    </span><span class="n">do_thing1</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check_state2</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">qemu_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">do_thing3</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="n">qemu_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are often <code class="docutils literal notranslate"><span class="pre">WITH_</span></code> forms of macros which more easily wrap
+around a block inside a function.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">WITH_RCU_READ_LOCK_GUARD</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">QTAILQ_FOREACH_RCU</span><span class="p">(</span><span class="n">kid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bus</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">,</span><span class="w"> </span><span class="n">sibling</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">do_the_thing</span><span class="p">(</span><span class="n">kid</span><span class="o">-&gt;</span><span class="n">child</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">err</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling-and-reporting">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Error handling and reporting</a><a class="headerlink" href="#error-handling-and-reporting" title="Permalink to this heading"></a></h3>
+<section id="reporting-errors-to-the-human-user">
+<h4><a class="toc-backref" href="#id32" role="doc-backlink">Reporting errors to the human user</a><a class="headerlink" href="#reporting-errors-to-the-human-user" title="Permalink to this heading"></a></h4>
 <p>Do not use printf(), fprintf() or monitor_printf().  Instead, use
 error_report() or error_vreport() from error-report.h.  This ensures the
 error is reported in the right place (current monitor or stderr), and in
@@ -611,9 +808,9 @@ a uniform format.</p>
 like command line parsing, the current location is tracked
 automatically.  To manipulate it manually, use the loc_``*``() from
 error-report.h.</p>
-</div>
-<div class="section" id="propagating-errors">
-<h4><a class="toc-backref" href="#id30">Propagating errors</a><a class="headerlink" href="#propagating-errors" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="propagating-errors">
+<h4><a class="toc-backref" href="#id33" role="doc-backlink">Propagating errors</a><a class="headerlink" href="#propagating-errors" title="Permalink to this heading"></a></h4>
 <p>An error can’t always be reported to the user right where it’s detected,
 but often needs to be propagated up the call chain to a place that can
 handle it.  This can be done in various ways.</p>
@@ -631,9 +828,9 @@ only the function really knows, use Error <code class="docutils literal notransl
 <p>Do not report an error to the user when you’re also returning an error
 for somebody else to handle.  Leave the reporting to the place that
 consumes the error returned.</p>
-</div>
-<div class="section" id="handling-errors">
-<h4><a class="toc-backref" href="#id31">Handling errors</a><a class="headerlink" href="#handling-errors" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="handling-errors">
+<h4><a class="toc-backref" href="#id34" role="doc-backlink">Handling errors</a><a class="headerlink" href="#handling-errors" title="Permalink to this heading"></a></h4>
 <p>Calling exit() is fine when handling configuration errors during
 startup.  It’s problematic during normal operation.  In particular,
 monitor commands should never exit().</p>
@@ -643,35 +840,35 @@ translation or device emulation).  Guests should not be able to
 terminate QEMU.</p>
 <p>Note that &amp;error_fatal is just another way to exit(1), and &amp;error_abort
 is just another way to abort().</p>
-</div>
-</div>
-<div class="section" id="trace-events-style">
-<h3><a class="toc-backref" href="#id32">trace-events style</a><a class="headerlink" href="#trace-events-style" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="x-prefix">
-<h4><a class="toc-backref" href="#id33">0x prefix</a><a class="headerlink" href="#x-prefix" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="trace-events-style">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">trace-events style</a><a class="headerlink" href="#trace-events-style" title="Permalink to this heading"></a></h3>
+<section id="x-prefix">
+<h4><a class="toc-backref" href="#id36" role="doc-backlink">0x prefix</a><a class="headerlink" href="#x-prefix" title="Permalink to this heading"></a></h4>
 <p>In trace-events files, use a ‘0x’ prefix to specify hex numbers, as in:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">some_trace</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">x</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">y</span><span class="p">)</span> <span class="s">&quot;x 0x%x y 0x&quot;</span> <span class="n">PRIx64</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">some_trace</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;x 0x%x y 0x&quot;</span><span class="w"> </span><span class="n">PRIx64</span>
 </pre></div>
 </div>
 <p>An exception is made for groups of numbers that are hexadecimal by
 convention and separated by the symbols ‘.’, ‘/’, ‘:’, or ‘ ‘ (such as
 PCI bus id):</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">another_trace</span><span class="p">(</span><span class="kt">int</span> <span class="n">cssid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ssid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dev_num</span><span class="p">)</span> <span class="s">&quot;bus id: %x.%x.%04x&quot;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">another_trace</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">cssid</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ssid</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dev_num</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;bus id: %x.%x.%04x&quot;</span>
 </pre></div>
 </div>
 <p>However, you can use ‘0x’ for such groups if you want. Anyway, be sure that
 it is obvious that numbers are in hex, ex.:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">data_dump</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">c1</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">c2</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">c3</span><span class="p">)</span> <span class="s">&quot;bytes (in hex): %02x %02x %02x&quot;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">data_dump</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;bytes (in hex): %02x %02x %02x&quot;</span>
 </pre></div>
 </div>
 <p>Rationale: hex numbers are hard to read in logs when there is no 0x prefix,
 especially when (occasionally) the representation doesn’t contain any letters
 and especially in one line with other decimal numbers. Number groups are allowed
 to not use ‘0x’ because for some things notations like %x.%x.%x are used not
-only in Qemu. Also dumping raw data bytes with ‘0x’ is less readable.</p>
-</div>
-<div class="section" id="printf-flag">
-<h4><a class="toc-backref" href="#id34">‘#’ printf flag</a><a class="headerlink" href="#printf-flag" title="Permalink to this headline">¶</a></h4>
+only in QEMU. Also dumping raw data bytes with ‘0x’ is less readable.</p>
+</section>
+<section id="printf-flag">
+<h4><a class="toc-backref" href="#id37" role="doc-backlink">‘#’ printf flag</a><a class="headerlink" href="#printf-flag" title="Permalink to this heading"></a></h4>
 <p>Do not use printf flag ‘#’, like ‘%#x’.</p>
 <p>Rationale: there are two ways to add a ‘0x’ prefix to printed number: ‘0x%…’
 and ‘%#…’. For consistency the only one way should be used. Arguments for
@@ -680,100 +877,52 @@ and ‘%#…’. For consistency the only one way should be used. Arguments for
 <li><p>it is more popular</p></li>
 <li><p>‘%#’ omits the 0x for the value 0 which makes output inconsistent</p></li>
 </ul>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
+           </div>
           </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="maintainers.html" class="btn btn-neutral float-left" title="The Role of Maintainers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="submitting-a-patch.html" class="btn btn-neutral float-right" title="Submitting a Patch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version 9.0.0.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<div id="editpage">
-  <ul>
-    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/style.rst">Page source</a></li>
-  </ul>
-</div><h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Information</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="code-of-conduct.html">Code of Conduct</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conflict-resolution.html">Conflict Resolution Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">QEMU Coding Style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="control-flow-integrity.html">Control-Flow Integrity (CFI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="memory.html">The memory API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-process.html">Multi-process QEMU</a></li>
-</ul>
-</li>
-</ul>
-
-
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, The QEMU Project Developers.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

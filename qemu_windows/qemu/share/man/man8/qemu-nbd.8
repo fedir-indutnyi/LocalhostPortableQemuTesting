@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "QEMU-NBD" "8" "May 06, 2021" "6.0.0" "QEMU"
-.SH NAME
-qemu-nbd \- QEMU Disk Network Block Device Server
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU-NBD" "8" "Apr 23, 2024" "9.0.0" "QEMU"
+.SH NAME
+qemu-nbd \- QEMU Disk Network Block Device Server
 .SH SYNOPSIS
 .sp
 \fBqemu\-nbd\fP [\fIOPTION\fP]... \fIfilename\fP
@@ -51,18 +51,18 @@ As a client to query exports of a remote NBD server.
 .SH OPTIONS
 .sp
 \fIfilename\fP is a disk image filename, or a set of block
-driver options if \fB\-\-image\-opts\fP is specified.
+driver options if \fI\%\-\-image\-opts\fP is specified.
 .sp
 \fIdev\fP is an NBD device.
 .INDENT 0.0
 .TP
-.B \-\-object type,id=ID,...props...
+.B \-\-object type,id=ID,...
 Define a new instance of the \fItype\fP object class identified by \fIID\fP\&.
 See the \fBqemu(1)\fP manual page for full details of the properties
 supported. The common object types that it makes sense to define are the
 \fBsecret\fP object, which is used to supply passwords and/or encryption
 keys, and the \fBtls\-creds\fP object, which is used to supply TLS
-credentials for the qemu\-nbd server or client.
+credentials for the \fBqemu\-nbd\fP server or client.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -135,13 +135,15 @@ as an read\-only device, SNAPSHOT_PARAM format is
 .INDENT 0.0
 .TP
 .B \-\-cache=CACHE
-The cache mode to be used with the file.  See the documentation of
-the emulator\(aqs \fB\-drive cache=...\fP option for allowed values.
+The cache mode to be used with the file. Valid values are:
+\fBnone\fP, \fBwriteback\fP (the default), \fBwritethrough\fP,
+\fBdirectsync\fP and \fBunsafe\fP\&. See the documentation of
+the emulator\(aqs \fB\-drive cache=...\fP option for more info.
 .UNINDENT
 .INDENT 0.0
 .TP
 .B \-n, \-\-nocache
-Equivalent to \fB\-\-cache=none\fP\&.
+Equivalent to \fI\%\-\-cache=none\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -180,8 +182,7 @@ Disconnect the device \fIDEV\fP (Linux only).
 .TP
 .B \-e, \-\-shared=NUM
 Allow up to \fINUM\fP clients to share the device (default
-\fB1\fP), 0 for unlimited. Safe for readers, but for now,
-consistency is not guaranteed between multiple writers.
+\fB1\fP), 0 for unlimited.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -211,9 +212,23 @@ with options that change behavior related to a specific export (such as
 .TP
 .B \-\-tls\-creds=ID
 Enable mandatory TLS encryption for the server by setting the ID
-of the TLS credentials object previously created with the \-\-object
-option; or provide the credentials needed for connecting as a client
-in list mode.
+of the TLS credentials object previously created with the
+\fI\%\-\-object\fP option; or provide the credentials needed for
+connecting as a client in list mode.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-tls\-hostname=hostname
+When validating an x509 certificate received over a TLS connection,
+the hostname that the NBD client used to connect will be checked
+against information in the server provided certificate. Sometimes
+it might be required to override the hostname used to perform this
+check. For example, if the NBD client is using a tunnel from localhost
+to connect to the remote server, the \fI\%\-\-tls\-hostname\fP option should
+be used to set the officially expected hostname of the remote NBD
+server. This can also be used if accessing NBD over a UNIX socket
+where there is no inherent hostname available. This is only permitted
+when acting as a NBD client with the \fI\%\-\-list\fP option.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -235,7 +250,9 @@ against their x509 distinguished name.
 .INDENT 0.0
 .TP
 .B \-v, \-\-verbose
-Display extra debugging information.
+Display extra debugging information. This option also keeps the original
+\fISTDERR\fP stream open if the \fBqemu\-nbd\fP process is daemonized due to
+other options like \fI\%\-\-fork\fP or \fI\%\-c\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -304,7 +321,7 @@ qemu\-nbd \-f qcow2 file.qcow2
 .UNINDENT
 .sp
 Start a long\-running server listening with encryption on port 10810,
-and whitelist clients with a specific X.509 certificate to connect to
+and allow clients with a specific X.509 certificate to connect to
 a 1 megabyte subset of a raw file, using the export name \(aqsubset\(aq:
 .INDENT 0.0
 .INDENT 3.5
@@ -341,7 +358,7 @@ qemu\-nbd \-\-fork \-\-persistent \-\-shared=5 \-\-socket=/path/to/sock \e
 Expose the guest\-visible contents of a qcow2 file via a block device
 /dev/nbd0 (and possibly creating /dev/nbd0p1 and friends for
 partitions found within), then disconnect the device when done.
-Access to bind qemu\-nbd to an /dev/nbd device generally requires root
+Access to bind \fBqemu\-nbd\fP to a /dev/nbd device generally requires root
 privileges, and may also require the execution of \fBmodprobe nbd\fP
 to enable the kernel NBD client module.  \fICAUTION\fP: Do not use
 this method to mount filesystems from an untrusted guest image \- a
@@ -379,6 +396,6 @@ qemu\-nbd \e
 .SH AUTHOR
 Anthony Liguori <anthony@codemonkey.ws>
 .SH COPYRIGHT
-2020, The QEMU Project Developers
+2024, The QEMU Project Developers
 .\" Generated by docutils manpage writer.
 .

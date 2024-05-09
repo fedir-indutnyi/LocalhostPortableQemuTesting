@@ -1,41 +1,142 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Invocation &#8212; QEMU  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invocation &mdash; QEMU  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Keys in the graphical frontends" href="keys.html" />
-    <link rel="prev" title="Quick Start" href="quickstart.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="next" title="Device Emulation" href="device-emulation.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="invocation">
-<span id="sec-005finvocation"></span><h1>Invocation<a class="headerlink" href="#invocation" title="Permalink to this headline">¶</a></h1>
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                9.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Emulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Invocation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-0">Standard options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-1">Block device options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-2">USB convenience options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-3">Display options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-4">i386 target only</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-5">Network options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-6">Character device options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-7">TPM device options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-8">Boot Image or Kernel specific</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-9">Debug/Expert options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hxtool-10">Generic object creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-url-syntax">Device URL Syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="device-emulation.html">Device Emulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html">Disk Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic-loader.html">Generic Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guest-loader.html">Guest Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="barrier.html">QEMU Barrier Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets.html">Providing secret data to QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authz.html">Client authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdb.html">GDB usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="replay.html">Record/replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootindex.html">Managing device boot order with bootindex properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-process.html">Multi-process QEMU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="confidential-guest-support.html">Confidential Guest Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm-templating.html">QEMU VM templating</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">Developer Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">System Emulation</a></li>
+      <li class="breadcrumb-item active">Invocation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://gitlab.com/qemu-project/qemu/blob/master/docs/system/invocation.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="invocation">
+<span id="sec-005finvocation"></span><h1>Invocation<a class="headerlink" href="#invocation" title="Permalink to this heading"></a></h1>
 <pre class="literal-block">qemu-system-x86_64 [options] [disk_image]</pre>
 <p>disk_image is a raw hard disk image for IDE hard disk 0. Some targets do
 not need a disk image.</p>
-<div class="section" id="hxtool-0">
-<h2>Standard options<a class="headerlink" href="#hxtool-0" title="Permalink to this headline">¶</a></h2>
+<p>When dealing with options parameters as arbitrary strings containing
+commas, such as in “file=my,file” and “string=a,b”, it’s necessary to
+double the commas. For instance,”-fw_cfg name=z,string=a,,b” will be
+parsed as “-fw_cfg name=z,string=a,b”.</p>
+<section id="hxtool-0">
+<h2>Standard options<a class="headerlink" href="#hxtool-0" title="Permalink to this heading"></a></h2>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-h</span></code></dt><dd><p>Display help and exit</p>
 </dd>
@@ -55,7 +156,7 @@ QEMU will support machine types from many previous versions.</p>
 <p>Supported machine properties are:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">accel=accels1[:accels2[:...]]</span></code></dt><dd><p>This is used to enable an accelerator. Depending on the target
-architecture, kvm, xen, hax, hvf, whpx or tcg can be available.
+architecture, kvm, xen, hvf, nvmm, whpx or tcg can be available.
 By default, tcg is used. If there is more than one accelerator
 specified, the next one is used if the previous one fails to
 initialize.</p>
@@ -84,40 +185,66 @@ is on.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">memory-encryption=</span></code></dt><dd><p>Memory encryption object to use. The default is none.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">hmat=on|off</span></code></dt><dd><blockquote>
-<div><p>Enables or disables ACPI Heterogeneous Memory Attribute Table
+<dt><code class="docutils literal notranslate"><span class="pre">hmat=on|off</span></code></dt><dd><p>Enables or disables ACPI Heterogeneous Memory Attribute Table
 (HMAT) support. The default is off.</p>
-</div></blockquote>
-<dl>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">memory-backend='id'</span></code></dt><dd><p>An alternative to legacy <code class="docutils literal notranslate"><span class="pre">-mem-path</span></code> and <code class="docutils literal notranslate"><span class="pre">mem-prealloc</span></code> options.
 Allows to use a memory backend as main RAM.</p>
-<p>For example:
-::
--object memory-backend-file,id=pc.ram,size=512M,mem-path=/hugetlbfs,prealloc=on,share=on
--machine memory-backend=pc.ram
--m 512M</p>
-<p>Migration compatibility note:
-a) as backend id one shall use value of ‘default-ram-id’, advertised by
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="nb">object</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="n">file</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">ram</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">512</span><span class="n">M</span><span class="p">,</span><span class="n">mem</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">hugetlbfs</span><span class="p">,</span><span class="n">prealloc</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">share</span><span class="o">=</span><span class="n">on</span>
+<span class="o">-</span><span class="n">machine</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">ram</span>
+<span class="o">-</span><span class="n">m</span> <span class="mi">512</span><span class="n">M</span>
+</pre></div>
+</div>
+<p>Migration compatibility note:</p>
+<ul class="simple">
+<li><p>as backend id one shall use value of ‘default-ram-id’, advertised by
 machine type (available via <code class="docutils literal notranslate"><span class="pre">query-machines</span></code> QMP command), if migration
-to/from old QEMU (&lt;5.0) is expected.
-b) for machine types 4.0 and older, user shall
+to/from old QEMU (&lt;5.0) is expected.</p></li>
+<li><p>for machine types 4.0 and older, user shall
 use <code class="docutils literal notranslate"><span class="pre">x-use-canonical-path-for-ramblock-id=off</span></code> backend option
-if migration to/from old QEMU (&lt;5.0) is expected.
-For example:
-::
--object memory-backend-ram,id=pc.ram,size=512M,x-use-canonical-path-for-ramblock-id=off
--machine memory-backend=pc.ram
--m 512M</p>
+if migration to/from old QEMU (&lt;5.0) is expected.</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="nb">object</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="n">ram</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">ram</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">512</span><span class="n">M</span><span class="p">,</span><span class="n">x</span><span class="o">-</span><span class="n">use</span><span class="o">-</span><span class="n">canonical</span><span class="o">-</span><span class="n">path</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">ramblock</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">machine</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">=</span><span class="n">pc</span><span class="o">.</span><span class="n">ram</span>
+<span class="o">-</span><span class="n">m</span> <span class="mi">512</span><span class="n">M</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cxl-fmw.0.targets.0=firsttarget,cxl-fmw.0.targets.1=secondtarget,cxl-fmw.0.size=size[,cxl-fmw.0.interleave-granularity=granularity]</span></code></dt><dd><p>Define a CXL Fixed Memory Window (CFMW).</p>
+<p>Described in the CXL 2.0 ECN: CEDT CFMWS &amp; QTG _DSM.</p>
+<p>They are regions of Host Physical Addresses (HPA) on a system which
+may be interleaved across one or more CXL host bridges.  The system
+software will assign particular devices into these windows and
+configure the downstream Host-managed Device Memory (HDM) decoders
+in root ports, switch ports and devices appropriately to meet the
+interleave requirements before enabling the memory devices.</p>
+<p><code class="docutils literal notranslate"><span class="pre">targets.X=target</span></code> provides the mapping to CXL host bridges
+which may be identified by the id provided in the -device entry.
+Multiple entries are needed to specify all the targets when
+the fixed memory window represents interleaved memory. X is the
+target index from 0.</p>
+<p><code class="docutils literal notranslate"><span class="pre">size=size</span></code> sets the size of the CFMW. This must be a multiple of
+256MiB. The region will be aligned to 256MiB but the location is
+platform and configuration dependent.</p>
+<p><code class="docutils literal notranslate"><span class="pre">interleave-granularity=granularity</span></code> sets the granularity of
+interleave. Default 256 (bytes). Only 256, 512, 1k, 2k,
+4k, 8k and 16k granularities supported.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">machine</span> <span class="n">cxl</span><span class="o">-</span><span class="n">fmw</span><span class="mf">.0</span><span class="o">.</span><span class="n">targets</span><span class="mf">.0</span><span class="o">=</span><span class="n">cxl</span><span class="mf">.0</span><span class="p">,</span><span class="n">cxl</span><span class="o">-</span><span class="n">fmw</span><span class="mf">.0</span><span class="o">.</span><span class="n">targets</span><span class="mf">.1</span><span class="o">=</span><span class="n">cxl</span><span class="mf">.1</span><span class="p">,</span><span class="n">cxl</span><span class="o">-</span><span class="n">fmw</span><span class="mf">.0</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="mi">128</span><span class="n">G</span><span class="p">,</span><span class="n">cxl</span><span class="o">-</span><span class="n">fmw</span><span class="mf">.0</span><span class="o">.</span><span class="n">interleave</span><span class="o">-</span><span class="n">granularity</span><span class="o">=</span><span class="mi">512</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </dd>
-</dl>
+<dt><code class="docutils literal notranslate"><span class="pre">sgx-epc.0.memdev=&#64;var{memid},sgx-epc.0.node=&#64;var{numaid}</span></code></dt><dd><p>Define an SGX EPC section.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-cpu</span> <span class="pre">model</span></code></dt><dd><p>Select CPU model (<code class="docutils literal notranslate"><span class="pre">-cpu</span> <span class="pre">help</span></code> for list and additional feature
 selection)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-accel</span> <span class="pre">name[,prop=value[,...]]</span></code></dt><dd><p>This is used to enable an accelerator. Depending on the target
-architecture, kvm, xen, hax, hvf, whpx or tcg can be available. By
+architecture, kvm, xen, hvf, nvmm, whpx or tcg can be available. By
 default, tcg is used. If there is more than one accelerator
 specified, the next one is used if the previous one fails to
 initialize.</p>
@@ -134,6 +261,11 @@ is not recommended except for debugging purposes.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">kvm-shadow-mem=size</span></code></dt><dd><p>Defines the size of the KVM shadow MMU.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">one-insn-per-tb=on|off</span></code></dt><dd><p>Makes the TCG accelerator put only one guest instruction into
+each translation block. This slows down emulation a lot, but
+can be useful in some situations, such as when trying to analyse
+the logs produced by the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">split-wx=on|off</span></code></dt><dd><p>Controls the use of split w^x mapping for the TCG code generation
 buffer. Some operating systems require this to be enabled, and in
 such a case this will default on. On other operating systems, this
@@ -148,16 +280,103 @@ where both the back-end and front-ends support it and no
 incompatible TCG features have been enabled (e.g.
 icount/replay).</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dirty-ring-size=n</span></code></dt><dd><p>When the KVM accelerator is used, it controls the size of the per-vCPU
+dirty page ring buffer (number of entries for each vCPU). It should
+be a value that is power of two, and it should be 1024 or bigger (but
+still less than the maximum value that the kernel supports).  4096
+could be a good initial value if you have no idea which is the best.
+Set this value to 0 to disable the feature.  By default, this feature
+is disabled (dirty-ring-size=0).  When enabled, KVM will instead
+record dirty pages in a bitmap.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eager-split-size=n</span></code></dt><dd><p>KVM implements dirty page logging at the PAGE_SIZE granularity and
+enabling dirty-logging on a huge-page requires breaking it into
+PAGE_SIZE pages in the first place. KVM on ARM does this splitting
+lazily by default. There are performance benefits in doing huge-page
+split eagerly, especially in situations where TLBI costs associated
+with break-before-make sequences are considerable and also if guest
+workloads are read intensive. The size here specifies how many pages
+to break at a time and needs to be a valid block size which is
+1GB/2MB/4KB, 32MB/16KB and 512MB/64KB for 4KB/16KB/64KB PAGE_SIZE
+respectively. Be wary of specifying a higher size as it will have an
+impact on the memory. By default, this feature is disabled
+(eager-split-size=0).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">notify-vmexit=run|internal-error|disable,notify-window=n</span></code></dt><dd><p>Enables or disables notify VM exit support on x86 host and specify
+the corresponding notify window to trigger the VM exit if enabled.
+<code class="docutils literal notranslate"><span class="pre">run</span></code> option enables the feature. It does nothing and continue
+if the exit happens. <code class="docutils literal notranslate"><span class="pre">internal-error</span></code> option enables the feature.
+It raises a internal error. <code class="docutils literal notranslate"><span class="pre">disable</span></code> option doesn’t enable the feature.
+This feature can mitigate the CPU stuck issue due to event windows don’t
+open up for a specified of time (i.e. notify-window).
+Default: notify-vmexit=run,notify-window=0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">device=path</span></code></dt><dd><p>Sets the path to the KVM device node. Defaults to <code class="docutils literal notranslate"><span class="pre">/dev/kvm</span></code>. This
+option can be used to pass the KVM device to use via a file descriptor
+by setting the value to <code class="docutils literal notranslate"><span class="pre">/dev/fdset/NN</span></code>.</p>
+</dd>
 </dl>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-smp</span> <span class="pre">[cpus=]n[,cores=cores][,threads=threads][,dies=dies][,sockets=sockets][,maxcpus=maxcpus]</span></code></dt><dd><p>Simulate an SMP system with n CPUs. On the PC target, up to 255 CPUs
-are supported. On Sparc32 target, Linux limits the number of usable
-CPUs to 4. For the PC target, the number of cores per die, the
-number of threads per cores, the number of dies per packages and the
-total number of sockets can be specified. Missing values will be
-computed. If any on the three values is given, the total number of
-CPUs n can be omitted. maxcpus specifies the maximum number of
-hotpluggable CPUs.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-smp</span> <span class="pre">[[cpus=]n][,maxcpus=maxcpus][,sockets=sockets][,dies=dies][,clusters=clusters][,cores=cores][,threads=threads]</span></code></dt><dd><p>Simulate a SMP system with ‘<code class="docutils literal notranslate"><span class="pre">n</span></code>‘ CPUs initially present on
+the machine type board. On boards supporting CPU hotplug, the optional
+‘<code class="docutils literal notranslate"><span class="pre">maxcpus</span></code>‘ parameter can be set to enable further CPUs to be
+added at runtime. When both parameters are omitted, the maximum number
+of CPUs will be calculated from the provided topology members and the
+initial CPU count will match the maximum number. When only one of them
+is given then the omitted one will be set to its counterpart’s value.
+Both parameters may be specified, but the maximum number of CPUs must
+be equal to or greater than the initial CPU count. Product of the
+CPU topology hierarchy must be equal to the maximum number of CPUs.
+Both parameters are subject to an upper limit that is determined by
+the specific machine type chosen.</p>
+<p>To control reporting of CPU topology information, values of the topology
+parameters can be specified. Machines may only support a subset of the
+parameters and different machines may have different subsets supported
+which vary depending on capacity of the corresponding CPU targets. So
+for a particular machine type board, an expected topology hierarchy can
+be defined through the supported sub-option. Unsupported parameters can
+also be provided in addition to the sub-option, but their values must be
+set as 1 in the purpose of correct parsing.</p>
+<p>Either the initial CPU count, or at least one of the topology parameters
+must be specified. The specified parameters must be greater than zero,
+explicit configuration like “cpus=0” is not allowed. Values for any
+omitted parameters will be computed from those which are given.</p>
+<p>For example, the following sub-option defines a CPU topology hierarchy
+(2 sockets totally on the machine, 2 cores per socket, 2 threads per
+core) for a machine that only supports sockets/cores/threads.
+Some members of the option can be omitted but their values will be
+automatically computed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">smp</span> <span class="mi">8</span><span class="p">,</span><span class="n">sockets</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cores</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">maxcpus</span><span class="o">=</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>The following sub-option defines a CPU topology hierarchy (2 sockets
+totally on the machine, 2 dies per socket, 2 cores per die, 2 threads
+per core) for PC machines which support sockets/dies/cores/threads.
+Some members of the option can be omitted but their values will be
+automatically computed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">smp</span> <span class="mi">16</span><span class="p">,</span><span class="n">sockets</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">dies</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cores</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">maxcpus</span><span class="o">=</span><span class="mi">16</span>
+</pre></div>
+</div>
+<p>The following sub-option defines a CPU topology hierarchy (2 sockets
+totally on the machine, 2 clusters per socket, 2 cores per cluster,
+2 threads per core) for ARM virt machines which support sockets/clusters
+/cores/threads. Some members of the option can be omitted but their values
+will be automatically computed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">smp</span> <span class="mi">16</span><span class="p">,</span><span class="n">sockets</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cores</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">maxcpus</span><span class="o">=</span><span class="mi">16</span>
+</pre></div>
+</div>
+<p>Historically preference was given to the coarsest topology parameters
+when computing missing values (ie sockets preferred over cores, which
+were preferred over threads), however, this behaviour is considered
+liable to change. Prior to 6.2 the preference was sockets over cores
+over threads. Since 6.2 the preference is cores over sockets over threads.</p>
+<p>For example, the following option defines a machine board with 2 sockets
+of 1 core before 6.2 and 1 socket of 2 cores after 6.2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">smp</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Note: The cluster topology will only be generated in ACPI and exposed
+to guest if it’s explicitly specified in -smp.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">node[,mem=size][,cpus=firstcpu[-lastcpu]][,nodeid=node][,initiator=initiator]</span></code></dt><dd><p></p>
 </dd>
@@ -167,7 +386,7 @@ hotpluggable CPUs.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">cpu,node-id=node[,socket-id=x][,core-id=y][,thread-id=z]</span></code></dt><dd><p></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">hmat-lb,initiator=node,target=node,hierarchy=hierarchy,data-type=tpye[,latency=lat][,bandwidth=bw]</span></code></dt><dd><p></p>
+<dt><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">hmat-lb,initiator=node,target=node,hierarchy=hierarchy,data-type=type[,latency=lat][,bandwidth=bw]</span></code></dt><dd><p></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">hmat-cache,node-id=node,size=size,level=level[,associativity=str][,policy=str][,line=size]</span></code></dt><dd><p>Define a NUMA node and assign RAM and VCPUs to it. Set the NUMA
 distance from a source node to a destination node. Set the ACPI
@@ -199,13 +418,20 @@ it’s used with ‘<code class="docutils literal notranslate"><span class="pre"
 <span class="o">-</span><span class="n">numa</span> <span class="n">cpu</span><span class="p">,</span><span class="n">node</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">socket</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span> <span class="o">-</span><span class="n">numa</span> <span class="n">cpu</span><span class="p">,</span><span class="n">node</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">socket</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>Legacy ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ assigns a given RAM amount to a node (not supported
-for 5.1 and newer machine types). ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ assigns RAM from
-a given memory backend device to a node. If ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ and
-‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ are omitted in all nodes, RAM is split equally between them.</p>
-<p>‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ and ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ are mutually exclusive.
-Furthermore, if one node uses ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘, all of them have to
-use it.</p>
+<p>‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ option assigns RAM from a given memory backend
+device to a node. It is recommended to use ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ option
+over legacy ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ option. This is because ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘
+option provides better performance and more control over the
+backend’s RAM (e.g. ‘<code class="docutils literal notranslate"><span class="pre">prealloc</span></code>‘ parameter of
+‘<code class="docutils literal notranslate"><span class="pre">-memory-backend-ram</span></code>‘ allows memory preallocation).</p>
+<p>For compatibility reasons, legacy ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ option is
+supported in 5.0 and older machine types. Note that ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘
+and ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘ are mutually exclusive. If one node uses
+‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘, the rest nodes have to use ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘
+option, and vice versa.</p>
+<p>Users must specify memory for all NUMA nodes by ‘<code class="docutils literal notranslate"><span class="pre">memdev</span></code>‘
+(or legacy ‘<code class="docutils literal notranslate"><span class="pre">mem</span></code>‘ if available). In QEMU 5.2, the support
+for ‘<code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">node</span></code>‘ without memory specified was removed.</p>
 <p>‘<code class="docutils literal notranslate"><span class="pre">initiator</span></code>‘ is an additional option that points to an
 initiator NUMA node that has best performance (the lowest latency or
 largest bandwidth) to this NUMA node. Note that this option can be
@@ -280,7 +506,7 @@ policy is write-back, the cache Line size is 8 bytes:</p>
 <span class="o">-</span><span class="n">m</span> <span class="mi">2</span><span class="n">G</span> \
 <span class="o">-</span><span class="nb">object</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="n">ram</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="n">G</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">m0</span> \
 <span class="o">-</span><span class="nb">object</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="n">ram</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="n">G</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">m1</span> \
-<span class="o">-</span><span class="n">smp</span> <span class="mi">2</span> \
+<span class="o">-</span><span class="n">smp</span> <span class="mi">2</span><span class="p">,</span><span class="n">sockets</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">maxcpus</span><span class="o">=</span><span class="mi">2</span> \
 <span class="o">-</span><span class="n">numa</span> <span class="n">node</span><span class="p">,</span><span class="n">nodeid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">memdev</span><span class="o">=</span><span class="n">m0</span> \
 <span class="o">-</span><span class="n">numa</span> <span class="n">node</span><span class="p">,</span><span class="n">nodeid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">memdev</span><span class="o">=</span><span class="n">m1</span><span class="p">,</span><span class="n">initiator</span><span class="o">=</span><span class="mi">0</span> \
 <span class="o">-</span><span class="n">numa</span> <span class="n">cpu</span><span class="p">,</span><span class="n">node</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">socket</span><span class="o">-</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span> \
@@ -391,8 +617,23 @@ PC/Windows hosts.</p>
 </div>
 <p>The default is <code class="docutils literal notranslate"><span class="pre">en-us</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-audio-help</span></code></dt><dd><p>Will show the -audiodev equivalent of the currently specified
-(deprecated) environment variables.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-audio</span> <span class="pre">[driver=]driver[,model=value][,prop[=value][,...]]</span></code></dt><dd><p>If the <code class="docutils literal notranslate"><span class="pre">model</span></code> option is specified, <code class="docutils literal notranslate"><span class="pre">-audio</span></code> is a shortcut
+for configuring both the guest audio hardware and the host audio
+backend in one go. The guest hardware model can be set with
+<code class="docutils literal notranslate"><span class="pre">model=modelname</span></code>.  Use <code class="docutils literal notranslate"><span class="pre">model=help</span></code> to list the available
+device types.</p>
+<p>The following two example do exactly the same, to show how <code class="docutils literal notranslate"><span class="pre">-audio</span></code>
+can be used to shorten the command line length:</p>
+<pre class="literal-block">qemu-system-x86_64 -audiodev pa,id=pa -device sb16,audiodev=pa
+qemu-system-x86_64 -audio pa,model=sb16</pre>
+<p>If the <code class="docutils literal notranslate"><span class="pre">model</span></code> option is not specified, <code class="docutils literal notranslate"><span class="pre">-audio</span></code> is used to
+configure a default audio backend that will be used whenever the
+<code class="docutils literal notranslate"><span class="pre">audiodev</span></code> property is not set on a device or machine.  In
+particular, <code class="docutils literal notranslate"><span class="pre">-audio</span> <span class="pre">none</span></code> ensures that no audio is produced even
+for machines that have embedded sound hardware.</p>
+<p>In both cases, the driver option is the same as with the corresponding
+<code class="docutils literal notranslate"><span class="pre">-audiodev</span></code> option below.  Use <code class="docutils literal notranslate"><span class="pre">driver=help</span></code> to list the available
+drivers.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-audiodev</span> <span class="pre">[driver=]driver,id=id[,prop[=value][,...]]</span></code></dt><dd><p>Adds a new audio backend driver identified by id. There are global
 and driver specific properties. Some values can be set differently
@@ -513,12 +754,35 @@ to honor this value but actual latencies may be lower or higher.</p>
 </dd>
 </dl>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-audiodev</span> <span class="pre">pipewire,id=id[,prop[=value][,...]]</span></code></dt><dd><p>Creates a backend using PipeWire. This backend is available on
+most systems.</p>
+<p>PipeWire specific options are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">in|out.latency=usecs</span></code></dt><dd><p>Desired latency in microseconds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">in|out.name=sink</span></code></dt><dd><p>Use the specified source/sink for recording/playback.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">in|out.stream-name</span></code></dt><dd><p>Specify the name of pipewire stream.</p>
+</dd>
+</dl>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-audiodev</span> <span class="pre">sdl,id=id[,prop[=value][,...]]</span></code></dt><dd><p>Creates a backend using SDL. This backend is available on most
 systems, but you should use your platform’s native backend if
 possible.</p>
 <p>SDL specific options are:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">in|out.buffer-count=count</span></code></dt><dd><p>Sets the count of the buffers.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-audiodev</span> <span class="pre">sndio,id=id[,prop[=value][,...]]</span></code></dt><dd><p>Creates a backend using SNDIO. This backend is available on
+OpenBSD and most other Unix-like systems.</p>
+<p>Sndio specific options are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">in|out.dev=device</span></code></dt><dd><p>Specify the sndio device to use for input and/or output. Default
+is <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">in|out.latency=usecs</span></code></dt><dd><p>Sets the desired period length in microseconds.</p>
 </dd>
 </dl>
 </dd>
@@ -534,20 +798,6 @@ specific properties.</p>
 <code class="docutils literal notranslate"><span class="pre">qemu.wav</span></code>.</p>
 </dd>
 </dl>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-soundhw</span> <span class="pre">card1[,card2,...]</span> <span class="pre">or</span> <span class="pre">-soundhw</span> <span class="pre">all</span></code></dt><dd><p>Enable audio and selected sound hardware. Use ‘help’ to print all
-available sound hardware. For example:</p>
-<pre class="literal-block">qemu-system-x86_64 -soundhw sb16,adlib disk.img
-qemu-system-x86_64 -soundhw es1370 disk.img
-qemu-system-x86_64 -soundhw ac97 disk.img
-qemu-system-x86_64 -soundhw hda disk.img
-qemu-system-x86_64 -soundhw all disk.img
-qemu-system-x86_64 -soundhw help</pre>
-<p>Note that Linux’s i810_audio OSS kernel (for AC97) module might
-require manually specifying clocking.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">modprobe</span> <span class="n">i810_audio</span> <span class="n">clocking</span><span class="o">=</span><span class="mi">48000</span>
-</pre></div>
-</div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">driver[,prop[=value][,...]]</span></code></dt><dd><p>Add device driver. prop=value sets driver properties. Valid
 properties depend on the driver. To get help on possible drivers and
@@ -596,7 +846,7 @@ simulator nor QEMU is exposed to any outside network.</p>
 <p>See the “lanserv/README.vm” file in the OpenIPMI library for more
 details on the external interface.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">isa-ipmi-kcs,bmc=id[,ioport=val][,irq=val]</span></code></dt><dd><p>Add a KCS IPMI interafce on the ISA bus. This also adds a
+<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">isa-ipmi-kcs,bmc=id[,ioport=val][,irq=val]</span></code></dt><dd><p>Add a KCS IPMI interface on the ISA bus. This also adds a
 corresponding ACPI and SMBIOS entries, if appropriate.</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">bmc=id</span></code></dt><dd><p>The BMC to connect to, one of ipmi-bmc-sim or ipmi-bmc-extern
@@ -613,13 +863,51 @@ interrupts, set this to 0.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">isa-ipmi-bt,bmc=id[,ioport=val][,irq=val]</span></code></dt><dd><p>Like the KCS interface, but defines a BT interface. The default port
 is 0xe4 and the default interrupt is 5.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">pci-ipmi-kcs,bmc=id</span></code></dt><dd><p>Add a KCS IPMI interafce on the PCI bus.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">pci-ipmi-kcs,bmc=id</span></code></dt><dd><p>Add a KCS IPMI interface on the PCI bus.</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">bmc=id</span></code></dt><dd><p>The BMC to connect to, one of ipmi-bmc-sim or ipmi-bmc-extern above.</p>
 </dd>
 </dl>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">pci-ipmi-bt,bmc=id</span></code></dt><dd><p>Like the KCS interface, but defines a BT interface on the PCI bus.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">intel-iommu[,option=...]</span></code></dt><dd><p>This is only supported by <code class="docutils literal notranslate"><span class="pre">-machine</span> <span class="pre">q35</span></code>, which will enable Intel VT-d
+emulation within the guest.  It supports below options:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">intremap=on|off</span></code> (default: auto)</dt><dd><p>This enables interrupt remapping feature.  It’s required to enable
+complete x2apic.  Currently it only supports kvm kernel-irqchip modes
+<code class="docutils literal notranslate"><span class="pre">off</span></code> or <code class="docutils literal notranslate"><span class="pre">split</span></code>, while full kernel-irqchip is not yet supported.
+The default value is “auto”, which will be decided by the mode of
+kernel-irqchip.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">caching-mode=on|off</span></code> (default: off)</dt><dd><p>This enables caching mode for the VT-d emulated device.  When
+caching-mode is enabled, each guest DMA buffer mapping will generate an
+IOTLB invalidation from the guest IOMMU driver to the vIOMMU device in
+a synchronous way.  It is required for <code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">vfio-pci</span></code> to work
+with the VT-d device, because host assigned devices requires to setup
+the DMA mapping on the host before guest DMA starts.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">device-iotlb=on|off</span></code> (default: off)</dt><dd><p>This enables device-iotlb capability for the emulated VT-d device.  So
+far virtio/vhost should be the only real user for this parameter,
+paired with ats=on configured for the device.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">aw-bits=39|48</span></code> (default: 39)</dt><dd><p>This decides the address width of IOVA address space.  The address
+space has 39 bits width for 3-level IOMMU page tables, and 48 bits for
+4-level IOMMU page tables.</p>
+</dd>
+</dl>
+<p>Please also refer to the wiki page for general scenarios of VT-d
+emulation in QEMU: <a class="reference external" href="https://wiki.qemu.org/Features/VT-d">https://wiki.qemu.org/Features/VT-d</a>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">virtio-iommu-pci[,option=...]</span></code></dt><dd><p>This is only supported by <code class="docutils literal notranslate"><span class="pre">-machine</span> <span class="pre">q35</span></code> (x86_64) and <code class="docutils literal notranslate"><span class="pre">-machine</span> <span class="pre">virt</span></code> (ARM).
+It supports below options:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">granule=val</span></code> (possible values are 4k, 8k, 16k, 64k and host; default: host)</dt><dd><p>This decides the default granule to be be exposed by the
+virtio-iommu. If host, the granule matches the host page size.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">aw-bits=val</span></code> (val between 32 and 64, default depends on machine)</dt><dd><p>This decides the address width of the IOVA address space.</p>
+</dd>
+</dl>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-name</span> <span class="pre">name</span></code></dt><dd><p>Sets the name of the guest. This name will be displayed in the SDL
 window caption. The name will also be used for the VNC server. Also
@@ -629,9 +917,27 @@ individual threads can also be enabled on Linux to aid debugging.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">-uuid</span> <span class="pre">uuid</span></code></dt><dd><p>Set system UUID.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-1">
-<h2>Block device options<a class="headerlink" href="#hxtool-1" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-1">
+<h2>Block device options<a class="headerlink" href="#hxtool-1" title="Permalink to this heading"></a></h2>
+<p>The QEMU block device handling options have a long history and
+have gone through several iterations as the feature set and complexity
+of the block layer have grown. Many online guides to QEMU often
+reference older and deprecated options, which can lead to confusion.</p>
+<p>The most explicit way to describe disks is to use a combination of
+<code class="docutils literal notranslate"><span class="pre">-device</span></code> to specify the hardware device and <code class="docutils literal notranslate"><span class="pre">-blockdev</span></code> to
+describe the backend. The device defines what the guest sees and the
+backend describes how QEMU handles the data. It is the only guaranteed
+stable interface for describing block devices and as such is
+recommended for management tools and scripting.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-drive</span></code> option combines the device and backend into a single
+command line option which is a more human friendly. There is however no
+interface stability guarantee although some older board models still
+need updating to work with the modern blockdev forms.</p>
+<p>Older options like <code class="docutils literal notranslate"><span class="pre">-hda</span></code> are essentially macros which expand into
+<code class="docutils literal notranslate"><span class="pre">-drive</span></code> options for various drive interfaces. The original forms
+bake in a lot of assumptions from the days when QEMU was emulating a
+legacy PC, they are not recommended for modern configurations.</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-fda</span> <span class="pre">file</span></code></dt><dd><p></p>
 </dd>
@@ -644,12 +950,16 @@ the System Emulation Users Guide).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-hdc</span> <span class="pre">file</span></code></dt><dd><p></p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-hdd</span> <span class="pre">file</span></code></dt><dd><p>Use file as hard disk 0, 1, 2 or 3 image (see the <a class="reference internal" href="images.html#disk-images"><span class="std std-ref">Disk Images</span></a>
-chapter in the System Emulation Users Guide).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-hdd</span> <span class="pre">file</span></code></dt><dd><p>Use file as hard disk 0, 1, 2 or 3 image on the default bus of the
+emulated machine (this is for example the IDE bus on most x86 machines,
+but it can also be SCSI, virtio or something else on other target
+architectures). See also the <a class="reference internal" href="images.html#disk-images"><span class="std std-ref">Disk Images</span></a> chapter in the System
+Emulation Users Guide.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-cdrom</span> <span class="pre">file</span></code></dt><dd><p>Use file as CD-ROM image (you cannot use <code class="docutils literal notranslate"><span class="pre">-hdc</span></code> and <code class="docutils literal notranslate"><span class="pre">-cdrom</span></code> at
-the same time). You can use the host CD-ROM by using <code class="docutils literal notranslate"><span class="pre">/dev/cdrom</span></code>
-as filename.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-cdrom</span> <span class="pre">file</span></code></dt><dd><p>Use file as CD-ROM image on the default bus of the emulated machine
+(which is IDE1 master on x86, so you cannot use <code class="docutils literal notranslate"><span class="pre">-hdc</span></code> and <code class="docutils literal notranslate"><span class="pre">-cdrom</span></code>
+at the same time there). On systems that support it, you can use the
+host CD-ROM by using <code class="docutils literal notranslate"><span class="pre">/dev/cdrom</span></code> as filename.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-blockdev</span> <span class="pre">option[,option[,option[,...]]]</span></code></dt><dd><p>Define a new block driver node. Some of the options apply to all
 block drivers, other options are only accepted for a specific block
@@ -806,6 +1116,21 @@ frees clusters in the qcow2 file (on/off; default: on)</p>
 issued on other occasions where a cluster gets freed
 (on/off; default: off)</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">discard-no-unref</span></code></dt><dd><p>When enabled, data clusters will remain preallocated when they are
+no longer used, e.g. because they are discarded or converted to
+zero clusters. As usual, whether the old data is discarded or kept
+on the protocol level (i.e. in the image file) depends on the
+setting of the pass-discard-request option. Keeping the clusters
+preallocated prevents qcow2 fragmentation that would otherwise be
+caused by freeing and re-allocating them later. Besides potential
+performance degradation, such fragmentation can lead to increased
+allocation of clusters past the end of the image file,
+resulting in image files whose file length can grow much larger
+than their guest disk size would suggest.
+If image file length is of concern (e.g. when storing qcow2
+images directly on block devices), you should consider enabling
+this option.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">overlap-check</span></code></dt><dd><p>Which overlap checks to perform for writes to the image
 (none/constant/cached/all; default: cached). For details or
 finer granularity control refer to the QAPI documentation of
@@ -848,7 +1173,7 @@ pflash, virtio, none.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">bus=bus,unit=unit</span></code></dt><dd><p>These options define where is connected the drive by defining
 the bus number and the unit id.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">index=index</span></code></dt><dd><p>This option defines where is connected the drive by using an
+<dt><code class="docutils literal notranslate"><span class="pre">index=index</span></code></dt><dd><p>This option defines where the drive is connected by using an
 index in the list of available connectors of a given interface
 type.</p>
 </dd>
@@ -865,12 +1190,6 @@ additionally <code class="docutils literal notranslate"><span class="pre">cache.
 the <code class="docutils literal notranslate"><span class="pre">write-cache</span></code> option of block guest devices (as in
 <code class="docutils literal notranslate"><span class="pre">-device</span></code>). The modes correspond to the following settings:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 24%" />
-<col style="width: 28%" />
-<col style="width: 22%" />
-<col style="width: 26%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p>cache.writeback</p></th>
@@ -990,7 +1309,7 @@ drive:</p>
 qemu-system-x86_64 -drive file=file,index=1,if=floppy</pre>
 <p>By default, interface is “ide” and index is automatically
 incremented:</p>
-<pre class="literal-block">qemu-system-x86_64 -drive file=a -drive file=b&quot;</pre>
+<pre class="literal-block">qemu-system-x86_64 -drive file=a -drive file=b</pre>
 <p>is interpreted like:</p>
 <pre class="literal-block">qemu-system-x86_64 -hda a -hdb b</pre>
 </dd>
@@ -998,12 +1317,18 @@ incremented:</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-sd</span> <span class="pre">file</span></code></dt><dd><p>Use file as SecureDigital card image.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-pflash</span> <span class="pre">file</span></code></dt><dd><p>Use file as a parallel flash image.</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-snapshot</span></code></dt><dd><p>Write to temporary files instead of disk image files. In this case,
 the raw disk image you use is not written back. You can however
 force the write back by pressing C-a s (see the <a class="reference internal" href="images.html#disk-images"><span class="std std-ref">Disk Images</span></a>
 chapter in the System Emulation Users Guide).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>snapshot is incompatible with <code class="docutils literal notranslate"><span class="pre">-blockdev</span></code> (instead use qemu-img
+to manually create snapshot images to attach to your blockdev).
+If you have mixed <code class="docutils literal notranslate"><span class="pre">-blockdev</span></code> and <code class="docutils literal notranslate"><span class="pre">-drive</span></code> declarations you
+can use the ‘snapshot’ property on your drive declarations
+instead of this global option.</p>
+</div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-fsdev</span> <span class="pre">local,id=id,path=path,security_model=security_model</span> <span class="pre">[,writeout=writeout][,readonly=on][,fmode=fmode][,dmode=dmode]</span> <span class="pre">[,throttling.option=value[,throttling.option=value[,...]]]</span></code></dt><dd><p></p>
 </dd>
@@ -1015,7 +1340,9 @@ chapter in the System Emulation Users Guide).</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">local</span></code></dt><dd><p>Accesses to the filesystem are done by QEMU.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">proxy</span></code></dt><dd><p>Accesses to the filesystem are done by virtfs-proxy-helper(1).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">proxy</span></code></dt><dd><p>Accesses to the filesystem are done by virtfs-proxy-helper(1). This
+option is deprecated (since QEMU 8.1) and will be removed in a future
+version of QEMU. Use <code class="docutils literal notranslate"><span class="pre">local</span></code> instead.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">synth</span></code></dt><dd><p>Synthetic filesystem, only used by QTests.</p>
 </dd>
@@ -1108,14 +1435,16 @@ a virtio-9p-device (a.k.a. 9pfs), which essentially means that a certain
 directory on host is made directly accessible by guest as a pass-through
 file system by using the 9P network protocol for communication between
 host and guests, if desired even accessible, shared by several guests
-simultaniously.</p>
+simultaneously.</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">-virtfs</span></code> is actually just a convenience shortcut for its
 generalized form <code class="docutils literal notranslate"><span class="pre">-fsdev</span> <span class="pre">-device</span> <span class="pre">virtio-9p-pci</span></code>.</p>
 <p>The general form of pass-through file system options are:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">local</span></code></dt><dd><p>Accesses to the filesystem are done by QEMU.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">proxy</span></code></dt><dd><p>Accesses to the filesystem are done by virtfs-proxy-helper(1).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">proxy</span></code></dt><dd><p>Accesses to the filesystem are done by virtfs-proxy-helper(1).
+This option is deprecated (since QEMU 8.1) and will be removed in a
+future version of QEMU. Use <code class="docutils literal notranslate"><span class="pre">local</span></code> instead.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">synth</span></code></dt><dd><p>Synthetic filesystem, only used by QTests.</p>
 </dd>
@@ -1199,9 +1528,9 @@ devices).</p>
 <dt><code class="docutils literal notranslate"><span class="pre">-iscsi</span></code></dt><dd><p>Configure iSCSI session parameters.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-2">
-<h2>USB convenience options<a class="headerlink" href="#hxtool-2" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-2">
+<h2>USB convenience options<a class="headerlink" href="#hxtool-2" title="Permalink to this heading"></a></h2>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-usb</span></code></dt><dd><p>Enable USB emulation on machine types with an on-board USB host
 controller (if not enabled by default). Note that on-board USB host
@@ -1219,7 +1548,7 @@ instead of using <code class="docutils literal notranslate"><span class="pre">-u
 to a USB 3.0 controller instead (at least on machines that support
 PCI and do not have an USB controller enabled by default yet).
 For more details, see the chapter about
-<a class="reference internal" href="usb.html#connecting-usb-devices"><span class="std std-ref">Connecting USB devices</span></a> in the System Emulation Users Guide.
+<a class="reference internal" href="devices/usb.html#connecting-usb-devices"><span class="std std-ref">Connecting USB devices</span></a> in the System Emulation Users Guide.
 Possible devices for devname are:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">braille</span></code></dt><dd><p>Braille device. This will use BrlAPI to display the braille
@@ -1242,18 +1571,55 @@ PS/2 mouse emulation when activated.</p>
 </dl>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-3">
-<h2>Display options<a class="headerlink" href="#hxtool-3" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-3">
+<h2>Display options<a class="headerlink" href="#hxtool-3" title="Permalink to this heading"></a></h2>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">-display</span> <span class="pre">type</span></code></dt><dd><p>Select type of display to use. This option is a replacement for the
-old style -sdl/-curses/… options. Use <code class="docutils literal notranslate"><span class="pre">-display</span> <span class="pre">help</span></code> to list
-the available display types. Valid values for type are</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">sdl</span></code></dt><dd><p>Display video output via SDL (usually in a separate graphics
-window; see the SDL documentation for other possibilities).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-display</span> <span class="pre">type</span></code></dt><dd><p>Select type of display to use. Use <code class="docutils literal notranslate"><span class="pre">-display</span> <span class="pre">help</span></code> to list the available
+display types. Valid values for type are</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">spice-app[,gl=on|off]</span></code></dt><dd><p>Start QEMU as a Spice server and launch the default Spice client
+application. The Spice server will redirect the serial consoles
+and QEMU monitors. (Since 4.0)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">curses</span></code></dt><dd><p>Display video output via curses. For graphics device models
+<dt><code class="docutils literal notranslate"><span class="pre">dbus</span></code></dt><dd><p>Export the display over D-Bus interfaces. (Since 7.0)</p>
+<p>The connection is registered with the “org.qemu” name (and queued when
+already owned).</p>
+<p><code class="docutils literal notranslate"><span class="pre">addr=&lt;dbusaddr&gt;</span></code> : D-Bus bus address to connect to.</p>
+<p><code class="docutils literal notranslate"><span class="pre">p2p=yes|no</span></code> : Use peer-to-peer connection, accepted via QMP <code class="docutils literal notranslate"><span class="pre">add_client</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">gl=on|off|core|es</span></code> : Use OpenGL for rendering (the D-Bus interface
+will share framebuffers with DMABUF file descriptors).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sdl</span></code></dt><dd><p>Display video output via SDL (usually in a separate graphics
+window; see the SDL documentation for other possibilities).
+Valid parameters are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">grab-mod=&lt;mods&gt;</span></code> : Used to select the modifier keys for toggling
+the mouse grabbing in conjunction with the “g” key. <code class="docutils literal notranslate"><span class="pre">&lt;mods&gt;</span></code> can be
+either <code class="docutils literal notranslate"><span class="pre">lshift-lctrl-lalt</span></code> or <code class="docutils literal notranslate"><span class="pre">rctrl</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">gl=on|off|core|es</span></code> : Use OpenGL for displaying</p>
+<p><code class="docutils literal notranslate"><span class="pre">show-cursor=on|off</span></code> :  Force showing the mouse cursor</p>
+<p><code class="docutils literal notranslate"><span class="pre">window-close=on|off</span></code> : Allow to quit qemu with window close button</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gtk</span></code></dt><dd><p>Display video output in a GTK window. This interface provides
+drop-down menus and other UI elements to configure and control
+the VM during runtime. Valid parameters are:</p>
+<p><code class="docutils literal notranslate"><span class="pre">full-screen=on|off</span></code> : Start in fullscreen mode</p>
+<p><code class="docutils literal notranslate"><span class="pre">gl=on|off</span></code> : Use OpenGL for displaying</p>
+<p><code class="docutils literal notranslate"><span class="pre">grab-on-hover=on|off</span></code> : Grab keyboard input on mouse hover</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">show-tabs=on|off</span></code><span class="classifier">Display the tab bar for switching between the</span></dt><dd><p>various graphical interfaces (e.g. VGA and
+virtual console character devices) by default.</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">show-cursor=on|off</span></code> :  Force showing the mouse cursor</p>
+<p><code class="docutils literal notranslate"><span class="pre">window-close=on|off</span></code> : Allow to quit qemu with window close button</p>
+<p><code class="docutils literal notranslate"><span class="pre">show-menubar=on|off</span></code> : Display the main window menubar, defaults to “on”</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">zoom-to-fit=on|off</span></code><span class="classifier">Expand video output to the window size,</span></dt><dd><p>defaults to “off”</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">curses[,charset=&lt;encoding&gt;]</span></code></dt><dd><p>Display video output via curses. For graphics device models
 which support a text mode, QEMU can display this output using a
 curses/ncurses interface. Nothing is displayed when the graphics
 device is in graphical mode or if the graphics device does not
@@ -1263,26 +1629,40 @@ specified with the <code class="docutils literal notranslate"><span class="pre">
 <code class="docutils literal notranslate"><span class="pre">charset=CP850</span></code> for IBM CP850 encoding. The default is
 <code class="docutils literal notranslate"><span class="pre">CP437</span></code>.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cocoa</span></code></dt><dd><p>Display video output in a Cocoa window. Mac only. This interface
+provides drop-down menus and other UI elements to configure and
+control the VM during runtime. Valid parameters are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">full-grab=on|off</span></code><span class="classifier">Capture all key presses, including system combos.</span></dt><dd><p>This requires accessibility permissions, since it
+performs a global grab on key events.
+(default: off) See
+<a class="reference external" href="https://support.apple.com/en-in/guide/mac-help/mh32356/mac">https://support.apple.com/en-in/guide/mac-help/mh32356/mac</a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">swap-opt-cmd=on|off</span></code><span class="classifier">Swap the Option and Command keys so that their</span></dt><dd><p>key codes match their position on non-Mac
+keyboards and you can use Meta/Super and Alt
+where you expect them.  (default: off)</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">show-cursor=on|off</span></code> :  Force showing the mouse cursor</p>
+<p><code class="docutils literal notranslate"><span class="pre">left-command-key=on|off</span></code> : Disable forwarding left command key to host</p>
+<p><code class="docutils literal notranslate"><span class="pre">full-screen=on|off</span></code> : Start in fullscreen mode</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">zoom-to-fit=on|off</span></code><span class="classifier">Expand video output to the window size,</span></dt><dd><p>defaults to “off”</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">egl-headless[,rendernode=&lt;file&gt;]</span></code></dt><dd><p>Offload all OpenGL operations to a local DRI device. For any
+graphical display, this display needs to be paired with either
+VNC or SPICE displays.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vnc=&lt;display&gt;</span></code></dt><dd><p>Start a VNC server on display &lt;display&gt;</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">none</span></code></dt><dd><p>Do not display video output. The guest will still see an
 emulated graphics card, but its output will not be displayed to
 the QEMU user. This option differs from the -nographic option in
 that it only affects what is done with video output; -nographic
 also changes the destination of the serial and parallel port
 data.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">gtk</span></code></dt><dd><p>Display video output in a GTK window. This interface provides
-drop-down menus and other UI elements to configure and control
-the VM during runtime.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">vnc</span></code></dt><dd><p>Start a VNC server on display &lt;arg&gt;</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">egl-headless</span></code></dt><dd><p>Offload all OpenGL operations to a local DRI device. For any
-graphical display, this display needs to be paired with either
-VNC or SPICE displays.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">spice-app</span></code></dt><dd><p>Start QEMU as a Spice server and launch the default Spice client
-application. The Spice server will redirect the serial consoles
-and QEMU monitors. (Since 4.0)</p>
 </dd>
 </dl>
 </dd>
@@ -1295,37 +1675,14 @@ the monitor (unless redirected elsewhere explicitly). Therefore, you
 can still use QEMU to debug a Linux kernel with a serial console.
 Use C-a h for help on switching between the console and monitor.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-curses</span></code></dt><dd><p>Normally, if QEMU is compiled with graphical window support, it
-displays output such as guest graphics, guest console, and the QEMU
-monitor in a window. With this option, QEMU can display the VGA
-output when in text mode using a curses/ncurses interface. Nothing
-is displayed in graphical mode.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-alt-grab</span></code></dt><dd><p>Use Ctrl-Alt-Shift to grab mouse (instead of Ctrl-Alt). Note that
-this also affects the special keys (for fullscreen, monitor-mode
-switching, etc).</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-ctrl-grab</span></code></dt><dd><p>Use Right-Ctrl to grab mouse (instead of Ctrl-Alt). Note that this
-also affects the special keys (for fullscreen, monitor-mode
-switching, etc).</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-no-quit</span></code></dt><dd><p>Disable SDL window close capability.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-sdl</span></code></dt><dd><p>Enable SDL.</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-spice</span> <span class="pre">option[,option[,...]]</span></code></dt><dd><p>Enable the spice remote desktop protocol. Valid options are</p>
-<dl>
+<dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">port=&lt;nr&gt;</span></code></dt><dd><p>Set the TCP port spice is listening on for plaintext channels.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">addr=&lt;addr&gt;</span></code></dt><dd><p>Set the IP address spice is listening on. Default is any
 address.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">ipv4=on|off</span></code>; <code class="docutils literal notranslate"><span class="pre">ipv6=on|off</span></code>; <code class="docutils literal notranslate"><span class="pre">unix=on|off</span></code></dt><dd><p>Force using the specified IP version.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">password=&lt;string&gt;</span></code></dt><dd><p>Set the password you need to authenticate.</p>
-<p>This option is deprecated and insecure because it leaves the
-password visible in the process listing. Use <code class="docutils literal notranslate"><span class="pre">password-secret</span></code>
-instead.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">password-secret=&lt;secret-id&gt;</span></code></dt><dd><p>Set the ID of the <code class="docutils literal notranslate"><span class="pre">secret</span></code> object containing the password
 you need to authenticate.</p>
@@ -1447,7 +1804,7 @@ VNC display, you must use the <code class="docutils literal notranslate"><span c
 layout if you are not using en-us. Valid syntax for the display is</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">to=L</span></code></dt><dd><p>With this option, QEMU will try next available VNC displays,
-until the number L, if the origianlly defined “-vnc display” is
+until the number L, if the originally defined “-vnc display” is
 not available, e.g. port 5900+display is already used by another
 application. By default, to=0.</p>
 </dd>
@@ -1588,22 +1945,17 @@ control requests.</p>
 </dl>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-4">
-<h2>i386 target only<a class="headerlink" href="#hxtool-4" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-4">
+<h2>i386 target only<a class="headerlink" href="#hxtool-4" title="Permalink to this heading"></a></h2>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-win2k-hack</span></code></dt><dd><p>Use it when installing Windows 2000 to avoid a disk full bug. After
 Windows 2000 is installed, you no longer need this option (this
-option slows down the IDE transfers).</p>
+option slows down the IDE transfers).  Synonym of <code class="docutils literal notranslate"><span class="pre">-global</span>
+<span class="pre">ide-device.win2k-install-hack=on</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-no-fd-bootchk</span></code></dt><dd><p>Disable boot signature checking for floppy disks in BIOS. May be
-needed to boot from old floppy disks.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-no-acpi</span></code></dt><dd><p>Disable ACPI (Advanced Configuration and Power Interface) support.
-Use it if your guest OS complains about ACPI problems (PC target
-machine only).</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-no-hpet</span></code></dt><dd><p>Disable HPET support.</p>
+needed to boot from old floppy disks.  Synonym of <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">fd-bootchk=off</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-acpitable</span> <span class="pre">[sig=str][,rev=n][,oem_id=str][,oem_table_id=str][,oem_rev=n]</span> <span class="pre">[,asl_compiler_id=str][,asl_compiler_rev=n][,data=file1[:file2]...]</span></code></dt><dd><p>Add ACPI table with specified header fields and context from
 specified files. For file=, take whole ACPI table from the specified
@@ -1625,7 +1977,9 @@ Microsoft SLIC spec and the ACPI spec.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=3[,manufacturer=str][,version=str][,serial=str][,asset=str][,sku=str]</span></code></dt><dd><p>Specify SMBIOS type 3 fields</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str]</span></code></dt><dd><p>Specify SMBIOS type 4 fields</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str][,processor-family=%d][,processor-id=%d]</span></code></dt><dd><p>Specify SMBIOS type 4 fields</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=9[,slot_designation=str][,slot_type=%d][,slot_data_bus_width=%d][,current_usage=%d][,slot_length=%d][,slot_id=%d][,slot_characteristics1=%d][,slot_characteristics12=%d][,pci_device=str]</span></code></dt><dd><p>Specify SMBIOS type 9 fields</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=11[,value=str][,path=filename]</span></code></dt><dd><p>Specify SMBIOS type 11 fields</p>
 <p>This argument can be repeated multiple times, and values are added in the order they are parsed.
@@ -1658,12 +2012,29 @@ OEM Strings
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=17[,loc_pfx=str][,bank=str][,manufacturer=str][,serial=str][,asset=str][,part=str][,speed=%d]</span></code></dt><dd><p>Specify SMBIOS type 17 fields</p>
 </dd>
-</dl>
+<dt><code class="docutils literal notranslate"><span class="pre">-smbios</span> <span class="pre">type=41[,designation=str][,kind=str][,instance=%d][,pcidev=str]</span></code></dt><dd><p>Specify SMBIOS type 41 fields</p>
+<p>This argument can be repeated multiple times.  Its main use is to allow network interfaces be created
+as <code class="docutils literal notranslate"><span class="pre">enoX</span></code> on Linux, with X being the instance number, instead of the name depending on the interface
+position on the PCI bus.</p>
+<p>Here is an example of use:</p>
+<pre class="literal-block">-netdev user,id=internet \
+-device virtio-net-pci,mac=50:54:00:00:00:42,netdev=internet,id=internet-dev \
+-smbios type=41,designation='Onboard LAN',instance=1,kind=ethernet,pcidev=internet-dev</pre>
+<p>In the guest OS, the device should then appear as <code class="docutils literal notranslate"><span class="pre">eno1</span></code>:</p>
+<p>..parsed-literal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ip -brief l
+lo               UNKNOWN        00:00:00:00:00:00 &lt;LOOPBACK,UP,LOWER_UP&gt;
+eno1             UP             50:54:00:00:00:42 &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;
+</pre></div>
 </div>
-<div class="section" id="hxtool-5">
-<h2>Network options<a class="headerlink" href="#hxtool-5" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the PCI device has to be attached to the root bus.</p>
+</dd>
+</dl>
+</section>
+<section id="hxtool-5">
+<h2>Network options<a class="headerlink" href="#hxtool-5" title="Permalink to this heading"></a></h2>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">-nic</span> <span class="pre">[tap|bridge|user|l2tpv3|vde|netmap|vhost-user|socket][,...][,mac=macaddr][,model=mn]</span></code></dt><dd><p>This option is a shortcut for configuring both the on-board
+<dt><code class="docutils literal notranslate"><span class="pre">-nic</span> <span class="pre">[tap|bridge|user|l2tpv3|vde|netmap|af-xdp|vhost-user|socket][,...][,mac=macaddr][,model=mn]</span></code></dt><dd><p>This option is a shortcut for configuring both the on-board
 (default) guest NIC hardware and the host network backend in one go.
 The host backend options are the same as with the corresponding
 <code class="docutils literal notranslate"><span class="pre">-netdev</span></code> options below. The guest NIC model can be set with
@@ -1737,7 +2108,9 @@ server.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">tftp=dir</span></code></dt><dd><p>When using the user mode network stack, activate a built-in TFTP
 server. The files in dir will be exposed as the root of a TFTP
 server. The TFTP client on the guest must be configured in
-binary mode (use the command <code class="docutils literal notranslate"><span class="pre">bin</span></code> of the Unix TFTP client).</p>
+binary mode (use the command <code class="docutils literal notranslate"><span class="pre">bin</span></code> of the Unix TFTP client).
+The built-in TFTP server is read-only; it does not implement any
+command for writing files. QEMU will not write to this directory.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">tftp-server-name=name</span></code></dt><dd><p>In BOOTP reply, broadcast name as the “TFTP server name”
 (RFC2132 option 66). This can be used to advise the guest to
@@ -1757,7 +2130,7 @@ server so that Windows OSes can access to the host files in
 set to addr. By default the 4th IP in the guest network is used,
 i.e. x.x.x.4.</p>
 <p>In the guest Windows OS, the line:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">2.4</span> <span class="n">smbserver</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.2.4</span> <span class="n">smbserver</span>
 </pre></div>
 </div>
 <p>must be added in the file <code class="docutils literal notranslate"><span class="pre">C:\WINDOWS\LMHOSTS</span></code> (for windows
@@ -1961,6 +2334,43 @@ vde_switch -F -sock /tmp/myswitch
 # launch QEMU instance
 qemu-system-x86_64 linux.img -nic vde,sock=/tmp/myswitch</pre>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-netdev</span> <span class="pre">af-xdp,id=str,ifname=name[,mode=native|skb][,force-copy=on|off][,queues=n][,start-queue=m][,inhibit=on|off][,sock-fds=x:y:...:z]</span></code></dt><dd><p>Configure AF_XDP backend to connect to a network interface ‘name’
+using AF_XDP socket.  A specific program attach mode for a default
+XDP program can be forced with ‘mode’, defaults to best-effort,
+where the likely most performant mode will be in use.  Number of queues
+‘n’ should generally match the number or queues in the interface,
+defaults to 1.  Traffic arriving on non-configured device queues will
+not be delivered to the network backend.</p>
+<pre class="literal-block"># set number of queues to 4
+ethtool -L eth0 combined 4
+# launch QEMU instance
+qemu-system-x86_64 linux.img -device virtio-net-pci,netdev=n1 \
+    -netdev af-xdp,id=n1,ifname=eth0,queues=4</pre>
+<p>‘start-queue’ option can be specified if a particular range of queues
+[m, m + n] should be in use.  For example, this is may be necessary in
+order to use certain NICs in native mode.  Kernel allows the driver to
+create a separate set of XDP queues on top of regular ones, and only
+these queues can be used for AF_XDP sockets.  NICs that work this way
+may also require an additional traffic redirection with ethtool to these
+special queues.</p>
+<pre class="literal-block"># set number of queues to 1
+ethtool -L eth0 combined 1
+# redirect all the traffic to the second queue (id: 1)
+# note: drivers may require non-empty key/mask pair.
+ethtool -N eth0 flow-type ether \
+    dst 00:00:00:00:00:00 m FF:FF:FF:FF:FF:FE action 1
+ethtool -N eth0 flow-type ether \
+    dst 00:00:00:00:00:01 m FF:FF:FF:FF:FF:FE action 1
+# launch QEMU instance
+qemu-system-x86_64 linux.img -device virtio-net-pci,netdev=n1 \
+    -netdev af-xdp,id=n1,ifname=eth0,queues=1,start-queue=1</pre>
+<p>XDP program can also be loaded externally.  In this case ‘inhibit’ option
+should be set to ‘on’ and ‘sock-fds’ provided with file descriptors for
+already open but not bound XDP sockets already added to a socket map for
+corresponding queues.  One socket per queue.</p>
+<pre class="literal-block">qemu-system-x86_64 linux.img -device virtio-net-pci,netdev=n1 \
+    -netdev af-xdp,id=n1,ifname=eth0,queues=3,inhibit=on,sock-fds=15:16:17</pre>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-netdev</span> <span class="pre">vhost-user,chardev=id[,vhostforce=on|off][,queues=n]</span></code></dt><dd><p>Establish a vhost-user netdev, backed by a chardev id. The chardev
 should be a unix domain socket backed one. The vhost-user uses a
 specifically defined protocol to pass vhost ioctl replacement
@@ -1977,7 +2387,7 @@ multiqueue vhost-user.</p>
 </pre></div>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-netdev</span> <span class="pre">vhost-vdpa,vhostdev=/path/to/dev</span></code></dt><dd><p>Establish a vhost-vdpa netdev.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-netdev</span> <span class="pre">vhost-vdpa[,vhostdev=/path/to/dev][,vhostfd=h]</span></code></dt><dd><p>Establish a vhost-vdpa netdev.</p>
 <p>vDPA device is a device that uses a datapath which complies with
 the virtio specifications with a vendor specific control path.
 vDPA devices can be both physically located on the hardware or
@@ -2010,14 +2420,14 @@ the same <code class="docutils literal notranslate"><span class="pre">-netdev</s
 (the default hub). Use name to specify the name of the hub port.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-6">
-<h2>Character device options<a class="headerlink" href="#hxtool-6" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-6">
+<h2>Character device options<a class="headerlink" href="#hxtool-6" title="Permalink to this heading"></a></h2>
 <p>The general form of a character device option is:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">backend,id=id[,mux=on|off][,options]</span></code></dt><dd><p>Backend is one of: <code class="docutils literal notranslate"><span class="pre">null</span></code>, <code class="docutils literal notranslate"><span class="pre">socket</span></code>, <code class="docutils literal notranslate"><span class="pre">udp</span></code>, <code class="docutils literal notranslate"><span class="pre">msmouse</span></code>,
 <code class="docutils literal notranslate"><span class="pre">vc</span></code>, <code class="docutils literal notranslate"><span class="pre">ringbuf</span></code>, <code class="docutils literal notranslate"><span class="pre">file</span></code>, <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, <code class="docutils literal notranslate"><span class="pre">console</span></code>, <code class="docutils literal notranslate"><span class="pre">serial</span></code>,
-<code class="docutils literal notranslate"><span class="pre">pty</span></code>, <code class="docutils literal notranslate"><span class="pre">stdio</span></code>, <code class="docutils literal notranslate"><span class="pre">braille</span></code>, <code class="docutils literal notranslate"><span class="pre">tty</span></code>, <code class="docutils literal notranslate"><span class="pre">parallel</span></code>, <code class="docutils literal notranslate"><span class="pre">parport</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pty</span></code>, <code class="docutils literal notranslate"><span class="pre">stdio</span></code>, <code class="docutils literal notranslate"><span class="pre">braille</span></code>, <code class="docutils literal notranslate"><span class="pre">parallel</span></code>,
 <code class="docutils literal notranslate"><span class="pre">spicevmc</span></code>, <code class="docutils literal notranslate"><span class="pre">spiceport</span></code>. The specific backend will determine the
 applicable options.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">help</span></code> to print all available chardev backend types.</p>
@@ -2154,10 +2564,14 @@ text console with the given dimensions.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">ringbuf,id=id[,size=size]</span></code></dt><dd><p>Create a ring buffer with fixed size <code class="docutils literal notranslate"><span class="pre">size</span></code>. size must be a power
 of two and defaults to <code class="docutils literal notranslate"><span class="pre">64K</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">file,id=id,path=path</span></code></dt><dd><p>Log all traffic received from the guest to a file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">file,id=id,path=path[,input-path=input-path]</span></code></dt><dd><p>Log all traffic received from the guest to a file.</p>
 <p><code class="docutils literal notranslate"><span class="pre">path</span></code> specifies the path of the file to be opened. This file will
 be created if it does not already exist, and overwritten if it does.
 <code class="docutils literal notranslate"><span class="pre">path</span></code> is required.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">input-path</span></code> is specified, this is the path of a second file
+which will be used for input. If <code class="docutils literal notranslate"><span class="pre">input-path</span></code> is not specified,
+no input will be available from the chardev.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">input-path</span></code> is not supported on Windows hosts.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">pipe,id=id,path=path</span></code></dt><dd><p>Create a two-way connection to the guest. The behaviour differs
 slightly between Windows hosts and other hosts:</p>
@@ -2191,17 +2605,14 @@ is enabled by default, use <code class="docutils literal notranslate"><span clas
 <dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">braille,id=id</span></code></dt><dd><p>Connect to a local BrlAPI server. <code class="docutils literal notranslate"><span class="pre">braille</span></code> does not take any
 options.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">tty,id=id,path=path</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">tty</span></code> is only available on Linux, Sun, FreeBSD, NetBSD, OpenBSD
-and DragonFlyBSD hosts. It is an alias for <code class="docutils literal notranslate"><span class="pre">serial</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">path</span></code> specifies the path to the tty. <code class="docutils literal notranslate"><span class="pre">path</span></code> is required.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">parallel,id=id,path=path</span></code></dt><dd><p></p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">parport,id=id,path=path</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">parallel</span></code> is only available on Linux, FreeBSD and DragonFlyBSD
+<dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">parallel,id=id,path=path</span></code></dt><dd><dl>
+<dt></dt><dd><p><code class="docutils literal notranslate"><span class="pre">parallel</span></code> is only available on Linux, FreeBSD and DragonFlyBSD
 hosts.</p>
 <p>Connect to a local parallel port.</p>
 <p><code class="docutils literal notranslate"><span class="pre">path</span></code> specifies the path to the parallel port device. <code class="docutils literal notranslate"><span class="pre">path</span></code> is
 required.</p>
+</dd>
+</dl>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-chardev</span> <span class="pre">spicevmc,id=id,debug=debug,name=name</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">spicevmc</span></code> is only available when spice support is built in.</p>
 <p><code class="docutils literal notranslate"><span class="pre">debug</span></code> debug level for spicevmc</p>
@@ -2215,9 +2626,9 @@ required.</p>
 traffic identified by a name (preferably a fqdn).</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-7">
-<h2>TPM device options<a class="headerlink" href="#hxtool-7" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-7">
+<h2>TPM device options<a class="headerlink" href="#hxtool-7" title="Permalink to this heading"></a></h2>
 <p>The general form of a TPM device option is:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-tpmdev</span> <span class="pre">backend,id=id[,options]</span></code></dt><dd><p>The specific backend type will determine the applicable options. The
@@ -2267,31 +2678,85 @@ that provides connection to the software TPM server.</p>
 </div>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-8">
-<h2>Linux/Multiboot boot specific<a class="headerlink" href="#hxtool-8" title="Permalink to this headline">¶</a></h2>
-<p>When using these options, you can use a given Linux or Multiboot kernel
-without installing it in the disk image. It can be useful for easier
-testing of various kernels.</p>
-<dl>
+</section>
+<section id="hxtool-8">
+<h2>Boot Image or Kernel specific<a class="headerlink" href="#hxtool-8" title="Permalink to this heading"></a></h2>
+<p>There are broadly 4 ways you can boot a system with QEMU.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>specify a firmware and let it control finding a kernel</p></li>
+<li><p>specify a firmware and pass a hint to the kernel to boot</p></li>
+<li><p>direct kernel image boot</p></li>
+<li><p>manually load files into the guest’s address space</p></li>
+</ul>
+</div></blockquote>
+<p>The third method is useful for quickly testing kernels but as there is
+no firmware to pass configuration information to the kernel the
+hardware must either be probeable, the kernel built for the exact
+configuration or passed some configuration data (e.g. a DTB blob)
+which tells the kernel what drivers it needs. This exact details are
+often hardware specific.</p>
+<p>The final method is the most generic way of loading images into the
+guest address space and used mostly for <code class="docutils literal notranslate"><span class="pre">bare</span> <span class="pre">metal</span></code> type
+development where the reset vectors of the processor are taken into
+account.</p>
+<p>For x86 machines and some other architectures <code class="docutils literal notranslate"><span class="pre">-bios</span></code> will generally
+do the right thing with whatever it is given. For other machines the
+more strict <code class="docutils literal notranslate"><span class="pre">-pflash</span></code> option needs an image that is sized for the
+flash device for the given machine type.</p>
+<p>Please see the <a class="reference internal" href="targets.html#system-targets-ref"><span class="std std-ref">QEMU System Emulator Targets</span></a> section of the manual for
+more detailed documentation.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-bios</span> <span class="pre">file</span></code></dt><dd><p>Set the filename for the BIOS.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-pflash</span> <span class="pre">file</span></code></dt><dd><p>Use file as a parallel flash image.</p>
+</dd>
+</dl>
+<p>The kernel options were designed to work with Linux kernels although
+other things (like hypervisors) can be packaged up as a kernel
+executable image. The exact format of a executable image is usually
+architecture specific.</p>
+<p>The way in which the kernel is started (what address it is loaded at,
+what if any information is passed to it via CPU registers, the state
+of the hardware when it is started, and so on) is also architecture
+specific. Typically it follows the specification laid down by the
+Linux kernel for how kernels for that architecture must be started.</p>
+<dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">-kernel</span> <span class="pre">bzImage</span></code></dt><dd><p>Use bzImage as kernel image. The kernel can be either a Linux kernel
 or in multiboot format.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-append</span> <span class="pre">cmdline</span></code></dt><dd><p>Use cmdline as kernel command line</p>
 </dd>
+</dl>
+<dl id="system-invocation-qemu-options-initrd">
 <dt><code class="docutils literal notranslate"><span class="pre">-initrd</span> <span class="pre">file</span></code></dt><dd><p>Use file as initial ram disk.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-initrd</span> <span class="pre">&quot;file1</span> <span class="pre">arg=foo,file2&quot;</span></code></dt><dd><p>This syntax is only available with multiboot.</p>
-<p>Use file1 and file2 as modules and pass arg=foo as parameter to the
-first module.</p>
+<p>Use file1 and file2 as modules and pass <code class="docutils literal notranslate"><span class="pre">arg=foo</span></code> as parameter to the
+first module. Commas can be provided in module parameters by doubling
+them on the command line to escape them:</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-initrd</span> <span class="pre">&quot;bzImage</span> <span class="pre">earlyprintk=xen,,keep</span> <span class="pre">root=/dev/xvda1,initrd.img&quot;</span></code></dt><dd><p>Multiboot only. Use bzImage as the first module with
+“<code class="docutils literal notranslate"><span class="pre">earlyprintk=xen,keep</span> <span class="pre">root=/dev/xvda1</span></code>” as its command line,
+and initrd.img as the second module.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-dtb</span> <span class="pre">file</span></code></dt><dd><p>Use file as a device tree binary (dtb) image and pass it to the
 kernel on boot.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="hxtool-9">
-<h2>Debug/Expert options<a class="headerlink" href="#hxtool-9" title="Permalink to this headline">¶</a></h2>
+<p>Finally you can also manually load images directly into the address
+space of the guest. This is most useful for developers who already
+know the layout of their guest and take care to ensure something sane
+will happen when the reset vector executes.</p>
+<p>The generic loader can be invoked by using the loader device:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">loader,addr=&lt;addr&gt;,data=&lt;data&gt;,data-len=&lt;data-len&gt;[,data-be=&lt;data-be&gt;][,cpu-num=&lt;cpu-num&gt;]</span></code></p>
+<p>there is also the guest loader which operates in a similar way but
+tweaks the DTB so a hypervisor loaded via <code class="docutils literal notranslate"><span class="pre">-kernel</span></code> can find where
+the guest image is:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">guest-loader,addr=&lt;addr&gt;[,kernel=&lt;path&gt;,[bootargs=&lt;arguments&gt;]][,initrd=&lt;path&gt;]</span></code></p>
+</section>
+<section id="hxtool-9">
+<h2>Debug/Expert options<a class="headerlink" href="#hxtool-9" title="Permalink to this heading"></a></h2>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-compat</span> <span class="pre">[deprecated-input=&#64;var{input-policy}][,deprecated-output=&#64;var{output-policy}]</span></code></dt><dd><p>Set policy for handling deprecated management interfaces (experimental):</p>
 <dl class="simple">
@@ -2308,9 +2773,28 @@ kernel on boot.</p>
 </dl>
 <p>Limitation: covers only syntactic aspects of QMP.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-fw_cfg</span> <span class="pre">[name=]name,file=file</span></code></dt><dd><p>Add named fw_cfg entry with contents from file file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-compat</span> <span class="pre">[unstable-input=&#64;var{input-policy}][,unstable-output=&#64;var{output-policy}]</span></code></dt><dd><p>Set policy for handling unstable management interfaces (experimental):</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">unstable-input=accept</span></code> (default)</dt><dd><p>Accept unstable commands and arguments</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-fw_cfg</span> <span class="pre">[name=]name,string=str</span></code></dt><dd><p>Add named fw_cfg entry with contents from string str.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">unstable-input=reject</span></code></dt><dd><p>Reject unstable commands and arguments</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unstable-input=crash</span></code></dt><dd><p>Crash on unstable commands and arguments</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unstable-output=accept</span></code> (default)</dt><dd><p>Emit unstable command results and events</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unstable-output=hide</span></code></dt><dd><p>Suppress unstable command results and events</p>
+</dd>
+</dl>
+<p>Limitation: covers only syntactic aspects of QMP.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-fw_cfg</span> <span class="pre">[name=]name,file=file</span></code></dt><dd><p>Add named fw_cfg entry with contents from file file.
+If the filename contains comma, you must double it (for instance,
+“file=my,,file” to use file “my,file”).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-fw_cfg</span> <span class="pre">[name=]name,string=str</span></code></dt><dd><p>Add named fw_cfg entry with contents from string str.
+If the string contains comma, you must double it (for instance,
+“string=my,,string” to use file “my,string”).</p>
 <p>The terminating NUL character of the contents of str will not be
 included as part of the fw_cfg item data. To insert contents with
 embedded NUL characters, you have to use the file parameter.</p>
@@ -2325,9 +2809,10 @@ from ./my_blob.bin.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">-serial</span> <span class="pre">dev</span></code></dt><dd><p>Redirect the virtual serial port to host character device dev. The
 default device is <code class="docutils literal notranslate"><span class="pre">vc</span></code> in graphical mode and <code class="docutils literal notranslate"><span class="pre">stdio</span></code> in non
 graphical mode.</p>
-<p>This option can be used several times to simulate up to 4 serial
+<p>This option can be used several times to simulate multiple serial
 ports.</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">-serial</span> <span class="pre">none</span></code> to disable all serial ports.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">-serial</span> <span class="pre">none</span></code> to suppress the creation of default
+serial devices.</p>
 <p>Available character devices are:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">vc[:WxH]</span></code></dt><dd><p>Virtual console. Optionally, a width and height can be given in
@@ -2342,9 +2827,16 @@ pixel with</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">pty</span></code></dt><dd><p>[Linux only] Pseudo TTY (a new PTY is automatically allocated)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">none</span></code></dt><dd><p>No device is allocated.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">none</span></code></dt><dd><p>No device is allocated. Note that for machine types which
+emulate systems where a serial device is always present in
+real hardware, this may be equivalent to the <code class="docutils literal notranslate"><span class="pre">null</span></code> option,
+in that the serial device is still present but all output
+is discarded. For boards where the number of serial ports is
+truly variable, this suppresses the creation of the device.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">null</span></code></dt><dd><p>void device</p>
+<dt><code class="docutils literal notranslate"><span class="pre">null</span></code></dt><dd><p>A guest will see the UART or serial device as present in the
+machine, but all output is discarded, and there is no input.
+Conceptually equivalent to redirecting the output to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">chardev:id</span></code></dt><dd><p>Use a named character device defined with the <code class="docutils literal notranslate"><span class="pre">-chardev</span></code>
 option.</p>
@@ -2459,13 +2951,30 @@ port). The default device is <code class="docutils literal notranslate"><span cl
 in non graphical mode. Use <code class="docutils literal notranslate"><span class="pre">-monitor</span> <span class="pre">none</span></code> to disable the default
 monitor.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-qmp</span> <span class="pre">dev</span></code></dt><dd><p>Like -monitor but opens in ‘control’ mode.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-qmp</span> <span class="pre">dev</span></code></dt><dd><p>Like <code class="docutils literal notranslate"><span class="pre">-monitor</span></code> but opens in ‘control’ mode. For example, to make
+QMP available on localhost port 4444:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">qmp</span> <span class="n">tcp</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4444</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+</pre></div>
+</div>
+<p>Not all options are configurable via this syntax; for maximum
+flexibility use the <code class="docutils literal notranslate"><span class="pre">-mon</span></code> option and an accompanying <code class="docutils literal notranslate"><span class="pre">-chardev</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-qmp-pretty</span> <span class="pre">dev</span></code></dt><dd><p>Like -qmp but uses pretty JSON formatting.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-qmp-pretty</span> <span class="pre">dev</span></code></dt><dd><p>Like <code class="docutils literal notranslate"><span class="pre">-qmp</span></code> but uses pretty JSON formatting.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-mon</span> <span class="pre">[chardev=]name[,mode=readline|control][,pretty[=on|off]]</span></code></dt><dd><p>Setup monitor on chardev name. <code class="docutils literal notranslate"><span class="pre">pretty</span></code> is only valid when
-<code class="docutils literal notranslate"><span class="pre">mode=control</span></code>, turning on JSON pretty printing to ease
+<dt><code class="docutils literal notranslate"><span class="pre">-mon</span> <span class="pre">[chardev=]name[,mode=readline|control][,pretty[=on|off]]</span></code></dt><dd><p>Set up a monitor connected to the chardev <code class="docutils literal notranslate"><span class="pre">name</span></code>.
+QEMU supports two monitors: the Human Monitor Protocol
+(HMP; for human interaction), and the QEMU Monitor Protocol
+(QMP; a JSON RPC-style protocol).
+The default is HMP; <code class="docutils literal notranslate"><span class="pre">mode=control</span></code> selects QMP instead.
+<code class="docutils literal notranslate"><span class="pre">pretty</span></code> is only valid when <code class="docutils literal notranslate"><span class="pre">mode=control</span></code>,
+turning on JSON pretty printing to ease
 human reading and debugging.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mon1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="n">localhost</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">4444</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span> \
+<span class="o">-</span><span class="n">mon</span> <span class="n">chardev</span><span class="o">=</span><span class="n">mon1</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="n">control</span><span class="p">,</span><span class="n">pretty</span><span class="o">=</span><span class="n">on</span>
+</pre></div>
+</div>
+<p>enables the QMP monitor on localhost port 4444 with pretty-printing.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-debugcon</span> <span class="pre">dev</span></code></dt><dd><p>Redirect the debug console to host device dev (same devices as the
 serial port). The debug console is an I/O port which is typically
@@ -2475,8 +2984,6 @@ graphical mode.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-pidfile</span> <span class="pre">file</span></code></dt><dd><p>Store the QEMU process PID in file. It is useful if you launch QEMU
 from a script.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-singlestep</span></code></dt><dd><p>Run the emulation in single step mode.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">--preconfig</span></code></dt><dd><p>Pause QEMU for interactive configuration before the machine is
 created, which allows querying and configuring properties that will
@@ -2528,7 +3035,7 @@ items.</p>
 The filter spec can be either start+size, start-size or start..end
 where start end and size are the addresses and sizes required. For
 example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">dfilter</span> <span class="mh">0x8000</span><span class="o">..</span><span class="mh">0x8fff</span><span class="p">,</span><span class="mh">0xffffffc000080000</span><span class="o">+</span><span class="mh">0x200</span><span class="p">,</span><span class="mh">0xffffffc000060000</span><span class="o">-</span><span class="mh">0x1000</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">dfilter</span> <span class="mh">0x8000</span><span class="o">.</span><span class="mf">.0</span><span class="n">x8fff</span><span class="p">,</span><span class="mh">0xffffffc000080000</span><span class="o">+</span><span class="mh">0x200</span><span class="p">,</span><span class="mh">0xffffffc000060000</span><span class="o">-</span><span class="mh">0x1000</span>
 </pre></div>
 </div>
 <p>Will dump output for any code in the 0x1000 sized block starting at
@@ -2541,8 +3048,6 @@ within the host.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-L</span>&#160; <span class="pre">path</span></code></dt><dd><p>Set the directory for the BIOS, VGA BIOS and keymaps.</p>
 <p>To list all the data directories, use <code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">help</span></code>.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-bios</span> <span class="pre">file</span></code></dt><dd><p>Set the filename for the BIOS.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-enable-kvm</span></code></dt><dd><p>Enable KVM full virtualization support. This option is only
 available if KVM support is enabled when compiling.</p>
@@ -2566,7 +3071,7 @@ parameters.</p>
 <p>Examples:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-action</span> <span class="pre">panic=none</span></code>
 <code class="docutils literal notranslate"><span class="pre">-action</span> <span class="pre">reboot=shutdown,shutdown=pause</span></code>
-<code class="docutils literal notranslate"><span class="pre">-watchdog</span> <span class="pre">i6300esb</span> <span class="pre">-action</span> <span class="pre">watchdog=pause</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">i6300esb</span> <span class="pre">-action</span> <span class="pre">watchdog=pause</span></code></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-loadvm</span> <span class="pre">file</span></code></dt><dd><p>Start right away with a saved state (<code class="docutils literal notranslate"><span class="pre">loadvm</span></code> in monitor)</p>
 </dd>
@@ -2639,25 +3144,6 @@ name. In record mode, a new VM snapshot with the given name is created
 at the start of execution recording. In replay mode this option
 specifies the snapshot name used to load the initial VM state.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-watchdog</span> <span class="pre">model</span></code></dt><dd><p>Create a virtual hardware watchdog device. Once enabled (by a guest
-action), the watchdog must be periodically polled by an agent inside
-the guest or else the guest will be restarted. Choose a model for
-which your guest has drivers.</p>
-<p>The model is the model of hardware watchdog to emulate. Use
-<code class="docutils literal notranslate"><span class="pre">-watchdog</span> <span class="pre">help</span></code> to list available hardware models. Only one
-watchdog can be enabled for a guest.</p>
-<p>The following models may be available:</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ib700</span></code></dt><dd><p>iBASE 700 is a very simple ISA watchdog with a single timer.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">i6300esb</span></code></dt><dd><p>Intel 6300ESB I/O controller hub is a much more featureful
-PCI-based dual-timer watchdog.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">diag288</span></code></dt><dd><p>A virtual watchdog for s390x backed by the diagnose 288
-hypercall (currently KVM only).</p>
-</dd>
-</dl>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-watchdog-action</span> <span class="pre">action</span></code></dt><dd><p>The action controls what QEMU will do when the watchdog timer
 expires. The default is <code class="docutils literal notranslate"><span class="pre">reset</span></code> (forcefully reset the guest).
 Other possible actions are: <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> (attempt to gracefully
@@ -2670,7 +3156,7 @@ to ACPI signals, which it may not be able to do in the sort of
 situations where the watchdog would have expired, and thus
 <code class="docutils literal notranslate"><span class="pre">-watchdog-action</span> <span class="pre">shutdown</span></code> is not recommended for production use.</p>
 <p>Examples:</p>
-<p><code class="docutils literal notranslate"><span class="pre">-watchdog</span> <span class="pre">i6300esb</span> <span class="pre">-watchdog-action</span> <span class="pre">pause</span></code>; <code class="docutils literal notranslate"><span class="pre">-watchdog</span> <span class="pre">ib700</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">i6300esb</span> <span class="pre">-watchdog-action</span> <span class="pre">pause</span></code></p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-echr</span> <span class="pre">numeric_ascii_value</span></code></dt><dd><p>Change the escape character used for switching to the monitor when
 using monitor and serial sharing. The default is <code class="docutils literal notranslate"><span class="pre">0x01</span></code> when using
@@ -2687,7 +3173,10 @@ escape character to Control-t.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-incoming</span> <span class="pre">unix:socketpath</span></code></dt><dd><p>Prepare for incoming migration, listen on a given unix socket.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-incoming</span> <span class="pre">fd:fd</span></code></dt><dd><p>Accept incoming migration from a given filedescriptor.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-incoming</span> <span class="pre">fd:fd</span></code></dt><dd><p>Accept incoming migration from a given file descriptor.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-incoming</span> <span class="pre">file:filename[,offset=offset]</span></code></dt><dd><p>Accept incoming migration from a given file starting at offset.
+offset allows the common size suffixes, or a 0x prefix, but not both.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-incoming</span> <span class="pre">exec:cmdline</span></code></dt><dd><p>Accept incoming migration as an output from specified external
 command.</p>
@@ -2704,10 +3193,6 @@ devices like serial port, parallel port, virtual console, monitor
 device, VGA adapter, floppy and CD-ROM drive and others. The
 <code class="docutils literal notranslate"><span class="pre">-nodefaults</span></code> option will disable all those default devices.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-chroot</span> <span class="pre">dir</span></code></dt><dd><p>Immediately before starting guest execution, chroot to the specified
-directory. Especially useful in combination with -runas.
-This option is not supported for Windows hosts.</p>
-</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-runas</span> <span class="pre">user</span></code></dt><dd><p>Immediately before starting guest execution, drop root privileges,
 switching to the specified user.</p>
 </dd>
@@ -2722,23 +3207,22 @@ switching to the specified user.</p>
 </pre></div>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-semihosting</span></code></dt><dd><p>Enable semihosting mode (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V only).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-semihosting</span></code></dt><dd><p>Enable <a class="reference internal" href="../about/emulation.html#semihosting"><span class="std std-ref">Semihosting</span></a> mode (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V only).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Note that this allows guest direct access to the host filesystem, so
 should only be used with a trusted guest OS.</p>
+</div>
 <p>See the -semihosting-config option documentation for further
 information about the facilities this enables.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-semihosting-config</span> <span class="pre">[enable=on|off][,target=native|gdb|auto][,chardev=id][,arg=str[,...]]</span></code></dt><dd><p>Enable and configure semihosting (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V
+<dt><code class="docutils literal notranslate"><span class="pre">-semihosting-config</span> <span class="pre">[enable=on|off][,target=native|gdb|auto][,chardev=id][,userspace=on|off][,arg=str[,...]]</span></code></dt><dd><p>Enable and configure <a class="reference internal" href="../about/emulation.html#semihosting"><span class="std std-ref">Semihosting</span></a> (ARM, M68K, Xtensa, MIPS, Nios II, RISC-V
 only).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Note that this allows guest direct access to the host filesystem, so
 should only be used with a trusted guest OS.</p>
-<p>On Arm this implements the standard semihosting API, version 2.0.</p>
-<p>On M68K this implements the “ColdFire GDB” interface used by
-libgloss.</p>
-<p>Xtensa semihosting provides basic file IO calls, such as
-open/read/write/seek/select. Tensilica baremetal libc for ISS and
-linux platform “sim” use this interface.</p>
-<p>On RISC-V this implements the standard semihosting API, version 0.2.</p>
+</div>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">target=native|gdb|auto</span></code></dt><dd><p>Defines where the semihosting calls will be addressed, to QEMU
 (<code class="docutils literal notranslate"><span class="pre">native</span></code>) or to GDB (<code class="docutils literal notranslate"><span class="pre">gdb</span></code>). The default is <code class="docutils literal notranslate"><span class="pre">auto</span></code>, which
@@ -2746,6 +3230,12 @@ means <code class="docutils literal notranslate"><span class="pre">gdb</span></c
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">chardev=str1</span></code></dt><dd><p>Send the output to a chardev backend output for native or auto
 output when not in gdb</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">userspace=on|off</span></code></dt><dd><p>Allows code running in guest userspace to access the semihosting
+interface. The default is that only privileged guest code can
+make semihosting calls. Note that setting <code class="docutils literal notranslate"><span class="pre">userspace=on</span></code> should
+only be used if all guest code is trusted (for example, in
+bare-metal test case code).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">arg=str1,arg=str2,...</span></code></dt><dd><p>Allows the user to pass input arguments, and can be used
 multiple times to build up a list. The old-style
@@ -2806,16 +3296,28 @@ This option is only available if QEMU has been compiled with
 the <code class="docutils literal notranslate"><span class="pre">simple</span></code> tracing backend.</p>
 </div></blockquote>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-plugin</span> <span class="pre">file=file[,arg=string]</span></code></dt><dd><p>Load a plugin.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-plugin</span> <span class="pre">file=file[,argname=argvalue]</span></code></dt><dd><p>Load a plugin.</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">file=file</span></code></dt><dd><p>Load the given plugin from a shared library file.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">arg=string</span></code></dt><dd><p>Argument string passed to the plugin. (Can be given multiple
-times.)</p>
+<dt><code class="docutils literal notranslate"><span class="pre">argname=argvalue</span></code></dt><dd><p>Argument passed to the plugin. (Can be given multiple times.)</p>
 </dd>
 </dl>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-enable-fips</span></code></dt><dd><p>Enable FIPS 140-2 compliance mode.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-run-with</span> <span class="pre">[async-teardown=on|off][,chroot=dir]</span></code></dt><dd><p>Set QEMU process lifecycle options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">async-teardown=on</span></code> enables asynchronous teardown. A new process called
+“cleanup/&lt;QEMU_PID&gt;” will be created at startup sharing the address
+space with the main QEMU process, using clone. It will wait for the
+main QEMU process to terminate completely, and then exit. This allows
+QEMU to terminate very quickly even if the guest was huge, leaving the
+teardown of the address space to the cleanup process. Since the cleanup
+process shares the same cgroups as the main QEMU process, accounting is
+performed correctly. This only works if the cleanup process is not
+forcefully killed with SIGKILL before the main QEMU process has
+terminated completely.</p>
+<p><code class="docutils literal notranslate"><span class="pre">chroot=dir</span></code> can be used for doing a chroot to the specified directory
+immediately before starting the guest execution. This is especially useful
+in combination with -runas.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-msg</span> <span class="pre">[timestamp[=on|off]][,guest-name[=on|off]]</span></code></dt><dd><p>Control error message format.</p>
 <dl class="simple">
@@ -2831,22 +3333,28 @@ file in file</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-enable-sync-profile</span></code></dt><dd><p>Enable synchronization profiling.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-perfmap</span></code></dt><dd><p>Generate a map file for Linux perf tools that will allow basic profiling
+information to be broken down into basic blocks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-jitdump</span></code></dt><dd><p>Generate a dump file for Linux perf tools that maps basic blocks to symbol
+names, line numbers and JITted code.</p>
+</dd>
 </dl>
-</div>
-<div class="section" id="hxtool-10">
-<h2>Generic object creation<a class="headerlink" href="#hxtool-10" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hxtool-10">
+<h2>Generic object creation<a class="headerlink" href="#hxtool-10" title="Permalink to this heading"></a></h2>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">typename[,prop1=value1,...]</span></code></dt><dd><p>Create a new object of type typename setting properties in the order
 they are specified. Note that the ‘id’ property must be set. These
 objects are placed in the ‘/objects’ path.</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">memory-backend-file,id=id,size=size,mem-path=dir,share=on|off,discard-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host-nodes=host-nodes,policy=default|preferred|bind|interleave,align=align,readonly=on|off</span></code></dt><dd><p>Creates a memory file backend object, which can be used to back
+<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">memory-backend-file,id=id,size=size,mem-path=dir,share=on|off,discard-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host-nodes=host-nodes,policy=default|preferred|bind|interleave,align=align,offset=offset,readonly=on|off,rom=on|off|auto</span></code></dt><dd><p>Creates a memory file backend object, which can be used to back
 the guest RAM with huge pages.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> parameter is a unique ID that will be used to
-reference this memory region when configuring the <code class="docutils literal notranslate"><span class="pre">-numa</span></code>
-argument.</p>
+reference this memory region in other parameters, e.g. <code class="docutils literal notranslate"><span class="pre">-numa</span></code>,
+<code class="docutils literal notranslate"><span class="pre">-device</span> <span class="pre">nvdimm</span></code>, etc.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> option provides the size of the memory region, and
-accepts common suffixes, eg <code class="docutils literal notranslate"><span class="pre">500M</span></code>.</p>
+accepts common suffixes, e.g. <code class="docutils literal notranslate"><span class="pre">500M</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">mem-path</span></code> provides the path to either a shared memory or
 huge page filesystem mount.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">share</span></code> boolean option determines whether the memory
@@ -2893,6 +3401,9 @@ alignment different than the default one used by QEMU, eg the
 device DAX /dev/dax0.0 requires 2M alignment rather than 4K. In
 such cases, users can specify the required alignment via this
 option.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">offset</span></code> option specifies the offset into the target file
+that the region starts at. You can use this parameter to back
+multiple regions with a single file.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pmem</span></code> option specifies whether the backing file specified
 by <code class="docutils literal notranslate"><span class="pre">mem-path</span></code> is in host persistent memory that can be
 accessed using the SNIA NVM programming model (e.g. Intel
@@ -2907,6 +3418,19 @@ requires support from both the host kernel (since Linux kernel
 option.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">readonly</span></code> option specifies whether the backing file is opened
 read-only or read-write (default).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rom</span></code> option specifies whether to create Read Only Memory
+(ROM) that cannot be modified by the VM. Any write attempts to such
+ROM will be denied. Most use cases want proper RAM instead of ROM.
+However, selected use cases, like R/O NVDIMMs, can benefit from
+ROM. If set to <code class="docutils literal notranslate"><span class="pre">on</span></code>, create ROM; if set to <code class="docutils literal notranslate"><span class="pre">off</span></code>, create
+writable RAM; if set to <code class="docutils literal notranslate"><span class="pre">auto</span></code> (default), the value of the
+<code class="docutils literal notranslate"><span class="pre">readonly</span></code> option is used. This option is primarily helpful when
+we want to have writable RAM in configurations that would
+traditionally create ROM before the <code class="docutils literal notranslate"><span class="pre">rom</span></code> option was introduced:
+VM templating, where we want to open a file readonly
+(<code class="docutils literal notranslate"><span class="pre">readonly=on</span></code>) and mark the memory to be private for QEMU
+(<code class="docutils literal notranslate"><span class="pre">share=off</span></code>). For this use case, we need writable RAM instead
+of ROM, and want to also set <code class="docutils literal notranslate"><span class="pre">rom=off</span></code>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">memory-backend-ram,id=id,merge=on|off,dump=on|off,share=on|off,prealloc=on|off,size=size,host-nodes=host-nodes,policy=default|preferred|bind|interleave</span></code></dt><dd><p>Creates a memory backend object, which can be used to back the
 guest RAM. Memory backend objects offer more control than the
@@ -2932,6 +3456,15 @@ incompatible with the <code class="docutils literal notranslate"><span class="pr
 <p>Please refer to <code class="docutils literal notranslate"><span class="pre">memory-backend-file</span></code> for a description of the
 other options.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">share</span></code> boolean option is on by default with memfd.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">iommufd,id=id[,fd=fd]</span></code></dt><dd><p>Creates an iommufd backend which allows control of DMA mapping
+through the <code class="docutils literal notranslate"><span class="pre">/dev/iommu</span></code> device.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> parameter is a unique ID which frontends (such as
+vfio-pci of vdpa) will use to connect with the iommufd backend.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fd</span></code> parameter is an optional pre-opened file descriptor
+resulting from <code class="docutils literal notranslate"><span class="pre">/dev/iommu</span></code> opening. Usually the iommufd is shared
+across all subsystems, bringing the benefit of centralized
+reference counting.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">rng-builtin,id=id</span></code></dt><dd><p>Creates a random number generator backend which obtains entropy
 from QEMU builtin functions. The <code class="docutils literal notranslate"><span class="pre">id</span></code> parameter is a unique ID
@@ -3135,14 +3668,14 @@ filter-redirector and filter-rewriter.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KVM</span> <span class="n">COLO</span>
 
 <span class="n">primary</span><span class="p">:</span>
-<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span><span class="p">,</span><span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifup</span><span class="p">,</span><span class="n">downscript</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifdown</span>
+<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span>
 <span class="o">-</span><span class="n">device</span> <span class="n">e1000</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">e0</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="mi">52</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="mi">66</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mirror0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mirror0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span>
 <span class="o">-</span><span class="nb">object</span> <span class="n">iothread</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">iothread1</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">mirror</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">m0</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">tx</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">mirror0</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">redire0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">indev</span><span class="o">=</span><span class="n">compare_out</span>
@@ -3150,10 +3683,10 @@ filter-redirector and filter-rewriter.</p>
 <span class="o">-</span><span class="nb">object</span> <span class="n">colo</span><span class="o">-</span><span class="n">compare</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">comp0</span><span class="p">,</span><span class="n">primary_in</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">secondary_in</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">iothread</span><span class="o">=</span><span class="n">iothread1</span>
 
 <span class="n">secondary</span><span class="p">:</span>
-<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span><span class="p">,</span><span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifup</span><span class="p">,</span><span class="n">down</span> <span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifdown</span>
+<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span>
 <span class="o">-</span><span class="n">device</span> <span class="n">e1000</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="mi">52</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="mi">66</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">f1</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">tx</span><span class="p">,</span><span class="n">indev</span><span class="o">=</span><span class="n">red0</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">f2</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">red1</span>
 
@@ -3161,26 +3694,26 @@ filter-redirector and filter-rewriter.</p>
 <span class="n">Xen</span> <span class="n">COLO</span>
 
 <span class="n">primary</span><span class="p">:</span>
-<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span><span class="p">,</span><span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifup</span><span class="p">,</span><span class="n">downscript</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifdown</span>
+<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span>
 <span class="o">-</span><span class="n">device</span> <span class="n">e1000</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">e0</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="mi">52</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="mi">66</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mirror0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">notify_way</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9009</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mirror0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9001</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9005</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">notify_way</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9009</span><span class="p">,</span><span class="n">server</span><span class="o">=</span><span class="n">on</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="n">off</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">mirror</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">m0</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">tx</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">mirror0</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">redire0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">indev</span><span class="o">=</span><span class="n">compare_out</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">redire1</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">compare0</span>
 <span class="o">-</span><span class="nb">object</span> <span class="n">iothread</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">iothread1</span>
-<span class="o">-</span><span class="nb">object</span> <span class="n">colo</span><span class="o">-</span><span class="n">compare</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">comp0</span><span class="p">,</span><span class="n">primary_in</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">secondary_in</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">notify_dev</span><span class="o">=</span><span class="n">nofity_way</span><span class="p">,</span><span class="n">iothread</span><span class="o">=</span><span class="n">iothread1</span>
+<span class="o">-</span><span class="nb">object</span> <span class="n">colo</span><span class="o">-</span><span class="n">compare</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">comp0</span><span class="p">,</span><span class="n">primary_in</span><span class="o">=</span><span class="n">compare0</span><span class="o">-</span><span class="mi">0</span><span class="p">,</span><span class="n">secondary_in</span><span class="o">=</span><span class="n">compare1</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">compare_out0</span><span class="p">,</span><span class="n">notify_dev</span><span class="o">=</span><span class="n">notify_way</span><span class="p">,</span><span class="n">iothread</span><span class="o">=</span><span class="n">iothread1</span>
 
 <span class="n">secondary</span><span class="p">:</span>
-<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span><span class="p">,</span><span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifup</span><span class="p">,</span><span class="n">down</span> <span class="n">script</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ifdown</span>
+<span class="o">-</span><span class="n">netdev</span> <span class="n">tap</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">vhost</span><span class="o">=</span><span class="n">off</span>
 <span class="o">-</span><span class="n">device</span> <span class="n">e1000</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="mi">52</span><span class="p">:</span><span class="n">a4</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">78</span><span class="p">:</span><span class="mi">66</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span>
-<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3</span><span class="o">.</span><span class="mf">3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red0</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9003</span>
+<span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">red1</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="mf">3.3.3.3</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">9004</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">f1</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">tx</span><span class="p">,</span><span class="n">indev</span><span class="o">=</span><span class="n">red0</span>
 <span class="o">-</span><span class="nb">object</span> <span class="nb">filter</span><span class="o">-</span><span class="n">redirector</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">f2</span><span class="p">,</span><span class="n">netdev</span><span class="o">=</span><span class="n">hn0</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="n">rx</span><span class="p">,</span><span class="n">outdev</span><span class="o">=</span><span class="n">red1</span>
 </pre></div>
@@ -3188,8 +3721,8 @@ filter-redirector and filter-rewriter.</p>
 <p>If you want to know the detail of above command line, you can
 read the colo-compare git log.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">cryptodev-backend-builtin,id=id[,queues=queues]</span></code></dt><dd><p>Creates a cryptodev backend which executes crypto opreation from
-the QEMU cipher APIS. The id parameter is a unique ID that will
+<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">cryptodev-backend-builtin,id=id[,queues=queues]</span></code></dt><dd><p>Creates a cryptodev backend which executes crypto operations from
+the QEMU cipher APIs. The id parameter is a unique ID that will
 be used to reference this cryptodev backend from the
 <code class="docutils literal notranslate"><span class="pre">virtio-crypto</span></code> device. The queues parameter is optional,
 which specify the queue number of cryptodev backend, the default
@@ -3276,7 +3809,7 @@ password. Pass the contents of <code class="docutils literal notranslate"><span 
     -object secret,id=sec0,keyid=secmaster0,format=base64,\
         data=$SECRET,iv=$(&lt;iv.b64)</pre>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">sev-guest,id=id,cbitpos=cbitpos,reduced-phys-bits=val,[sev-device=string,policy=policy,handle=handle,dh-cert-file=file,session-file=file]</span></code></dt><dd><p>Create a Secure Encrypted Virtualization (SEV) guest object,
+<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">sev-guest,id=id,cbitpos=cbitpos,reduced-phys-bits=val,[sev-device=string,policy=policy,handle=handle,dh-cert-file=file,session-file=file,kernel-hashes=on|off]</span></code></dt><dd><p>Create a Secure Encrypted Virtualization (SEV) guest object,
 which can be used to provide the guest memory encryption support
 on AMD processors.</p>
 <p>When memory encryption is enabled, one of the physical address
@@ -3288,7 +3821,7 @@ must provide this value. On EPYC, the value should be 47.</p>
 physical address space. The <code class="docutils literal notranslate"><span class="pre">reduced-phys-bits</span></code> is used to
 provide the number of bits we loose in physical address space.
 Similar to C-bit, the value is Host family dependent. On EPYC,
-the value should be 5.</p>
+a guest will lose a maximum of 1 bit, so the value should be 1.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">sev-device</span></code> provides the device file to use for
 communicating with the SEV firmware running inside AMD Secure
 Processor. The default device is ‘/dev/sev’. If hardware
@@ -3308,10 +3841,13 @@ owner’s Public Diffie-Hillman key defined in SEV spec. The PDH
 and session parameters are used for establishing a cryptographic
 session with the guest owner to negotiate keys used for
 attestation. The file must be encoded in base64.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">kernel-hashes</span></code> adds the hashes of given kernel/initrd/
+cmdline to a designated guest firmware page for measured Linux
+boot with -kernel. The default is off. (Since 6.2)</p>
 <p>e.g to launch a SEV guest</p>
 <pre class="literal-block"># qemu-system-x86_64 \
     ...... \
-    -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=5 \
+    -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=1 \
     -machine ...,memory-encryption=sev0 \
     .....</pre>
 </dd>
@@ -3386,12 +3922,12 @@ distinguished name would look like:</p>
 </pre></div>
 </div>
 <p>Finally the <code class="docutils literal notranslate"><span class="pre">/etc/qemu/vnc.allow</span></code> file would contain the list
-of x509 distingished names that are permitted access</p>
+of x509 distinguished names that are permitted access</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CN</span><span class="o">=</span><span class="n">laptop</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">,</span><span class="n">O</span><span class="o">=</span><span class="n">Example</span> <span class="n">Home</span><span class="p">,</span><span class="n">L</span><span class="o">=</span><span class="n">London</span><span class="p">,</span><span class="n">ST</span><span class="o">=</span><span class="n">London</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="n">GB</span>
 </pre></div>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">iothread,id=id,poll-max-ns=poll-max-ns,poll-grow=poll-grow,poll-shrink=poll-shrink</span></code></dt><dd><p>Creates a dedicated event loop thread that devices can be
+<dt><code class="docutils literal notranslate"><span class="pre">-object</span> <span class="pre">iothread,id=id,poll-max-ns=poll-max-ns,poll-grow=poll-grow,poll-shrink=poll-shrink,aio-max-batch=aio-max-batch</span></code></dt><dd><p>Creates a dedicated event loop thread that devices can be
 assigned to. This is known as an IOThread. By default device
 emulation happens in vCPU threads or the main event loop thread.
 This can become a scalability bottleneck. IOThreads allow device
@@ -3419,7 +3955,10 @@ due to not polling long enough.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">poll-shrink</span></code> parameter is the divisor used to decrease
 the polling time when the algorithm detects it is spending too
 long polling without encountering events.</p>
-<p>The polling parameters can be modified at run-time using the
+<p>The <code class="docutils literal notranslate"><span class="pre">aio-max-batch</span></code> parameter is the maximum number of requests
+in a batch for the AIO engine, 0 means that the engine will use
+its default.</p>
+<p>The IOThread parameters can be modified at run-time using the
 <code class="docutils literal notranslate"><span class="pre">qom-set</span></code> command (where <code class="docutils literal notranslate"><span class="pre">iothread1</span></code> is the IOThread’s
 <code class="docutils literal notranslate"><span class="pre">id</span></code>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">qemu</span><span class="p">)</span> <span class="n">qom</span><span class="o">-</span><span class="nb">set</span> <span class="o">/</span><span class="n">objects</span><span class="o">/</span><span class="n">iothread1</span> <span class="n">poll</span><span class="o">-</span><span class="nb">max</span><span class="o">-</span><span class="n">ns</span> <span class="mi">100000</span>
@@ -3429,9 +3968,9 @@ long polling without encountering events.</p>
 </dl>
 </dd>
 </dl>
-</div>
-<div class="section" id="device-url-syntax">
-<h2>Device URL Syntax<a class="headerlink" href="#device-url-syntax" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="device-url-syntax">
+<h2>Device URL Syntax<a class="headerlink" href="#device-url-syntax" title="Permalink to this heading"></a></h2>
 <p>In addition to using normal file images for the emulated storage
 devices, QEMU can also use networked resources such as iSCSI devices.
 These are specified using a special URL syntax.</p>
@@ -3444,7 +3983,7 @@ supported.</p>
 <p>By default qemu will use the iSCSI initiator-name
 ‘iqn.2008-11.org.linux-kvm[:&lt;name&gt;]’ but this can also be set from
 the command line or a configuration file.</p>
-<p>Since version Qemu 2.4 it is possible to specify a iSCSI request
+<p>Since version QEMU 2.4 it is possible to specify a iSCSI request
 timeout to detect stalled requests and force a reestablishment of the
 session. The timeout is specified in seconds. The default is 0 which
 means no timeout. Libiscsi 1.15.0 or greater is required for this
@@ -3482,16 +4021,6 @@ remember that ‘?’ is a shell glob character and may need quoting:
 qemu-system-x86_64 -drive file.driver=ssh,file.user=user,file.host=host,file.port=22,file.path=/path/to/disk.img</pre>
 <p>Currently authentication must be done using ssh-agent. Other
 authentication methods may be supported in future.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Sheepdog</span></code></dt><dd><p>Sheepdog is a distributed storage system for QEMU. QEMU supports
-using either local sheepdog devices or remote networked devices.</p>
-<p>Syntax for specifying a sheepdog device</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sheepdog[+tcp|+unix]://[host:port]/vdiname[?socket=path][#snapid|#tag]
-</pre></div>
-</div>
-<p>Example</p>
-<pre class="literal-block">qemu-system-x86_64 --drive file=sheepdog://192.0.2.1:30000/MyVirtualMachine</pre>
-<p>See also <a class="reference external" href="https://sheepdog.github.io/sheepdog/">https://sheepdog.github.io/sheepdog/</a>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">GlusterFS</span></code></dt><dd><p>GlusterFS is a user space distributed file system. QEMU supports the
 use of GlusterFS volumes for hosting VM disk images using TCP, Unix
@@ -3586,95 +4115,50 @@ of 64k and a timeout of 10 seconds.</p>
 qemu-system-x86_64 -drive file=/tmp/test.qcow2</pre>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
+           </div>
           </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="device-emulation.html" class="btn btn-neutral float-right" title="Device Emulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version 9.0.0.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<div id="editpage">
-  <ul>
-    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/invocation.rst">Page source</a></li>
-  </ul>
-</div><h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">System Emulation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Invocation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="images.html">Disk Images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="net.html">Network emulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usb.html">USB emulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nvme.html">NVMe Emulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generic-loader.html">Generic Loader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guest-loader.html">Guest Loader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gdb.html">GDB usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html">virtio pmem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multi-process.html">Multi-process QEMU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deprecated.html">Deprecated features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="removed-features.html">Removed features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build-platforms.html">Supported build platforms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html">License</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">Developer Information</a></li>
-</ul>
-
-
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, The QEMU Project Developers.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "QEMU" "1" "May 06, 2021" "6.0.0" "QEMU"
-.SH NAME
-qemu \- QEMU User Documentation
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU" "1" "Apr 23, 2024" "9.0.0" "QEMU"
+.SH NAME
+qemu \- QEMU User Documentation
 .SH SYNOPSIS
 .INDENT 0.0
 .INDENT 3.5
@@ -91,7 +91,7 @@ VGA BIOS.
 QEMU uses YM3812 emulation by Tatsuyuki Satoh.
 .sp
 QEMU uses GUS emulation (GUSEMU32 \fI\%http://www.deinmeister.de/gusemu/\fP) by
-Tibor "TS" Schütz.
+Tibor \(dqTS\(dq Schütz.
 .sp
 Note that, by default, GUS shares IRQ(7) with parallel ports and so QEMU
 must be told to not have parallel ports to have working GUS.
@@ -134,10 +134,23 @@ qemu\-system\-x86_64 some.img \-audiodev <backend>,id=<name> \-machine pcspk\-au
 .fi
 .UNINDENT
 .UNINDENT
+.SS Machine\-specific options
+.sp
+It supports the following machine\-specific options:
+.INDENT 0.0
+.IP \(bu 2
+\fBx\-south\-bridge=PIIX3|piix4\-isa\fP (Experimental option to select a particular
+south bridge. Default: \fBPIIX3\fP)
+.UNINDENT
 .SH OPTIONS
 .sp
 disk_image is a raw hard disk image for IDE hard disk 0. Some targets do
 not need a disk image.
+.sp
+When dealing with options parameters as arbitrary strings containing
+commas, such as in \(dqfile=my,file\(dq and \(dqstring=a,b\(dq, it\(aqs necessary to
+double the commas. For instance,\(dq\-fw_cfg name=z,string=a,,b\(dq will be
+parsed as \(dq\-fw_cfg name=z,string=a,b\(dq.
 .SS Standard options
 .INDENT 0.0
 .TP
@@ -154,11 +167,11 @@ available machines.
 For architectures which aim to support live migration compatibility
 across releases, each release will introduce a new versioned machine
 type. For example, the 2.8.0 release introduced machine types
-"pc\-i440fx\-2.8" and "pc\-q35\-2.8" for the x86_64/i686 architectures.
+\(dqpc\-i440fx\-2.8\(dq and \(dqpc\-q35\-2.8\(dq for the x86_64/i686 architectures.
 .sp
 To allow live migration of guests from QEMU version 2.8.0, to QEMU
-version 2.9.0, the 2.9.0 version must support the "pc\-i440fx\-2.8"
-and "pc\-q35\-2.8" machines too. To allow users live migrating VMs to
+version 2.9.0, the 2.9.0 version must support the \(dqpc\-i440fx\-2.8\(dq
+and \(dqpc\-q35\-2.8\(dq machines too. To allow users live migrating VMs to
 skip multiple intermediate releases when upgrading, new releases of
 QEMU will support machine types from many previous versions.
 .sp
@@ -167,7 +180,7 @@ Supported machine properties are:
 .TP
 .B \fBaccel=accels1[:accels2[:...]]\fP
 This is used to enable an accelerator. Depending on the target
-architecture, kvm, xen, hax, hvf, whpx or tcg can be available.
+architecture, kvm, xen, hvf, nvmm, whpx or tcg can be available.
 By default, tcg is used. If there is more than one accelerator
 specified, the next one is used if the previous one fails to
 initialize.
@@ -204,38 +217,94 @@ Enables or disables NVDIMM support. The default is off.
 Memory encryption object to use. The default is none.
 .TP
 .B \fBhmat=on|off\fP
-.INDENT 7.0
-.INDENT 3.5
 Enables or disables ACPI Heterogeneous Memory Attribute Table
 (HMAT) support. The default is off.
-.UNINDENT
-.UNINDENT
-.INDENT 7.0
 .TP
 .B \fBmemory\-backend=\(aqid\(aq\fP
 An alternative to legacy \fB\-mem\-path\fP and \fBmem\-prealloc\fP options.
 Allows to use a memory backend as main RAM.
 .sp
 For example:
-::
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
 \-object memory\-backend\-file,id=pc.ram,size=512M,mem\-path=/hugetlbfs,prealloc=on,share=on
 \-machine memory\-backend=pc.ram
 \-m 512M
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
 .sp
 Migration compatibility note:
-a) as backend id one shall use value of \(aqdefault\-ram\-id\(aq, advertised by
+.INDENT 7.0
+.IP \(bu 2
+as backend id one shall use value of \(aqdefault\-ram\-id\(aq, advertised by
 machine type (available via \fBquery\-machines\fP QMP command), if migration
 to/from old QEMU (<5.0) is expected.
-b) for machine types 4.0 and older, user shall
+.IP \(bu 2
+for machine types 4.0 and older, user shall
 use \fBx\-use\-canonical\-path\-for\-ramblock\-id=off\fP backend option
 if migration to/from old QEMU (<5.0) is expected.
+.UNINDENT
+.sp
 For example:
-::
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
 \-object memory\-backend\-ram,id=pc.ram,size=512M,x\-use\-canonical\-path\-for\-ramblock\-id=off
 \-machine memory\-backend=pc.ram
 \-m 512M
+.ft P
+.fi
 .UNINDENT
 .UNINDENT
+.TP
+.B \fBcxl\-fmw.0.targets.0=firsttarget,cxl\-fmw.0.targets.1=secondtarget,cxl\-fmw.0.size=size[,cxl\-fmw.0.interleave\-granularity=granularity]\fP
+Define a CXL Fixed Memory Window (CFMW).
+.sp
+Described in the CXL 2.0 ECN: CEDT CFMWS & QTG _DSM.
+.sp
+They are regions of Host Physical Addresses (HPA) on a system which
+may be interleaved across one or more CXL host bridges.  The system
+software will assign particular devices into these windows and
+configure the downstream Host\-managed Device Memory (HDM) decoders
+in root ports, switch ports and devices appropriately to meet the
+interleave requirements before enabling the memory devices.
+.sp
+\fBtargets.X=target\fP provides the mapping to CXL host bridges
+which may be identified by the id provided in the \-device entry.
+Multiple entries are needed to specify all the targets when
+the fixed memory window represents interleaved memory. X is the
+target index from 0.
+.sp
+\fBsize=size\fP sets the size of the CFMW. This must be a multiple of
+256MiB. The region will be aligned to 256MiB but the location is
+platform and configuration dependent.
+.sp
+\fBinterleave\-granularity=granularity\fP sets the granularity of
+interleave. Default 256 (bytes). Only 256, 512, 1k, 2k,
+4k, 8k and 16k granularities supported.
+.sp
+Example:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-machine cxl\-fmw.0.targets.0=cxl.0,cxl\-fmw.0.targets.1=cxl.1,cxl\-fmw.0.size=128G,cxl\-fmw.0.interleave\-granularity=512
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.TP
+.B \fBsgx\-epc.0.memdev=@var{memid},sgx\-epc.0.node=@var{numaid}\fP
+Define an SGX EPC section.
 .TP
 .B \fB\-cpu model\fP
 Select CPU model (\fB\-cpu help\fP for list and additional feature
@@ -243,7 +312,7 @@ selection)
 .TP
 .B \fB\-accel name[,prop=value[,...]]\fP
 This is used to enable an accelerator. Depending on the target
-architecture, kvm, xen, hax, hvf, whpx or tcg can be available. By
+architecture, kvm, xen, hvf, nvmm, whpx or tcg can be available. By
 default, tcg is used. If there is more than one accelerator
 specified, the next one is used if the previous one fails to
 initialize.
@@ -264,6 +333,12 @@ is not recommended except for debugging purposes.
 .B \fBkvm\-shadow\-mem=size\fP
 Defines the size of the KVM shadow MMU.
 .TP
+.B \fBone\-insn\-per\-tb=on|off\fP
+Makes the TCG accelerator put only one guest instruction into
+each translation block. This slows down emulation a lot, but
+can be useful in some situations, such as when trying to analyse
+the logs produced by the \fB\-d\fP option.
+.TP
 .B \fBsplit\-wx=on|off\fP
 Controls the use of split w^x mapping for the TCG code generation
 buffer. Some operating systems require this to be enabled, and in
@@ -280,17 +355,144 @@ additional host cores. The default is to enable multi\-threading
 where both the back\-end and front\-ends support it and no
 incompatible TCG features have been enabled (e.g.
 icount/replay).
+.TP
+.B \fBdirty\-ring\-size=n\fP
+When the KVM accelerator is used, it controls the size of the per\-vCPU
+dirty page ring buffer (number of entries for each vCPU). It should
+be a value that is power of two, and it should be 1024 or bigger (but
+still less than the maximum value that the kernel supports).  4096
+could be a good initial value if you have no idea which is the best.
+Set this value to 0 to disable the feature.  By default, this feature
+is disabled (dirty\-ring\-size=0).  When enabled, KVM will instead
+record dirty pages in a bitmap.
+.TP
+.B \fBeager\-split\-size=n\fP
+KVM implements dirty page logging at the PAGE_SIZE granularity and
+enabling dirty\-logging on a huge\-page requires breaking it into
+PAGE_SIZE pages in the first place. KVM on ARM does this splitting
+lazily by default. There are performance benefits in doing huge\-page
+split eagerly, especially in situations where TLBI costs associated
+with break\-before\-make sequences are considerable and also if guest
+workloads are read intensive. The size here specifies how many pages
+to break at a time and needs to be a valid block size which is
+1GB/2MB/4KB, 32MB/16KB and 512MB/64KB for 4KB/16KB/64KB PAGE_SIZE
+respectively. Be wary of specifying a higher size as it will have an
+impact on the memory. By default, this feature is disabled
+(eager\-split\-size=0).
+.TP
+.B \fBnotify\-vmexit=run|internal\-error|disable,notify\-window=n\fP
+Enables or disables notify VM exit support on x86 host and specify
+the corresponding notify window to trigger the VM exit if enabled.
+\fBrun\fP option enables the feature. It does nothing and continue
+if the exit happens. \fBinternal\-error\fP option enables the feature.
+It raises a internal error. \fBdisable\fP option doesn\(aqt enable the feature.
+This feature can mitigate the CPU stuck issue due to event windows don\(aqt
+open up for a specified of time (i.e. notify\-window).
+Default: notify\-vmexit=run,notify\-window=0.
+.TP
+.B \fBdevice=path\fP
+Sets the path to the KVM device node. Defaults to \fB/dev/kvm\fP\&. This
+option can be used to pass the KVM device to use via a file descriptor
+by setting the value to \fB/dev/fdset/NN\fP\&.
 .UNINDENT
 .TP
-.B \fB\-smp [cpus=]n[,cores=cores][,threads=threads][,dies=dies][,sockets=sockets][,maxcpus=maxcpus]\fP
-Simulate an SMP system with n CPUs. On the PC target, up to 255 CPUs
-are supported. On Sparc32 target, Linux limits the number of usable
-CPUs to 4. For the PC target, the number of cores per die, the
-number of threads per cores, the number of dies per packages and the
-total number of sockets can be specified. Missing values will be
-computed. If any on the three values is given, the total number of
-CPUs n can be omitted. maxcpus specifies the maximum number of
-hotpluggable CPUs.
+.B \fB\-smp [[cpus=]n][,maxcpus=maxcpus][,sockets=sockets][,dies=dies][,clusters=clusters][,cores=cores][,threads=threads]\fP
+Simulate a SMP system with \(aq\fBn\fP\(aq CPUs initially present on
+the machine type board. On boards supporting CPU hotplug, the optional
+\(aq\fBmaxcpus\fP\(aq parameter can be set to enable further CPUs to be
+added at runtime. When both parameters are omitted, the maximum number
+of CPUs will be calculated from the provided topology members and the
+initial CPU count will match the maximum number. When only one of them
+is given then the omitted one will be set to its counterpart\(aqs value.
+Both parameters may be specified, but the maximum number of CPUs must
+be equal to or greater than the initial CPU count. Product of the
+CPU topology hierarchy must be equal to the maximum number of CPUs.
+Both parameters are subject to an upper limit that is determined by
+the specific machine type chosen.
+.sp
+To control reporting of CPU topology information, values of the topology
+parameters can be specified. Machines may only support a subset of the
+parameters and different machines may have different subsets supported
+which vary depending on capacity of the corresponding CPU targets. So
+for a particular machine type board, an expected topology hierarchy can
+be defined through the supported sub\-option. Unsupported parameters can
+also be provided in addition to the sub\-option, but their values must be
+set as 1 in the purpose of correct parsing.
+.sp
+Either the initial CPU count, or at least one of the topology parameters
+must be specified. The specified parameters must be greater than zero,
+explicit configuration like \(dqcpus=0\(dq is not allowed. Values for any
+omitted parameters will be computed from those which are given.
+.sp
+For example, the following sub\-option defines a CPU topology hierarchy
+(2 sockets totally on the machine, 2 cores per socket, 2 threads per
+core) for a machine that only supports sockets/cores/threads.
+Some members of the option can be omitted but their values will be
+automatically computed:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-smp 8,sockets=2,cores=2,threads=2,maxcpus=8
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The following sub\-option defines a CPU topology hierarchy (2 sockets
+totally on the machine, 2 dies per socket, 2 cores per die, 2 threads
+per core) for PC machines which support sockets/dies/cores/threads.
+Some members of the option can be omitted but their values will be
+automatically computed:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-smp 16,sockets=2,dies=2,cores=2,threads=2,maxcpus=16
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The following sub\-option defines a CPU topology hierarchy (2 sockets
+totally on the machine, 2 clusters per socket, 2 cores per cluster,
+2 threads per core) for ARM virt machines which support sockets/clusters
+/cores/threads. Some members of the option can be omitted but their values
+will be automatically computed:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-smp 16,sockets=2,clusters=2,cores=2,threads=2,maxcpus=16
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Historically preference was given to the coarsest topology parameters
+when computing missing values (ie sockets preferred over cores, which
+were preferred over threads), however, this behaviour is considered
+liable to change. Prior to 6.2 the preference was sockets over cores
+over threads. Since 6.2 the preference is cores over sockets over threads.
+.sp
+For example, the following option defines a machine board with 2 sockets
+of 1 core before 6.2 and 1 socket of 2 cores after 6.2:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-smp 2
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Note: The cluster topology will only be generated in ACPI and exposed
+to guest if it\(aqs explicitly specified in \-smp.
 .TP
 .B \fB\-numa node[,mem=size][,cpus=firstcpu[\-lastcpu]][,nodeid=node][,initiator=initiator]\fP
 
@@ -304,7 +506,7 @@ hotpluggable CPUs.
 .B \fB\-numa cpu,node\-id=node[,socket\-id=x][,core\-id=y][,thread\-id=z]\fP
 
 .TP
-.B \fB\-numa hmat\-lb,initiator=node,target=node,hierarchy=hierarchy,data\-type=tpye[,latency=lat][,bandwidth=bw]\fP
+.B \fB\-numa hmat\-lb,initiator=node,target=node,hierarchy=hierarchy,data\-type=type[,latency=lat][,bandwidth=bw]\fP
 
 .TP
 .B \fB\-numa hmat\-cache,node\-id=node,size=size,level=level[,associativity=str][,policy=str][,line=size]\fP
@@ -357,14 +559,22 @@ For example:
 .UNINDENT
 .UNINDENT
 .sp
-Legacy \(aq\fBmem\fP\(aq assigns a given RAM amount to a node (not supported
-for 5.1 and newer machine types). \(aq\fBmemdev\fP\(aq assigns RAM from
-a given memory backend device to a node. If \(aq\fBmem\fP\(aq and
-\(aq\fBmemdev\fP\(aq are omitted in all nodes, RAM is split equally between them.
+\(aq\fBmemdev\fP\(aq option assigns RAM from a given memory backend
+device to a node. It is recommended to use \(aq\fBmemdev\fP\(aq option
+over legacy \(aq\fBmem\fP\(aq option. This is because \(aq\fBmemdev\fP\(aq
+option provides better performance and more control over the
+backend\(aqs RAM (e.g. \(aq\fBprealloc\fP\(aq parameter of
+\(aq\fB\-memory\-backend\-ram\fP\(aq allows memory preallocation).
 .sp
-\(aq\fBmem\fP\(aq and \(aq\fBmemdev\fP\(aq are mutually exclusive.
-Furthermore, if one node uses \(aq\fBmemdev\fP\(aq, all of them have to
-use it.
+For compatibility reasons, legacy \(aq\fBmem\fP\(aq option is
+supported in 5.0 and older machine types. Note that \(aq\fBmem\fP\(aq
+and \(aq\fBmemdev\fP\(aq are mutually exclusive. If one node uses
+\(aq\fBmemdev\fP\(aq, the rest nodes have to use \(aq\fBmemdev\fP\(aq
+option, and vice versa.
+.sp
+Users must specify memory for all NUMA nodes by \(aq\fBmemdev\fP\(aq
+(or legacy \(aq\fBmem\fP\(aq if available). In QEMU 5.2, the support
+for \(aq\fB\-numa node\fP\(aq without memory specified was removed.
 .sp
 \(aq\fBinitiator\fP\(aq is an additional option that points to an
 initiator NUMA node that has best performance (the lowest latency or
@@ -460,7 +670,7 @@ policy is write\-back, the cache Line size is 8 bytes:
 \-m 2G \e
 \-object memory\-backend\-ram,size=1G,id=m0 \e
 \-object memory\-backend\-ram,size=1G,id=m1 \e
-\-smp 2 \e
+\-smp 2,sockets=2,maxcpus=2 \e
 \-numa node,nodeid=0,memdev=m0 \e
 \-numa node,nodeid=1,memdev=m1,initiator=0 \e
 \-numa cpu,node\-id=0,socket\-id=0 \e
@@ -502,8 +712,8 @@ set:
 .nf
 .ft C
 qemu\-system\-x86_64 \e
- \-add\-fd fd=3,set=2,opaque="rdwr:/path/to/file" \e
- \-add\-fd fd=4,set=2,opaque="rdonly:/path/to/file" \e
+ \-add\-fd fd=3,set=2,opaque=\(dqrdwr:/path/to/file\(dq \e
+ \-add\-fd fd=4,set=2,opaque=\(dqrdonly:/path/to/file\(dq \e
  \-drive file=/dev/fdset/2,index=0,media=disk
 .ft P
 .fi
@@ -589,7 +799,7 @@ use is discouraged as it may be removed from future versions.
 .TP
 .B \fB\-m [size=]megs[,slots=n,maxmem=size]\fP
 Sets guest startup RAM size to megs megabytes. Default is 128 MiB.
-Optionally, a suffix of "M" or "G" can be used to signify a value in
+Optionally, a suffix of \(dqM\(dq or \(dqG\(dq can be used to signify a value in
 megabytes or gigabytes respectively. Optional pair slots, maxmem
 could be used to set amount of hotpluggable memory slots and maximum
 amount of memory. Note that maxmem must be aligned to the page size.
@@ -640,9 +850,36 @@ de  en\-us  fi  fr\-be  hr     it  lv  nl\-be  pt  sl     tr
 .sp
 The default is \fBen\-us\fP\&.
 .TP
-.B \fB\-audio\-help\fP
-Will show the \-audiodev equivalent of the currently specified
-(deprecated) environment variables.
+.B \fB\-audio [driver=]driver[,model=value][,prop[=value][,...]]\fP
+If the \fBmodel\fP option is specified, \fB\-audio\fP is a shortcut
+for configuring both the guest audio hardware and the host audio
+backend in one go. The guest hardware model can be set with
+\fBmodel=modelname\fP\&.  Use \fBmodel=help\fP to list the available
+device types.
+.sp
+The following two example do exactly the same, to show how \fB\-audio\fP
+can be used to shorten the command line length:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+qemu\-system\-x86_64 \-audiodev pa,id=pa \-device sb16,audiodev=pa
+qemu\-system\-x86_64 \-audio pa,model=sb16
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+If the \fBmodel\fP option is not specified, \fB\-audio\fP is used to
+configure a default audio backend that will be used whenever the
+\fBaudiodev\fP property is not set on a device or machine.  In
+particular, \fB\-audio none\fP ensures that no audio is produced even
+for machines that have embedded sound hardware.
+.sp
+In both cases, the driver option is the same as with the corresponding
+\fB\-audiodev\fP option below.  Use \fBdriver=help\fP to list the available
+drivers.
 .TP
 .B \fB\-audiodev [driver=]driver,id=id[,prop[=value][,...]]\fP
 Adds a new audio backend driver identified by id. There are global
@@ -808,6 +1045,23 @@ Desired latency in microseconds. The PulseAudio server will try
 to honor this value but actual latencies may be lower or higher.
 .UNINDENT
 .TP
+.B \fB\-audiodev pipewire,id=id[,prop[=value][,...]]\fP
+Creates a backend using PipeWire. This backend is available on
+most systems.
+.sp
+PipeWire specific options are:
+.INDENT 7.0
+.TP
+.B \fBin|out.latency=usecs\fP
+Desired latency in microseconds.
+.TP
+.B \fBin|out.name=sink\fP
+Use the specified source/sink for recording/playback.
+.TP
+.B \fBin|out.stream\-name\fP
+Specify the name of pipewire stream.
+.UNINDENT
+.TP
 .B \fB\-audiodev sdl,id=id[,prop[=value][,...]]\fP
 Creates a backend using SDL. This backend is available on most
 systems, but you should use your platform\(aqs native backend if
@@ -818,6 +1072,21 @@ SDL specific options are:
 .TP
 .B \fBin|out.buffer\-count=count\fP
 Sets the count of the buffers.
+.UNINDENT
+.TP
+.B \fB\-audiodev sndio,id=id[,prop[=value][,...]]\fP
+Creates a backend using SNDIO. This backend is available on
+OpenBSD and most other Unix\-like systems.
+.sp
+Sndio specific options are:
+.INDENT 7.0
+.TP
+.B \fBin|out.dev=device\fP
+Specify the sndio device to use for input and/or output. Default
+is \fBdefault\fP\&.
+.TP
+.B \fBin|out.latency=usecs\fP
+Sets the desired period length in microseconds.
 .UNINDENT
 .TP
 .B \fB\-audiodev spice,id=id[,prop[=value][,...]]\fP
@@ -835,38 +1104,6 @@ Backend specific options are:
 .B \fBpath=path\fP
 Write recorded audio into the specified file. Default is
 \fBqemu.wav\fP\&.
-.UNINDENT
-.TP
-.B \fB\-soundhw card1[,card2,...] or \-soundhw all\fP
-Enable audio and selected sound hardware. Use \(aqhelp\(aq to print all
-available sound hardware. For example:
-.INDENT 7.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-system\-x86_64 \-soundhw sb16,adlib disk.img
-qemu\-system\-x86_64 \-soundhw es1370 disk.img
-qemu\-system\-x86_64 \-soundhw ac97 disk.img
-qemu\-system\-x86_64 \-soundhw hda disk.img
-qemu\-system\-x86_64 \-soundhw all disk.img
-qemu\-system\-x86_64 \-soundhw help
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Note that Linux\(aqs i810_audio OSS kernel (for AC97) module might
-require manually specifying clocking.
-.INDENT 7.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-modprobe i810_audio clocking=48000
-.ft P
-.fi
-.UNINDENT
 .UNINDENT
 .TP
 .B \fB\-device driver[,prop[=value][,...]]\fP
@@ -908,8 +1145,8 @@ The default is none.
 .TP
 .B \fBguid=uuid\fP
 value for the GUID for the BMC, in standard UUID format. If this
-is set, get "Get GUID" command to the BMC will return it.
-Otherwise "Get GUID" will return an error.
+is set, get \(dqGet GUID\(dq command to the BMC will return it.
+Otherwise \(dqGet GUID\(dq will return an error.
 .UNINDENT
 .TP
 .B \fB\-device ipmi\-bmc\-extern,id=id,chardev=id[,slave_addr=val]\fP
@@ -918,7 +1155,7 @@ locally emulating the BMC like the above item, instead connect to an
 external entity that provides the IPMI services.
 .sp
 A connection is made to an external BMC simulator. If you do this,
-it is strongly recommended that you use the "reconnect=" chardev
+it is strongly recommended that you use the \(dqreconnect=\(dq chardev
 option to reconnect to the simulator if the connection is lost. Note
 that if this is not used carefully, it can be a security issue, as
 the interface has the ability to send resets, NMIs, and power off
@@ -926,11 +1163,11 @@ the VM. It\(aqs best if QEMU makes a connection to an external
 simulator running on a secure port on localhost, so neither the
 simulator nor QEMU is exposed to any outside network.
 .sp
-See the "lanserv/README.vm" file in the OpenIPMI library for more
+See the \(dqlanserv/README.vm\(dq file in the OpenIPMI library for more
 details on the external interface.
 .TP
 .B \fB\-device isa\-ipmi\-kcs,bmc=id[,ioport=val][,irq=val]\fP
-Add a KCS IPMI interafce on the ISA bus. This also adds a
+Add a KCS IPMI interface on the ISA bus. This also adds a
 corresponding ACPI and SMBIOS entries, if appropriate.
 .INDENT 7.0
 .TP
@@ -952,7 +1189,7 @@ Like the KCS interface, but defines a BT interface. The default port
 is 0xe4 and the default interrupt is 5.
 .TP
 .B \fB\-device pci\-ipmi\-kcs,bmc=id\fP
-Add a KCS IPMI interafce on the PCI bus.
+Add a KCS IPMI interface on the PCI bus.
 .INDENT 7.0
 .TP
 .B \fBbmc=id\fP
@@ -961,6 +1198,53 @@ The BMC to connect to, one of ipmi\-bmc\-sim or ipmi\-bmc\-extern above.
 .TP
 .B \fB\-device pci\-ipmi\-bt,bmc=id\fP
 Like the KCS interface, but defines a BT interface on the PCI bus.
+.TP
+.B \fB\-device intel\-iommu[,option=...]\fP
+This is only supported by \fB\-machine q35\fP, which will enable Intel VT\-d
+emulation within the guest.  It supports below options:
+.INDENT 7.0
+.TP
+.B \fBintremap=on|off\fP (default: auto)
+This enables interrupt remapping feature.  It\(aqs required to enable
+complete x2apic.  Currently it only supports kvm kernel\-irqchip modes
+\fBoff\fP or \fBsplit\fP, while full kernel\-irqchip is not yet supported.
+The default value is \(dqauto\(dq, which will be decided by the mode of
+kernel\-irqchip.
+.TP
+.B \fBcaching\-mode=on|off\fP (default: off)
+This enables caching mode for the VT\-d emulated device.  When
+caching\-mode is enabled, each guest DMA buffer mapping will generate an
+IOTLB invalidation from the guest IOMMU driver to the vIOMMU device in
+a synchronous way.  It is required for \fB\-device vfio\-pci\fP to work
+with the VT\-d device, because host assigned devices requires to setup
+the DMA mapping on the host before guest DMA starts.
+.TP
+.B \fBdevice\-iotlb=on|off\fP (default: off)
+This enables device\-iotlb capability for the emulated VT\-d device.  So
+far virtio/vhost should be the only real user for this parameter,
+paired with ats=on configured for the device.
+.TP
+.B \fBaw\-bits=39|48\fP (default: 39)
+This decides the address width of IOVA address space.  The address
+space has 39 bits width for 3\-level IOMMU page tables, and 48 bits for
+4\-level IOMMU page tables.
+.UNINDENT
+.sp
+Please also refer to the wiki page for general scenarios of VT\-d
+emulation in QEMU: \fI\%https://wiki.qemu.org/Features/VT\-d\fP\&.
+.TP
+.B \fB\-device virtio\-iommu\-pci[,option=...]\fP
+This is only supported by \fB\-machine q35\fP (x86_64) and \fB\-machine virt\fP (ARM).
+It supports below options:
+.INDENT 7.0
+.TP
+.B \fBgranule=val\fP (possible values are 4k, 8k, 16k, 64k and host; default: host)
+This decides the default granule to be be exposed by the
+virtio\-iommu. If host, the granule matches the host page size.
+.TP
+.B \fBaw\-bits=val\fP (val between 32 and 64, default depends on machine)
+This decides the address width of the IOVA address space.
+.UNINDENT
 .TP
 .B \fB\-name name\fP
 Sets the name of the guest. This name will be displayed in the SDL
@@ -972,13 +1256,35 @@ individual threads can also be enabled on Linux to aid debugging.
 Set system UUID.
 .UNINDENT
 .SS Block device options
+.sp
+The QEMU block device handling options have a long history and
+have gone through several iterations as the feature set and complexity
+of the block layer have grown. Many online guides to QEMU often
+reference older and deprecated options, which can lead to confusion.
+.sp
+The most explicit way to describe disks is to use a combination of
+\fB\-device\fP to specify the hardware device and \fB\-blockdev\fP to
+describe the backend. The device defines what the guest sees and the
+backend describes how QEMU handles the data. It is the only guaranteed
+stable interface for describing block devices and as such is
+recommended for management tools and scripting.
+.sp
+The \fB\-drive\fP option combines the device and backend into a single
+command line option which is a more human friendly. There is however no
+interface stability guarantee although some older board models still
+need updating to work with the modern blockdev forms.
+.sp
+Older options like \fB\-hda\fP are essentially macros which expand into
+\fB\-drive\fP options for various drive interfaces. The original forms
+bake in a lot of assumptions from the days when QEMU was emulating a
+legacy PC, they are not recommended for modern configurations.
 .INDENT 0.0
 .TP
 .B \fB\-fda file\fP
 
 .TP
 .B \fB\-fdb file\fP
-Use file as floppy disk 0/1 image (see the disk images chapter in
+Use file as floppy disk 0/1 image (see the \fI\%Disk Images\fP chapter in
 the System Emulation Users Guide).
 .TP
 .B \fB\-hda file\fP
@@ -991,13 +1297,17 @@ the System Emulation Users Guide).
 
 .TP
 .B \fB\-hdd file\fP
-Use file as hard disk 0, 1, 2 or 3 image (see the disk images
-chapter in the System Emulation Users Guide).
+Use file as hard disk 0, 1, 2 or 3 image on the default bus of the
+emulated machine (this is for example the IDE bus on most x86 machines,
+but it can also be SCSI, virtio or something else on other target
+architectures). See also the \fI\%Disk Images\fP chapter in the System
+Emulation Users Guide.
 .TP
 .B \fB\-cdrom file\fP
-Use file as CD\-ROM image (you cannot use \fB\-hdc\fP and \fB\-cdrom\fP at
-the same time). You can use the host CD\-ROM by using \fB/dev/cdrom\fP
-as filename.
+Use file as CD\-ROM image on the default bus of the emulated machine
+(which is IDE1 master on x86, so you cannot use \fB\-hdc\fP and \fB\-cdrom\fP
+at the same time there). On systems that support it, you can use the
+host CD\-ROM by using \fB/dev/cdrom\fP as filename.
 .TP
 .B \fB\-blockdev option[,option[,option[,...]]]\fP
 Define a new block driver node. Some of the options apply to all
@@ -1074,16 +1384,16 @@ disconnected accidentally, etc. your image will most
 probably be rendered unusable.
 .TP
 .B \fBdiscard=discard\fP
-discard is one of "ignore" (or "off") or "unmap" (or "on")
+discard is one of \(dqignore\(dq (or \(dqoff\(dq) or \(dqunmap\(dq (or \(dqon\(dq)
 and controls whether \fBdiscard\fP (also known as \fBtrim\fP or
 \fBunmap\fP) requests are ignored or passed to the filesystem.
 Some machine types may not support discard requests.
 .TP
 .B \fBdetect\-zeroes=detect\-zeroes\fP
-detect\-zeroes is "off", "on" or "unmap" and enables the
+detect\-zeroes is \(dqoff\(dq, \(dqon\(dq or \(dqunmap\(dq and enables the
 automatic conversion of plain zero writes by the OS to
 driver specific optimized zero write commands. You may even
-choose "unmap" if discard is set to "unmap" to allow a zero
+choose \(dqunmap\(dq if discard is set to \(dqunmap\(dq to allow a zero
 write to be converted to an \fBunmap\fP operation.
 .UNINDENT
 .TP
@@ -1213,6 +1523,22 @@ Whether discard requests for the data source should be
 issued on other occasions where a cluster gets freed
 (on/off; default: off)
 .TP
+.B \fBdiscard\-no\-unref\fP
+When enabled, data clusters will remain preallocated when they are
+no longer used, e.g. because they are discarded or converted to
+zero clusters. As usual, whether the old data is discarded or kept
+on the protocol level (i.e. in the image file) depends on the
+setting of the pass\-discard\-request option. Keeping the clusters
+preallocated prevents qcow2 fragmentation that would otherwise be
+caused by freeing and re\-allocating them later. Besides potential
+performance degradation, such fragmentation can lead to increased
+allocation of clusters past the end of the image file,
+resulting in image files whose file length can grow much larger
+than their guest disk size would suggest.
+If image file length is of concern (e.g. when storing qcow2
+images directly on block devices), you should consider enabling
+this option.
+.TP
 .B \fBoverlap\-check\fP
 Which overlap checks to perform for writes to the image
 (none/constant/cached/all; default: cached). For details or
@@ -1260,13 +1586,13 @@ In addition, it knows the following options:
 .INDENT 7.0
 .TP
 .B \fBfile=file\fP
-This option defines which disk image (see the disk images
+This option defines which disk image (see the \fI\%Disk Images\fP
 chapter in the System Emulation Users Guide) to use with this drive.
 If the filename contains comma, you must double it (for instance,
-"file=my,,file" to use file "my,file").
+\(dqfile=my,,file\(dq to use file \(dqmy,file\(dq).
 .sp
 Special files such as iSCSI devices can be specified using
-protocol specific URLs. See the section for "Device URL Syntax"
+protocol specific URLs. See the section for \(dqDevice URL Syntax\(dq
 for more information.
 .TP
 .B \fBif=interface\fP
@@ -1279,7 +1605,7 @@ These options define where is connected the drive by defining
 the bus number and the unit id.
 .TP
 .B \fBindex=index\fP
-This option defines where is connected the drive by using an
+This option defines where the drive is connected by using an
 index in the list of available connectors of a given interface
 type.
 .TP
@@ -1287,12 +1613,12 @@ type.
 This option defines the type of the media: disk or cdrom.
 .TP
 .B \fBsnapshot=snapshot\fP
-snapshot is "on" or "off" and controls snapshot mode for the
+snapshot is \(dqon\(dq or \(dqoff\(dq and controls snapshot mode for the
 given drive (see \fB\-snapshot\fP).
 .TP
 .B \fBcache=cache\fP
-cache is "none", "writeback", "unsafe", "directsync" or
-"writethrough" and controls how the host cache is used to access
+cache is \(dqnone\(dq, \(dqwriteback\(dq, \(dqunsafe\(dq, \(dqdirectsync\(dq or
+\(dqwritethrough\(dq and controls how the host cache is used to access
 block data. This is a shortcut that sets the \fBcache.direct\fP
 and \fBcache.no\-flush\fP options (as in \fB\-blockdev\fP), and
 additionally \fBcache.writeback\fP, which provides a default for
@@ -1367,7 +1693,7 @@ _
 The default mode is \fBcache=writeback\fP\&.
 .TP
 .B \fBaio=aio\fP
-aio is "threads", "native", or "io_uring" and selects between pthread
+aio is \(dqthreads\(dq, \(dqnative\(dq, or \(dqio_uring\(dq and selects between pthread
 based disk I/O, native Linux AIO, or Linux io_uring API.
 .TP
 .B \fBformat=format\fP
@@ -1377,14 +1703,14 @@ an untrusted format header.
 .TP
 .B \fBwerror=action,rerror=action\fP
 Specify which action to take on write and read errors. Valid
-actions are: "ignore" (ignore the error and try to continue),
-"stop" (pause QEMU), "report" (report the error to the guest),
-"enospc" (pause QEMU only if the host disk is full; report the
+actions are: \(dqignore\(dq (ignore the error and try to continue),
+\(dqstop\(dq (pause QEMU), \(dqreport\(dq (report the error to the guest),
+\(dqenospc\(dq (pause QEMU only if the host disk is full; report the
 error to the guest otherwise). The default setting is
 \fBwerror=enospc\fP and \fBrerror=report\fP\&.
 .TP
 .B \fBcopy\-on\-read=copy\-on\-read\fP
-copy\-on\-read is "on" or "off" and enables whether to copy read
+copy\-on\-read is \(dqon\(dq or \(dqoff\(dq and enables whether to copy read
 backing file sectors into the image file.
 .TP
 .B \fBbps=b,bps_rd=r,bps_wr=w\fP
@@ -1474,8 +1800,8 @@ set:
 .nf
 .ft C
 qemu\-system\-x86_64 \e
- \-add\-fd fd=3,set=2,opaque="rdwr:/path/to/file" \e
- \-add\-fd fd=4,set=2,opaque="rdonly:/path/to/file" \e
+ \-add\-fd fd=3,set=2,opaque=\(dqrdwr:/path/to/file\(dq \e
+ \-add\-fd fd=4,set=2,opaque=\(dqrdonly:/path/to/file\(dq \e
  \-drive file=/dev/fdset/2,index=0,media=disk
 .ft P
 .fi
@@ -1494,7 +1820,7 @@ qemu\-system\-x86_64 \-drive file=file,if=ide,index=1,media=cdrom
 .UNINDENT
 .UNINDENT
 .sp
-If you don\(aqt specify the "file=" argument, you define an empty
+If you don\(aqt specify the \(dqfile=\(dq argument, you define an empty
 drive:
 .INDENT 7.0
 .INDENT 3.5
@@ -1520,14 +1846,14 @@ qemu\-system\-x86_64 \-drive file=file,index=1,if=floppy
 .UNINDENT
 .UNINDENT
 .sp
-By default, interface is "ide" and index is automatically
+By default, interface is \(dqide\(dq and index is automatically
 incremented:
 .INDENT 7.0
 .INDENT 3.5
 .sp
 .nf
 .ft C
-qemu\-system\-x86_64 \-drive file=a \-drive file=b"
+qemu\-system\-x86_64 \-drive file=a \-drive file=b
 .ft P
 .fi
 .UNINDENT
@@ -1551,14 +1877,22 @@ Use file as on\-board Flash memory image.
 .B \fB\-sd file\fP
 Use file as SecureDigital card image.
 .TP
-.B \fB\-pflash file\fP
-Use file as a parallel flash image.
-.TP
 .B \fB\-snapshot\fP
 Write to temporary files instead of disk image files. In this case,
 the raw disk image you use is not written back. You can however
-force the write back by pressing C\-a s (see the disk images
+force the write back by pressing C\-a s (see the \fI\%Disk Images\fP
 chapter in the System Emulation Users Guide).
+.sp
+\fBWARNING:\fP
+.INDENT 7.0
+.INDENT 3.5
+snapshot is incompatible with \fB\-blockdev\fP (instead use qemu\-img
+to manually create snapshot images to attach to your blockdev).
+If you have mixed \fB\-blockdev\fP and \fB\-drive\fP declarations you
+can use the \(aqsnapshot\(aq property on your drive declarations
+instead of this global option.
+.UNINDENT
+.UNINDENT
 .TP
 .B \fB\-fsdev local,id=id,path=path,security_model=security_model [,writeout=writeout][,readonly=on][,fmode=fmode][,dmode=dmode] [,throttling.option=value[,throttling.option=value[,...]]]\fP
 
@@ -1577,7 +1911,9 @@ Define a new file system device. Valid options are:
 Accesses to the filesystem are done by QEMU.
 .TP
 .B \fBproxy\fP
-Accesses to the filesystem are done by virtfs\-proxy\-helper(1).
+Accesses to the filesystem are done by virtfs\-proxy\-helper(1). This
+option is deprecated (since QEMU 8.1) and will be removed in a future
+version of QEMU. Use \fBlocal\fP instead.
 .TP
 .B \fBsynth\fP
 Synthetic filesystem, only used by QTests.
@@ -1591,15 +1927,15 @@ under this path will be available to the 9p client on the guest.
 .TP
 .B \fBsecurity_model=security_model\fP
 Specifies the security model to be used for this export path.
-Supported security models are "passthrough", "mapped\-xattr",
-"mapped\-file" and "none". In "passthrough" security model, files
+Supported security models are \(dqpassthrough\(dq, \(dqmapped\-xattr\(dq,
+\(dqmapped\-file\(dq and \(dqnone\(dq. In \(dqpassthrough\(dq security model, files
 are stored using the same credentials as they are created on the
-guest. This requires QEMU to run as root. In "mapped\-xattr"
+guest. This requires QEMU to run as root. In \(dqmapped\-xattr\(dq
 security model, some of the file attributes like uid, gid, mode
 bits and link target are stored as file attributes. For
-"mapped\-file" these attributes are stored in the hidden
+\(dqmapped\-file\(dq these attributes are stored in the hidden
 \&.virtfs_metadata directory. Directories exported by this
-security model cannot interact with other unix tools. "none"
+security model cannot interact with other unix tools. \(dqnone\(dq
 security model is same as passthrough except the sever won\(aqt
 report failures if it fails to set file attributes like
 ownership. Security model is mandatory only for local fsdriver.
@@ -1608,7 +1944,7 @@ parameter.
 .TP
 .B \fBwriteout=writeout\fP
 This is an optional argument. The only supported value is
-"immediate". This means that host page cache will be used to
+\(dqimmediate\(dq. This means that host page cache will be used to
 read and write data but write notification will be sent to the
 guest only when the data has been reported as written by the
 storage subsystem.
@@ -1629,13 +1965,13 @@ sock_fd.
 .TP
 .B \fBfmode=fmode\fP
 Specifies the default mode for newly created files on the host.
-Works only with security models "mapped\-xattr" and
-"mapped\-file".
+Works only with security models \(dqmapped\-xattr\(dq and
+\(dqmapped\-file\(dq.
 .TP
 .B \fBdmode=dmode\fP
 Specifies the default mode for newly created directories on the
-host. Works only with security models "mapped\-xattr" and
-"mapped\-file".
+host. Works only with security models \(dqmapped\-xattr\(dq and
+\(dqmapped\-file\(dq.
 .TP
 .B \fBthrottling.bps\-total=b,throttling.bps\-read=r,throttling.bps\-write=w\fP
 Specify bandwidth throttling limits in bytes per second, either
@@ -1660,15 +1996,15 @@ Let every is bytes of a request count as a new request for iops
 throttling purposes.
 .UNINDENT
 .sp
-\-fsdev option is used along with \-device driver "virtio\-9p\-...".
+\-fsdev option is used along with \-device driver \(dqvirtio\-9p\-...\(dq.
 .TP
 .B \fB\-device virtio\-9p\-type,fsdev=id,mount_tag=mount_tag\fP
 Options for virtio\-9p\-... driver are:
 .INDENT 7.0
 .TP
 .B \fBtype\fP
-Specifies the variant to be used. Supported values are "pci",
-"ccw" or "device", depending on the machine type.
+Specifies the variant to be used. Supported values are \(dqpci\(dq,
+\(dqccw\(dq or \(dqdevice\(dq, depending on the machine type.
 .TP
 .B \fBfsdev=id\fP
 Specifies the id value specified along with \-fsdev option.
@@ -1693,7 +2029,7 @@ a virtio\-9p\-device (a.k.a. 9pfs), which essentially means that a certain
 directory on host is made directly accessible by guest as a pass\-through
 file system by using the 9P network protocol for communication between
 host and guests, if desired even accessible, shared by several guests
-simultaniously.
+simultaneously.
 .sp
 Note that \fB\-virtfs\fP is actually just a convenience shortcut for its
 generalized form \fB\-fsdev \-device virtio\-9p\-pci\fP\&.
@@ -1706,6 +2042,8 @@ Accesses to the filesystem are done by QEMU.
 .TP
 .B \fBproxy\fP
 Accesses to the filesystem are done by virtfs\-proxy\-helper(1).
+This option is deprecated (since QEMU 8.1) and will be removed in a
+future version of QEMU. Use \fBlocal\fP instead.
 .TP
 .B \fBsynth\fP
 Synthetic filesystem, only used by QTests.
@@ -1719,15 +2057,15 @@ under this path will be available to the 9p client on the guest.
 .TP
 .B \fBsecurity_model=security_model\fP
 Specifies the security model to be used for this export path.
-Supported security models are "passthrough", "mapped\-xattr",
-"mapped\-file" and "none". In "passthrough" security model, files
+Supported security models are \(dqpassthrough\(dq, \(dqmapped\-xattr\(dq,
+\(dqmapped\-file\(dq and \(dqnone\(dq. In \(dqpassthrough\(dq security model, files
 are stored using the same credentials as they are created on the
-guest. This requires QEMU to run as root. In "mapped\-xattr"
+guest. This requires QEMU to run as root. In \(dqmapped\-xattr\(dq
 security model, some of the file attributes like uid, gid, mode
 bits and link target are stored as file attributes. For
-"mapped\-file" these attributes are stored in the hidden
+\(dqmapped\-file\(dq these attributes are stored in the hidden
 \&.virtfs_metadata directory. Directories exported by this
-security model cannot interact with other unix tools. "none"
+security model cannot interact with other unix tools. \(dqnone\(dq
 security model is same as passthrough except the sever won\(aqt
 report failures if it fails to set file attributes like
 ownership. Security model is mandatory only for local fsdriver.
@@ -1736,7 +2074,7 @@ parameter.
 .TP
 .B \fBwriteout=writeout\fP
 This is an optional argument. The only supported value is
-"immediate". This means that host page cache will be used to
+\(dqimmediate\(dq. This means that host page cache will be used to
 read and write data but write notification will be sent to the
 guest only when the data has been reported as written by the
 storage subsystem.
@@ -1757,13 +2095,13 @@ socket descriptor for interfacing with virtfs\-proxy\-helper(1).
 .TP
 .B \fBfmode=fmode\fP
 Specifies the default mode for newly created files on the host.
-Works only with security models "mapped\-xattr" and
-"mapped\-file".
+Works only with security models \(dqmapped\-xattr\(dq and
+\(dqmapped\-file\(dq.
 .TP
 .B \fBdmode=dmode\fP
 Specifies the default mode for newly created directories on the
-host. Works only with security models "mapped\-xattr" and
-"mapped\-file".
+host. Works only with security models \(dqmapped\-xattr\(dq and
+\(dqmapped\-file\(dq.
 .TP
 .B \fBmount_tag=mount_tag\fP
 Specifies the tag name to be used by the guest to mount this
@@ -1771,14 +2109,14 @@ export point.
 .TP
 .B \fBmultidevs=multidevs\fP
 Specifies how to deal with multiple devices being shared with a
-9p export. Supported behaviours are either "remap", "forbid" or
-"warn". The latter is the default behaviour on which virtfs 9p
+9p export. Supported behaviours are either \(dqremap\(dq, \(dqforbid\(dq or
+\(dqwarn\(dq. The latter is the default behaviour on which virtfs 9p
 expects only one device to be shared with the same export, and
 if more than one device is shared and accessed via the same 9p
 export then only a warning message is logged (once) by qemu on
 host side. In order to avoid file ID collisions on guest you
 should either create a separate virtfs export for each device to
-be shared with guests (recommended way) or you might use "remap"
+be shared with guests (recommended way) or you might use \(dqremap\(dq
 instead which allows you to share multiple devices with only one
 export instead, which is achieved by remapping the original
 inode numbers from host to guest in a way that would prevent
@@ -1788,11 +2126,11 @@ exposed on guest. Instead all files of an export shared with
 virtfs always share the same device id on guest. So two files
 with identical inode numbers but from actually different devices
 on host would otherwise cause a file ID collision and hence
-potential misbehaviours on guest. "forbid" on the other hand
-assumes like "warn" that only one device is shared by the same
+potential misbehaviours on guest. \(dqforbid\(dq on the other hand
+assumes like \(dqwarn\(dq that only one device is shared by the same
 export, however it will not only log a warning message but also
 deny access to additional devices on guest. Note though that
-"forbid" does currently not block all possible file access
+\(dqforbid\(dq does currently not block all possible file access
 operations (e.g. readdir() would still return entries from other
 devices).
 .UNINDENT
@@ -1821,7 +2159,7 @@ instead of using \fB\-usbdevice mouse\fP it is possible to use
 to a USB 3.0 controller instead (at least on machines that support
 PCI and do not have an USB controller enabled by default yet).
 For more details, see the chapter about
-Connecting USB devices in the System Emulation Users Guide.
+\fI\%Connecting USB devices\fP in the System Emulation Users Guide.
 Possible devices for devname are:
 .INDENT 7.0
 .TP
@@ -1852,16 +2190,74 @@ Wacom PenPartner USB tablet.
 .INDENT 0.0
 .TP
 .B \fB\-display type\fP
-Select type of display to use. This option is a replacement for the
-old style \-sdl/\-curses/... options. Use \fB\-display help\fP to list
-the available display types. Valid values for type are
+Select type of display to use. Use \fB\-display help\fP to list the available
+display types. Valid values for type are
 .INDENT 7.0
+.TP
+.B \fBspice\-app[,gl=on|off]\fP
+Start QEMU as a Spice server and launch the default Spice client
+application. The Spice server will redirect the serial consoles
+and QEMU monitors. (Since 4.0)
+.TP
+.B \fBdbus\fP
+Export the display over D\-Bus interfaces. (Since 7.0)
+.sp
+The connection is registered with the \(dqorg.qemu\(dq name (and queued when
+already owned).
+.sp
+\fBaddr=<dbusaddr>\fP : D\-Bus bus address to connect to.
+.sp
+\fBp2p=yes|no\fP : Use peer\-to\-peer connection, accepted via QMP \fBadd_client\fP\&.
+.sp
+\fBgl=on|off|core|es\fP : Use OpenGL for rendering (the D\-Bus interface
+will share framebuffers with DMABUF file descriptors).
 .TP
 .B \fBsdl\fP
 Display video output via SDL (usually in a separate graphics
 window; see the SDL documentation for other possibilities).
+Valid parameters are:
+.sp
+\fBgrab\-mod=<mods>\fP : Used to select the modifier keys for toggling
+the mouse grabbing in conjunction with the \(dqg\(dq key. \fB<mods>\fP can be
+either \fBlshift\-lctrl\-lalt\fP or \fBrctrl\fP\&.
+.sp
+\fBgl=on|off|core|es\fP : Use OpenGL for displaying
+.sp
+\fBshow\-cursor=on|off\fP :  Force showing the mouse cursor
+.sp
+\fBwindow\-close=on|off\fP : Allow to quit qemu with window close button
 .TP
-.B \fBcurses\fP
+.B \fBgtk\fP
+Display video output in a GTK window. This interface provides
+drop\-down menus and other UI elements to configure and control
+the VM during runtime. Valid parameters are:
+.sp
+\fBfull\-screen=on|off\fP : Start in fullscreen mode
+.sp
+\fBgl=on|off\fP : Use OpenGL for displaying
+.sp
+\fBgrab\-on\-hover=on|off\fP : Grab keyboard input on mouse hover
+.INDENT 7.0
+.TP
+.B \fBshow\-tabs=on|off\fP
+Display the tab bar for switching between the
+various graphical interfaces (e.g. VGA and
+virtual console character devices) by default.
+.UNINDENT
+.sp
+\fBshow\-cursor=on|off\fP :  Force showing the mouse cursor
+.sp
+\fBwindow\-close=on|off\fP : Allow to quit qemu with window close button
+.sp
+\fBshow\-menubar=on|off\fP : Display the main window menubar, defaults to \(dqon\(dq
+.INDENT 7.0
+.TP
+.B \fBzoom\-to\-fit=on|off\fP
+Expand video output to the window size,
+defaults to \(dqoff\(dq
+.UNINDENT
+.TP
+.B \fBcurses[,charset=<encoding>]\fP
 Display video output via curses. For graphics device models
 which support a text mode, QEMU can display this output using a
 curses/ncurses interface. Nothing is displayed when the graphics
@@ -1872,6 +2268,46 @@ specified with the \fBcharset\fP option, for example
 \fBcharset=CP850\fP for IBM CP850 encoding. The default is
 \fBCP437\fP\&.
 .TP
+.B \fBcocoa\fP
+Display video output in a Cocoa window. Mac only. This interface
+provides drop\-down menus and other UI elements to configure and
+control the VM during runtime. Valid parameters are:
+.INDENT 7.0
+.TP
+.B \fBfull\-grab=on|off\fP
+Capture all key presses, including system combos.
+This requires accessibility permissions, since it
+performs a global grab on key events.
+(default: off) See
+\fI\%https://support.apple.com/en\-in/guide/mac\-help/mh32356/mac\fP
+.TP
+.B \fBswap\-opt\-cmd=on|off\fP
+Swap the Option and Command keys so that their
+key codes match their position on non\-Mac
+keyboards and you can use Meta/Super and Alt
+where you expect them.  (default: off)
+.UNINDENT
+.sp
+\fBshow\-cursor=on|off\fP :  Force showing the mouse cursor
+.sp
+\fBleft\-command\-key=on|off\fP : Disable forwarding left command key to host
+.sp
+\fBfull\-screen=on|off\fP : Start in fullscreen mode
+.INDENT 7.0
+.TP
+.B \fBzoom\-to\-fit=on|off\fP
+Expand video output to the window size,
+defaults to \(dqoff\(dq
+.UNINDENT
+.TP
+.B \fBegl\-headless[,rendernode=<file>]\fP
+Offload all OpenGL operations to a local DRI device. For any
+graphical display, this display needs to be paired with either
+VNC or SPICE displays.
+.TP
+.B \fBvnc=<display>\fP
+Start a VNC server on display <display>
+.TP
 .B \fBnone\fP
 Do not display video output. The guest will still see an
 emulated graphics card, but its output will not be displayed to
@@ -1879,24 +2315,6 @@ the QEMU user. This option differs from the \-nographic option in
 that it only affects what is done with video output; \-nographic
 also changes the destination of the serial and parallel port
 data.
-.TP
-.B \fBgtk\fP
-Display video output in a GTK window. This interface provides
-drop\-down menus and other UI elements to configure and control
-the VM during runtime.
-.TP
-.B \fBvnc\fP
-Start a VNC server on display <arg>
-.TP
-.B \fBegl\-headless\fP
-Offload all OpenGL operations to a local DRI device. For any
-graphical display, this display needs to be paired with either
-VNC or SPICE displays.
-.TP
-.B \fBspice\-app\fP
-Start QEMU as a Spice server and launch the default Spice client
-application. The Spice server will redirect the serial consoles
-and QEMU monitors. (Since 4.0)
 .UNINDENT
 .TP
 .B \fB\-nographic\fP
@@ -1908,29 +2326,6 @@ The emulated serial port is redirected on the console and muxed with
 the monitor (unless redirected elsewhere explicitly). Therefore, you
 can still use QEMU to debug a Linux kernel with a serial console.
 Use C\-a h for help on switching between the console and monitor.
-.TP
-.B \fB\-curses\fP
-Normally, if QEMU is compiled with graphical window support, it
-displays output such as guest graphics, guest console, and the QEMU
-monitor in a window. With this option, QEMU can display the VGA
-output when in text mode using a curses/ncurses interface. Nothing
-is displayed in graphical mode.
-.TP
-.B \fB\-alt\-grab\fP
-Use Ctrl\-Alt\-Shift to grab mouse (instead of Ctrl\-Alt). Note that
-this also affects the special keys (for fullscreen, monitor\-mode
-switching, etc).
-.TP
-.B \fB\-ctrl\-grab\fP
-Use Right\-Ctrl to grab mouse (instead of Ctrl\-Alt). Note that this
-also affects the special keys (for fullscreen, monitor\-mode
-switching, etc).
-.TP
-.B \fB\-no\-quit\fP
-Disable SDL window close capability.
-.TP
-.B \fB\-sdl\fP
-Enable SDL.
 .TP
 .B \fB\-spice option[,option[,...]]\fP
 Enable the spice remote desktop protocol. Valid options are
@@ -1945,13 +2340,6 @@ address.
 .TP
 .B \fBipv4=on|off\fP; \fBipv6=on|off\fP; \fBunix=on|off\fP
 Force using the specified IP version.
-.TP
-.B \fBpassword=<string>\fP
-Set the password you need to authenticate.
-.sp
-This option is deprecated and insecure because it leaves the
-password visible in the process listing. Use \fBpassword\-secret\fP
-instead.
 .TP
 .B \fBpassword\-secret=<secret\-id>\fP
 Set the ID of the \fBsecret\fP object containing the password
@@ -1997,7 +2385,7 @@ Specify which ciphers to use.
 .B \fBtls\-channel=[main|display|cursor|inputs|record|playback]\fP; \fBplaintext\-channel=[main|display|cursor|inputs|record|playback]\fP
 Force specific channel to be used with or without TLS
 encryption. The options can be specified multiple times to
-configure multiple channels. The special name "default" can be
+configure multiple channels. The special name \(dqdefault\(dq can be
 used to set the default mode. For channels which are not
 explicitly forced into one mode the spice client is allowed to
 pick tls/plaintext as he pleases.
@@ -2108,7 +2496,7 @@ layout if you are not using en\-us. Valid syntax for the display is
 .TP
 .B \fBto=L\fP
 With this option, QEMU will try next available VNC displays,
-until the number L, if the origianlly defined "\-vnc display" is
+until the number L, if the originally defined \(dq\-vnc display\(dq is
 not available, e.g. port 5900+display is already used by another
 application. By default, to=0.
 .TP
@@ -2132,7 +2520,7 @@ separated by commas. Valid options are
 .INDENT 7.0
 .TP
 .B \fBreverse=on|off\fP
-Connect to a listening VNC client via a "reverse" connection.
+Connect to a listening VNC client via a \(dqreverse\(dq connection.
 The client is specified by the display. For reverse network
 connections (host:d,\(ga\(gareverse\(ga\(ga), the d argument is a TCP port
 number, not a display number.
@@ -2156,20 +2544,20 @@ Require that password based authentication is used for client
 connections.
 .sp
 The password must be set separately using the \fBset_password\fP
-command in the QEMU monitor\&. The
+command in the \fI\%QEMU Monitor\fP\&. The
 syntax to change your password is:
 \fBset_password <protocol> <password>\fP where <protocol> could be
-either "vnc" or "spice".
+either \(dqvnc\(dq or \(dqspice\(dq.
 .sp
 If you would like to change <protocol> password expiration, you
 should use \fBexpire_password <protocol> <expiration\-time>\fP
 where expiration time could be one of the following options:
 now, never, +seconds or UNIX time of expiration, e.g. +60 to
 make password expire in 60 seconds, or 1335196800 to make
-password expire on "Mon Apr 23 12:00:00 EDT 2012" (UNIX time for
+password expire on \(dqMon Apr 23 12:00:00 EDT 2012\(dq (UNIX time for
 this date and time).
 .sp
-You can also use keywords "now" or "never" for the expiration
+You can also use keywords \(dqnow\(dq or \(dqnever\(dq for the expiration
 time to allow <protocol> password to expire immediately or never
 expire.
 .TP
@@ -2206,7 +2594,7 @@ it is recommended that SASL always be combined with the \(aqtls\(aq
 and \(aqx509\(aq settings to enable use of SSL and server
 certificates. This ensures a data encryption preventing
 compromise of authentication credentials. See the
-VNC security section in the System Emulation Users Guide
+\fI\%VNC security\fP section in the System Emulation Users Guide
 for details on using SASL authentication.
 .TP
 .B \fBsasl\-authz=ID\fP
@@ -2278,19 +2666,12 @@ control requests.
 .B \fB\-win2k\-hack\fP
 Use it when installing Windows 2000 to avoid a disk full bug. After
 Windows 2000 is installed, you no longer need this option (this
-option slows down the IDE transfers).
+option slows down the IDE transfers).  Synonym of \fB\-global
+ide\-device.win2k\-install\-hack=on\fP\&.
 .TP
 .B \fB\-no\-fd\-bootchk\fP
 Disable boot signature checking for floppy disks in BIOS. May be
-needed to boot from old floppy disks.
-.TP
-.B \fB\-no\-acpi\fP
-Disable ACPI (Advanced Configuration and Power Interface) support.
-Use it if your guest OS complains about ACPI problems (PC target
-machine only).
-.TP
-.B \fB\-no\-hpet\fP
-Disable HPET support.
+needed to boot from old floppy disks.  Synonym of \fB\-m fd\-bootchk=off\fP\&.
 .TP
 .B \fB\-acpitable [sig=str][,rev=n][,oem_id=str][,oem_table_id=str][,oem_rev=n] [,asl_compiler_id=str][,asl_compiler_rev=n][,data=file1[:file2]...]\fP
 Add ACPI table with specified header fields and context from
@@ -2318,8 +2699,11 @@ Specify SMBIOS type 2 fields
 .B \fB\-smbios type=3[,manufacturer=str][,version=str][,serial=str][,asset=str][,sku=str]\fP
 Specify SMBIOS type 3 fields
 .TP
-.B \fB\-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str]\fP
+.B \fB\-smbios type=4[,sock_pfx=str][,manufacturer=str][,version=str][,serial=str][,asset=str][,part=str][,processor\-family=%d][,processor\-id=%d]\fP
 Specify SMBIOS type 4 fields
+.TP
+.B \fB\-smbios type=9[,slot_designation=str][,slot_type=%d][,slot_data_bus_width=%d][,current_usage=%d][,slot_length=%d][,slot_id=%d][,slot_characteristics1=%d][,slot_characteristics12=%d][,pci_device=str]\fP
+Specify SMBIOS type 9 fields
 .TP
 .B \fB\-smbios type=11[,value=str][,path=filename]\fP
 Specify SMBIOS type 11 fields
@@ -2377,11 +2761,50 @@ OEM Strings
 .TP
 .B \fB\-smbios type=17[,loc_pfx=str][,bank=str][,manufacturer=str][,serial=str][,asset=str][,part=str][,speed=%d]\fP
 Specify SMBIOS type 17 fields
+.TP
+.B \fB\-smbios type=41[,designation=str][,kind=str][,instance=%d][,pcidev=str]\fP
+Specify SMBIOS type 41 fields
+.sp
+This argument can be repeated multiple times.  Its main use is to allow network interfaces be created
+as \fBenoX\fP on Linux, with X being the instance number, instead of the name depending on the interface
+position on the PCI bus.
+.sp
+Here is an example of use:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-netdev user,id=internet \e
+\-device virtio\-net\-pci,mac=50:54:00:00:00:42,netdev=internet,id=internet\-dev \e
+\-smbios type=41,designation=\(aqOnboard LAN\(aq,instance=1,kind=ethernet,pcidev=internet\-dev
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+In the guest OS, the device should then appear as \fBeno1\fP:
+.sp
+\&..parsed\-literal:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ ip \-brief l
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>
+eno1             UP             50:54:00:00:00:42 <BROADCAST,MULTICAST,UP,LOWER_UP>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Currently, the PCI device has to be attached to the root bus.
 .UNINDENT
 .SS Network options
 .INDENT 0.0
 .TP
-.B \fB\-nic [tap|bridge|user|l2tpv3|vde|netmap|vhost\-user|socket][,...][,mac=macaddr][,model=mn]\fP
+.B \fB\-nic [tap|bridge|user|l2tpv3|vde|netmap|af\-xdp|vhost\-user|socket][,...][,mac=macaddr][,model=mn]\fP
 This option is a shortcut for configuring both the on\-board
 (default) guest NIC hardware and the host network backend in one go.
 The host backend options are the same as with the corresponding
@@ -2405,7 +2828,7 @@ qemu\-system\-x86_64 \-nic user,ipv6=off,model=e1000,mac=52:54:98:76:54:32
 .TP
 .B \fB\-nic none\fP
 Indicate that no network devices should be configured. It is used to
-override the default configuration (default NIC with "user" host
+override the default configuration (default NIC with \(dquser\(dq host
 network backend) which is activated if no other networking options
 are provided.
 .TP
@@ -2494,9 +2917,11 @@ When using the user mode network stack, activate a built\-in TFTP
 server. The files in dir will be exposed as the root of a TFTP
 server. The TFTP client on the guest must be configured in
 binary mode (use the command \fBbin\fP of the Unix TFTP client).
+The built\-in TFTP server is read\-only; it does not implement any
+command for writing files. QEMU will not write to this directory.
 .TP
 .B \fBtftp\-server\-name=name\fP
-In BOOTP reply, broadcast name as the "TFTP server name"
+In BOOTP reply, broadcast name as the \(dqTFTP server name\(dq
 (RFC2132 option 66). This can be used to advise the guest to
 load boot files or configurations from a different server than
 the host address.
@@ -2618,7 +3043,7 @@ for that virtual server:
 .sp
 .nf
 .ft C
-# call "netcat 10.10.1.1 4321" on every TCP connection to 10.0.2.100:1234
+# call \(dqnetcat 10.10.1.1 4321\(dq on every TCP connection to 10.0.2.100:1234
 # and connect the TCP stream to its stdin/stdout
 qemu\-system\-x86_64 \-nic  \(aquser,id=n1,guestfwd=tcp:10.0.2.100:1234\-cmd:netcat 10.10.1.1 4321\(aq
 .ft P
@@ -2680,7 +3105,7 @@ qemu\-system\-x86_64 linux.img \e
 #launch a QEMU instance with the default network helper to
 #connect a TAP device to bridge br0
 qemu\-system\-x86_64 linux.img \-device virtio\-net\-pci,netdev=n1 \e
-        \-netdev tap,id=n1,"helper=/path/to/qemu\-bridge\-helper"
+        \-netdev tap,id=n1,\(dqhelper=/path/to/qemu\-bridge\-helper\(dq
 .ft P
 .fi
 .UNINDENT
@@ -2773,11 +3198,11 @@ Example:
 qemu\-system\-x86_64 linux.img \e
                  \-device e1000,netdev=n1,mac=52:54:00:12:34:56 \e
                  \-netdev socket,id=n1,mcast=230.0.0.1:1234
-# launch another QEMU instance on same "bus"
+# launch another QEMU instance on same \(dqbus\(dq
 qemu\-system\-x86_64 linux.img \e
                  \-device e1000,netdev=n2,mac=52:54:00:12:34:57 \e
                  \-netdev socket,id=n2,mcast=230.0.0.1:1234
-# launch yet another QEMU instance on same "bus"
+# launch yet another QEMU instance on same \(dqbus\(dq
 qemu\-system\-x86_64 linux.img \e
                  \-device e1000,netdev=n3,mac=52:54:00:12:34:58 \e
                  \-netdev socket,id=n3,mcast=230.0.0.1:1234
@@ -2915,6 +3340,73 @@ qemu\-system\-x86_64 linux.img \-nic vde,sock=/tmp/myswitch
 .UNINDENT
 .UNINDENT
 .TP
+.B \fB\-netdev af\-xdp,id=str,ifname=name[,mode=native|skb][,force\-copy=on|off][,queues=n][,start\-queue=m][,inhibit=on|off][,sock\-fds=x:y:...:z]\fP
+Configure AF_XDP backend to connect to a network interface \(aqname\(aq
+using AF_XDP socket.  A specific program attach mode for a default
+XDP program can be forced with \(aqmode\(aq, defaults to best\-effort,
+where the likely most performant mode will be in use.  Number of queues
+\(aqn\(aq should generally match the number or queues in the interface,
+defaults to 1.  Traffic arriving on non\-configured device queues will
+not be delivered to the network backend.
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# set number of queues to 4
+ethtool \-L eth0 combined 4
+# launch QEMU instance
+qemu\-system\-x86_64 linux.img \-device virtio\-net\-pci,netdev=n1 \e
+    \-netdev af\-xdp,id=n1,ifname=eth0,queues=4
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+\(aqstart\-queue\(aq option can be specified if a particular range of queues
+[m, m + n] should be in use.  For example, this is may be necessary in
+order to use certain NICs in native mode.  Kernel allows the driver to
+create a separate set of XDP queues on top of regular ones, and only
+these queues can be used for AF_XDP sockets.  NICs that work this way
+may also require an additional traffic redirection with ethtool to these
+special queues.
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# set number of queues to 1
+ethtool \-L eth0 combined 1
+# redirect all the traffic to the second queue (id: 1)
+# note: drivers may require non\-empty key/mask pair.
+ethtool \-N eth0 flow\-type ether \e
+    dst 00:00:00:00:00:00 m FF:FF:FF:FF:FF:FE action 1
+ethtool \-N eth0 flow\-type ether \e
+    dst 00:00:00:00:00:01 m FF:FF:FF:FF:FF:FE action 1
+# launch QEMU instance
+qemu\-system\-x86_64 linux.img \-device virtio\-net\-pci,netdev=n1 \e
+    \-netdev af\-xdp,id=n1,ifname=eth0,queues=1,start\-queue=1
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+XDP program can also be loaded externally.  In this case \(aqinhibit\(aq option
+should be set to \(aqon\(aq and \(aqsock\-fds\(aq provided with file descriptors for
+already open but not bound XDP sockets already added to a socket map for
+corresponding queues.  One socket per queue.
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+qemu\-system\-x86_64 linux.img \-device virtio\-net\-pci,netdev=n1 \e
+    \-netdev af\-xdp,id=n1,ifname=eth0,queues=3,inhibit=on,sock\-fds=15:16:17
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.TP
 .B \fB\-netdev vhost\-user,chardev=id[,vhostforce=on|off][,queues=n]\fP
 Establish a vhost\-user netdev, backed by a chardev id. The chardev
 should be a unix domain socket backed one. The vhost\-user uses a
@@ -2940,7 +3432,7 @@ qemu \-m 512 \-object memory\-backend\-file,id=mem,size=512M,mem\-path=/hugetlbf
 .UNINDENT
 .UNINDENT
 .TP
-.B \fB\-netdev vhost\-vdpa,vhostdev=/path/to/dev\fP
+.B \fB\-netdev vhost\-vdpa[,vhostdev=/path/to/dev][,vhostfd=h]\fP
 Establish a vhost\-vdpa netdev.
 .sp
 vDPA device is a device that uses a datapath which complies with
@@ -2986,7 +3478,7 @@ The general form of a character device option is:
 .B \fB\-chardev backend,id=id[,mux=on|off][,options]\fP
 Backend is one of: \fBnull\fP, \fBsocket\fP, \fBudp\fP, \fBmsmouse\fP,
 \fBvc\fP, \fBringbuf\fP, \fBfile\fP, \fBpipe\fP, \fBconsole\fP, \fBserial\fP,
-\fBpty\fP, \fBstdio\fP, \fBbraille\fP, \fBtty\fP, \fBparallel\fP, \fBparport\fP,
+\fBpty\fP, \fBstdio\fP, \fBbraille\fP, \fBparallel\fP,
 \fBspicevmc\fP, \fBspiceport\fP\&. The specific backend will determine the
 applicable options.
 .sp
@@ -2998,8 +3490,8 @@ other command line directives.
 .sp
 A character device may be used in multiplexing mode by multiple
 front\-ends. Specify \fBmux=on\fP to enable this mode. A multiplexer is
-a "1:N" device, and here the "1" end is your specified chardev
-backend, and the "N" end is the various parts of QEMU that can talk
+a \(dq1:N\(dq device, and here the \(dq1\(dq end is your specified chardev
+backend, and the \(dqN\(dq end is the various parts of QEMU that can talk
 to a chardev. If you create a chardev with \fBid=myid\fP and
 \fBmux=on\fP, QEMU will create a multiplexer with your specified ID,
 and you can then configure multiple front ends to use that chardev
@@ -3044,7 +3536,7 @@ parallel port:
 .sp
 When you\(aqre using a multiplexed character device, some escape
 sequences are interpreted in the input. See the chapter about
-keys in the character backend multiplexer in the
+\fI\%Keys in the character backend multiplexer\fP in the
 System Emulation Users Guide for more details.
 .sp
 Note that some other command line options may implicitly create
@@ -3173,12 +3665,18 @@ text console with the given dimensions.
 Create a ring buffer with fixed size \fBsize\fP\&. size must be a power
 of two and defaults to \fB64K\fP\&.
 .TP
-.B \fB\-chardev file,id=id,path=path\fP
+.B \fB\-chardev file,id=id,path=path[,input\-path=input\-path]\fP
 Log all traffic received from the guest to a file.
 .sp
 \fBpath\fP specifies the path of the file to be opened. This file will
 be created if it does not already exist, and overwritten if it does.
 \fBpath\fP is required.
+.sp
+If \fBinput\-path\fP is specified, this is the path of a second file
+which will be used for input. If \fBinput\-path\fP is not specified,
+no input will be available from the chardev.
+.sp
+Note that \fBinput\-path\fP is not supported on Windows hosts.
 .TP
 .B \fB\-chardev pipe,id=id,path=path\fP
 Create a two\-way connection to the guest. The behaviour differs
@@ -3226,16 +3724,10 @@ is enabled by default, use \fBsignal=off\fP to disable it.
 Connect to a local BrlAPI server. \fBbraille\fP does not take any
 options.
 .TP
-.B \fB\-chardev tty,id=id,path=path\fP
-\fBtty\fP is only available on Linux, Sun, FreeBSD, NetBSD, OpenBSD
-and DragonFlyBSD hosts. It is an alias for \fBserial\fP\&.
-.sp
-\fBpath\fP specifies the path to the tty. \fBpath\fP is required.
-.TP
 .B \fB\-chardev parallel,id=id,path=path\fP
-
+.INDENT 7.0
 .TP
-.B \fB\-chardev parport,id=id,path=path\fP
+.B 
 \fBparallel\fP is only available on Linux, FreeBSD and DragonFlyBSD
 hosts.
 .sp
@@ -3243,6 +3735,7 @@ Connect to a local parallel port.
 .sp
 \fBpath\fP specifies the path to the parallel port device. \fBpath\fP is
 required.
+.UNINDENT
 .TP
 .B \fB\-chardev spicevmc,id=id,debug=debug,name=name\fP
 \fBspicevmc\fP is only available when spice support is built in.
@@ -3342,11 +3835,62 @@ To create a TPM emulator backend device with chardev socket backend:
 .UNINDENT
 .UNINDENT
 .UNINDENT
-.SS Linux/Multiboot boot specific
+.SS Boot Image or Kernel specific
 .sp
-When using these options, you can use a given Linux or Multiboot kernel
-without installing it in the disk image. It can be useful for easier
-testing of various kernels.
+There are broadly 4 ways you can boot a system with QEMU.
+.INDENT 0.0
+.INDENT 3.5
+.INDENT 0.0
+.IP \(bu 2
+specify a firmware and let it control finding a kernel
+.IP \(bu 2
+specify a firmware and pass a hint to the kernel to boot
+.IP \(bu 2
+direct kernel image boot
+.IP \(bu 2
+manually load files into the guest\(aqs address space
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+The third method is useful for quickly testing kernels but as there is
+no firmware to pass configuration information to the kernel the
+hardware must either be probeable, the kernel built for the exact
+configuration or passed some configuration data (e.g. a DTB blob)
+which tells the kernel what drivers it needs. This exact details are
+often hardware specific.
+.sp
+The final method is the most generic way of loading images into the
+guest address space and used mostly for \fBbare metal\fP type
+development where the reset vectors of the processor are taken into
+account.
+.sp
+For x86 machines and some other architectures \fB\-bios\fP will generally
+do the right thing with whatever it is given. For other machines the
+more strict \fB\-pflash\fP option needs an image that is sized for the
+flash device for the given machine type.
+.sp
+Please see the \fI\%QEMU System Emulator Targets\fP section of the manual for
+more detailed documentation.
+.INDENT 0.0
+.TP
+.B \fB\-bios file\fP
+Set the filename for the BIOS.
+.TP
+.B \fB\-pflash file\fP
+Use file as a parallel flash image.
+.UNINDENT
+.sp
+The kernel options were designed to work with Linux kernels although
+other things (like hypervisors) can be packaged up as a kernel
+executable image. The exact format of a executable image is usually
+architecture specific.
+.sp
+The way in which the kernel is started (what address it is loaded at,
+what if any information is passed to it via CPU registers, the state
+of the hardware when it is started, and so on) is also architecture
+specific. Typically it follows the specification laid down by the
+Linux kernel for how kernels for that architecture must be started.
 .INDENT 0.0
 .TP
 .B \fB\-kernel bzImage\fP
@@ -3355,20 +3899,43 @@ or in multiboot format.
 .TP
 .B \fB\-append cmdline\fP
 Use cmdline as kernel command line
+.UNINDENT
+.INDENT 0.0
 .TP
 .B \fB\-initrd file\fP
 Use file as initial ram disk.
 .TP
-.B \fB\-initrd "file1 arg=foo,file2"\fP
+.B \fB\-initrd \(dqfile1 arg=foo,file2\(dq\fP
 This syntax is only available with multiboot.
 .sp
-Use file1 and file2 as modules and pass arg=foo as parameter to the
-first module.
+Use file1 and file2 as modules and pass \fBarg=foo\fP as parameter to the
+first module. Commas can be provided in module parameters by doubling
+them on the command line to escape them:
+.TP
+.B \fB\-initrd \(dqbzImage earlyprintk=xen,,keep root=/dev/xvda1,initrd.img\(dq\fP
+Multiboot only. Use bzImage as the first module with
+\(dq\fBearlyprintk=xen,keep root=/dev/xvda1\fP\(dq as its command line,
+and initrd.img as the second module.
 .TP
 .B \fB\-dtb file\fP
 Use file as a device tree binary (dtb) image and pass it to the
 kernel on boot.
 .UNINDENT
+.sp
+Finally you can also manually load images directly into the address
+space of the guest. This is most useful for developers who already
+know the layout of their guest and take care to ensure something sane
+will happen when the reset vector executes.
+.sp
+The generic loader can be invoked by using the loader device:
+.sp
+\fB\-device loader,addr=<addr>,data=<data>,data\-len=<data\-len>[,data\-be=<data\-be>][,cpu\-num=<cpu\-num>]\fP
+.sp
+there is also the guest loader which operates in a similar way but
+tweaks the DTB so a hypervisor loaded via \fB\-kernel\fP can find where
+the guest image is:
+.sp
+\fB\-device guest\-loader,addr=<addr>[,kernel=<path>,[bootargs=<arguments>]][,initrd=<path>]\fP
 .SS Debug/Expert options
 .INDENT 0.0
 .TP
@@ -3394,11 +3961,37 @@ Suppress deprecated command results and events
 .sp
 Limitation: covers only syntactic aspects of QMP.
 .TP
+.B \fB\-compat [unstable\-input=@var{input\-policy}][,unstable\-output=@var{output\-policy}]\fP
+Set policy for handling unstable management interfaces (experimental):
+.INDENT 7.0
+.TP
+.B \fBunstable\-input=accept\fP (default)
+Accept unstable commands and arguments
+.TP
+.B \fBunstable\-input=reject\fP
+Reject unstable commands and arguments
+.TP
+.B \fBunstable\-input=crash\fP
+Crash on unstable commands and arguments
+.TP
+.B \fBunstable\-output=accept\fP (default)
+Emit unstable command results and events
+.TP
+.B \fBunstable\-output=hide\fP
+Suppress unstable command results and events
+.UNINDENT
+.sp
+Limitation: covers only syntactic aspects of QMP.
+.TP
 .B \fB\-fw_cfg [name=]name,file=file\fP
 Add named fw_cfg entry with contents from file file.
+If the filename contains comma, you must double it (for instance,
+\(dqfile=my,,file\(dq to use file \(dqmy,file\(dq).
 .TP
 .B \fB\-fw_cfg [name=]name,string=str\fP
 Add named fw_cfg entry with contents from string str.
+If the string contains comma, you must double it (for instance,
+\(dqstring=my,,string\(dq to use file \(dqmy,string\(dq).
 .sp
 The terminating NUL character of the contents of str will not be
 included as part of the fw_cfg item data. To insert contents with
@@ -3426,10 +4019,11 @@ Redirect the virtual serial port to host character device dev. The
 default device is \fBvc\fP in graphical mode and \fBstdio\fP in non
 graphical mode.
 .sp
-This option can be used several times to simulate up to 4 serial
+This option can be used several times to simulate multiple serial
 ports.
 .sp
-Use \fB\-serial none\fP to disable all serial ports.
+You can use \fB\-serial none\fP to suppress the creation of default
+serial devices.
 .sp
 Available character devices are:
 .INDENT 7.0
@@ -3464,10 +4058,17 @@ vc:80Cx24C
 [Linux only] Pseudo TTY (a new PTY is automatically allocated)
 .TP
 .B \fBnone\fP
-No device is allocated.
+No device is allocated. Note that for machine types which
+emulate systems where a serial device is always present in
+real hardware, this may be equivalent to the \fBnull\fP option,
+in that the serial device is still present but all output
+is discarded. For boards where the number of serial ports is
+truly variable, this suppresses the creation of the device.
 .TP
 .B \fBnull\fP
-void device
+A guest will see the UART or serial device as present in the
+machine, but all output is discarded, and there is no input.
+Conceptually equivalent to redirecting the output to \fB/dev/null\fP\&.
 .TP
 .B \fBchardev:id\fP
 Use a named character device defined with the \fB\-chardev\fP
@@ -3558,7 +4159,7 @@ The difference is that the port acts like a telnet server or
 client using telnet option negotiation. This will also allow you
 to send the MAGIC_SYSRQ sequence if you use a telnet that
 supports sending the break sequence. Typically in unix telnet
-you do it with Control\-] and then type "send break" followed by
+you do it with Control\-] and then type \(dqsend break\(dq followed by
 pressing the enter key.
 .TP
 .B \fBwebsocket:host:port,server=on[,wait=on|off][,nodelay=on|off]\fP
@@ -3611,15 +4212,49 @@ in non graphical mode. Use \fB\-monitor none\fP to disable the default
 monitor.
 .TP
 .B \fB\-qmp dev\fP
-Like \-monitor but opens in \(aqcontrol\(aq mode.
+Like \fB\-monitor\fP but opens in \(aqcontrol\(aq mode. For example, to make
+QMP available on localhost port 4444:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-qmp tcp:localhost:4444,server=on,wait=off
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Not all options are configurable via this syntax; for maximum
+flexibility use the \fB\-mon\fP option and an accompanying \fB\-chardev\fP\&.
 .TP
 .B \fB\-qmp\-pretty dev\fP
-Like \-qmp but uses pretty JSON formatting.
+Like \fB\-qmp\fP but uses pretty JSON formatting.
 .TP
 .B \fB\-mon [chardev=]name[,mode=readline|control][,pretty[=on|off]]\fP
-Setup monitor on chardev name. \fBpretty\fP is only valid when
-\fBmode=control\fP, turning on JSON pretty printing to ease
+Set up a monitor connected to the chardev \fBname\fP\&.
+QEMU supports two monitors: the Human Monitor Protocol
+(HMP; for human interaction), and the QEMU Monitor Protocol
+(QMP; a JSON RPC\-style protocol).
+The default is HMP; \fBmode=control\fP selects QMP instead.
+\fBpretty\fP is only valid when \fBmode=control\fP,
+turning on JSON pretty printing to ease
 human reading and debugging.
+.sp
+For example:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+\-chardev socket,id=mon1,host=localhost,port=4444,server=on,wait=off \e
+\-mon chardev=mon1,mode=control,pretty=on
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+enables the QMP monitor on localhost port 4444 with pretty\-printing.
 .TP
 .B \fB\-debugcon dev\fP
 Redirect the debug console to host device dev (same devices as the
@@ -3631,9 +4266,6 @@ graphical mode.
 .B \fB\-pidfile file\fP
 Store the QEMU process PID in file. It is useful if you launch QEMU
 from a script.
-.TP
-.B \fB\-singlestep\fP
-Run the emulation in single step mode.
 .TP
 .B \fB\-\-preconfig\fP
 Pause QEMU for interactive configuration before the machine is
@@ -3665,7 +4297,7 @@ estimates of CPU cycle and power utilization will be incorrect, not
 taking into account guest idle time.
 .TP
 .B \fB\-gdb dev\fP
-Accept a gdb connection on device dev (see the GDB usage chapter
+Accept a gdb connection on device dev (see the \fI\%GDB usage\fP chapter
 in the System Emulation Users Guide). Note that this option does not pause QEMU
 execution \-\- if you want QEMU to not start the guest until you
 connect with gdb and issue a \fBcontinue\fP command, you will need to
@@ -3700,7 +4332,7 @@ connection via a pipe:
 .TP
 .B \fB\-s\fP
 Shorthand for \-gdb \fI\%tcp::1234\fP, i.e. open a gdbserver on TCP port 1234
-(see the GDB usage chapter in the System Emulation Users Guide).
+(see the \fI\%GDB usage\fP chapter in the System Emulation Users Guide).
 .TP
 .B \fB\-d item1[,...]\fP
 Enable logging of specified items. Use \(aq\-d help\(aq for a list of log
@@ -3739,9 +4371,6 @@ Set the directory for the BIOS, VGA BIOS and keymaps.
 .sp
 To list all the data directories, use \fB\-L help\fP\&.
 .TP
-.B \fB\-bios file\fP
-Set the filename for the BIOS.
-.TP
 .B \fB\-enable\-kvm\fP
 Enable KVM full virtualization support. This option is only
 available if KVM support is enabled when compiling.
@@ -3772,7 +4401,7 @@ Examples:
 .sp
 \fB\-action panic=none\fP
 \fB\-action reboot=shutdown,shutdown=pause\fP
-\fB\-watchdog i6300esb \-action watchdog=pause\fP
+\fB\-device i6300esb \-action watchdog=pause\fP
 .TP
 .B \fB\-loadvm file\fP
 Start right away with a saved state (\fBloadvm\fP in monitor)
@@ -3856,31 +4485,6 @@ name. In record mode, a new VM snapshot with the given name is created
 at the start of execution recording. In replay mode this option
 specifies the snapshot name used to load the initial VM state.
 .TP
-.B \fB\-watchdog model\fP
-Create a virtual hardware watchdog device. Once enabled (by a guest
-action), the watchdog must be periodically polled by an agent inside
-the guest or else the guest will be restarted. Choose a model for
-which your guest has drivers.
-.sp
-The model is the model of hardware watchdog to emulate. Use
-\fB\-watchdog help\fP to list available hardware models. Only one
-watchdog can be enabled for a guest.
-.sp
-The following models may be available:
-.INDENT 7.0
-.TP
-.B \fBib700\fP
-iBASE 700 is a very simple ISA watchdog with a single timer.
-.TP
-.B \fBi6300esb\fP
-Intel 6300ESB I/O controller hub is a much more featureful
-PCI\-based dual\-timer watchdog.
-.TP
-.B \fBdiag288\fP
-A virtual watchdog for s390x backed by the diagnose 288
-hypercall (currently KVM only).
-.UNINDENT
-.TP
 .B \fB\-watchdog\-action action\fP
 The action controls what QEMU will do when the watchdog timer
 expires. The default is \fBreset\fP (forcefully reset the guest).
@@ -3897,7 +4501,7 @@ situations where the watchdog would have expired, and thus
 .sp
 Examples:
 .sp
-\fB\-watchdog i6300esb \-watchdog\-action pause\fP; \fB\-watchdog ib700\fP
+\fB\-device i6300esb \-watchdog\-action pause\fP
 .TP
 .B \fB\-echr numeric_ascii_value\fP
 Change the escape character used for switching to the monitor when
@@ -3920,7 +4524,11 @@ Prepare for incoming migration, listen on a given tcp port.
 Prepare for incoming migration, listen on a given unix socket.
 .TP
 .B \fB\-incoming fd:fd\fP
-Accept incoming migration from a given filedescriptor.
+Accept incoming migration from a given file descriptor.
+.TP
+.B \fB\-incoming file:filename[,offset=offset]\fP
+Accept incoming migration from a given file starting at offset.
+offset allows the common size suffixes, or a 0x prefix, but not both.
 .TP
 .B \fB\-incoming exec:cmdline\fP
 Accept incoming migration as an output from specified external
@@ -3940,11 +4548,6 @@ Don\(aqt create default devices. Normally, QEMU sets the default
 devices like serial port, parallel port, virtual console, monitor
 device, VGA adapter, floppy and CD\-ROM drive and others. The
 \fB\-nodefaults\fP option will disable all those default devices.
-.TP
-.B \fB\-chroot dir\fP
-Immediately before starting guest execution, chroot to the specified
-directory. Especially useful in combination with \-runas.
-This option is not supported for Windows hosts.
 .TP
 .B \fB\-runas user\fP
 Immediately before starting guest execution, drop root privileges,
@@ -3977,31 +4580,30 @@ qemu\-system\-ppc \-prom\-env \(aqauto\-boot?=false\(aq \e
 .UNINDENT
 .TP
 .B \fB\-semihosting\fP
-Enable semihosting mode (ARM, M68K, Xtensa, MIPS, Nios II, RISC\-V only).
+Enable \fI\%Semihosting\fP mode (ARM, M68K, Xtensa, MIPS, Nios II, RISC\-V only).
 .sp
+\fBWARNING:\fP
+.INDENT 7.0
+.INDENT 3.5
 Note that this allows guest direct access to the host filesystem, so
 should only be used with a trusted guest OS.
+.UNINDENT
+.UNINDENT
 .sp
 See the \-semihosting\-config option documentation for further
 information about the facilities this enables.
 .TP
-.B \fB\-semihosting\-config [enable=on|off][,target=native|gdb|auto][,chardev=id][,arg=str[,...]]\fP
-Enable and configure semihosting (ARM, M68K, Xtensa, MIPS, Nios II, RISC\-V
+.B \fB\-semihosting\-config [enable=on|off][,target=native|gdb|auto][,chardev=id][,userspace=on|off][,arg=str[,...]]\fP
+Enable and configure \fI\%Semihosting\fP (ARM, M68K, Xtensa, MIPS, Nios II, RISC\-V
 only).
 .sp
+\fBWARNING:\fP
+.INDENT 7.0
+.INDENT 3.5
 Note that this allows guest direct access to the host filesystem, so
 should only be used with a trusted guest OS.
-.sp
-On Arm this implements the standard semihosting API, version 2.0.
-.sp
-On M68K this implements the "ColdFire GDB" interface used by
-libgloss.
-.sp
-Xtensa semihosting provides basic file IO calls, such as
-open/read/write/seek/select. Tensilica baremetal libc for ISS and
-linux platform "sim" use this interface.
-.sp
-On RISC\-V this implements the standard semihosting API, version 0.2.
+.UNINDENT
+.UNINDENT
 .INDENT 7.0
 .TP
 .B \fBtarget=native|gdb|auto\fP
@@ -4012,6 +4614,13 @@ means \fBgdb\fP during debug sessions and \fBnative\fP otherwise.
 .B \fBchardev=str1\fP
 Send the output to a chardev backend output for native or auto
 output when not in gdb
+.TP
+.B \fBuserspace=on|off\fP
+Allows code running in guest userspace to access the semihosting
+interface. The default is that only privileged guest code can
+make semihosting calls. Note that setting \fBuserspace=on\fP should
+only be used if all guest code is trusted (for example, in
+bare\-metal test case code).
 .TP
 .B \fBarg=str1,arg=str2,...\fP
 Allows the user to pass input arguments, and can be used
@@ -4092,20 +4701,34 @@ the \fBsimple\fP tracing backend.
 .UNINDENT
 .UNINDENT
 .TP
-.B \fB\-plugin file=file[,arg=string]\fP
+.B \fB\-plugin file=file[,argname=argvalue]\fP
 Load a plugin.
 .INDENT 7.0
 .TP
 .B \fBfile=file\fP
 Load the given plugin from a shared library file.
 .TP
-.B \fBarg=string\fP
-Argument string passed to the plugin. (Can be given multiple
-times.)
+.B \fBargname=argvalue\fP
+Argument passed to the plugin. (Can be given multiple times.)
 .UNINDENT
 .TP
-.B \fB\-enable\-fips\fP
-Enable FIPS 140\-2 compliance mode.
+.B \fB\-run\-with [async\-teardown=on|off][,chroot=dir]\fP
+Set QEMU process lifecycle options.
+.sp
+\fBasync\-teardown=on\fP enables asynchronous teardown. A new process called
+\(dqcleanup/<QEMU_PID>\(dq will be created at startup sharing the address
+space with the main QEMU process, using clone. It will wait for the
+main QEMU process to terminate completely, and then exit. This allows
+QEMU to terminate very quickly even if the guest was huge, leaving the
+teardown of the address space to the cleanup process. Since the cleanup
+process shares the same cgroups as the main QEMU process, accounting is
+performed correctly. This only works if the cleanup process is not
+forcefully killed with SIGKILL before the main QEMU process has
+terminated completely.
+.sp
+\fBchroot=dir\fP can be used for doing a chroot to the specified directory
+immediately before starting the guest execution. This is especially useful
+in combination with \-runas.
 .TP
 .B \fB\-msg [timestamp[=on|off]][,guest\-name[=on|off]]\fP
 Control error message format.
@@ -4125,6 +4748,14 @@ file in file
 .TP
 .B \fB\-enable\-sync\-profile\fP
 Enable synchronization profiling.
+.TP
+.B \fB\-perfmap\fP
+Generate a map file for Linux perf tools that will allow basic profiling
+information to be broken down into basic blocks.
+.TP
+.B \fB\-jitdump\fP
+Generate a dump file for Linux perf tools that maps basic blocks to symbol
+names, line numbers and JITted code.
 .UNINDENT
 .SS Generic object creation
 .INDENT 0.0
@@ -4135,16 +4766,16 @@ they are specified. Note that the \(aqid\(aq property must be set. These
 objects are placed in the \(aq/objects\(aq path.
 .INDENT 7.0
 .TP
-.B \fB\-object memory\-backend\-file,id=id,size=size,mem\-path=dir,share=on|off,discard\-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host\-nodes=host\-nodes,policy=default|preferred|bind|interleave,align=align,readonly=on|off\fP
+.B \fB\-object memory\-backend\-file,id=id,size=size,mem\-path=dir,share=on|off,discard\-data=on|off,merge=on|off,dump=on|off,prealloc=on|off,host\-nodes=host\-nodes,policy=default|preferred|bind|interleave,align=align,offset=offset,readonly=on|off,rom=on|off|auto\fP
 Creates a memory file backend object, which can be used to back
 the guest RAM with huge pages.
 .sp
 The \fBid\fP parameter is a unique ID that will be used to
-reference this memory region when configuring the \fB\-numa\fP
-argument.
+reference this memory region in other parameters, e.g. \fB\-numa\fP,
+\fB\-device nvdimm\fP, etc.
 .sp
 The \fBsize\fP option provides the size of the memory region, and
-accepts common suffixes, eg \fB500M\fP\&.
+accepts common suffixes, e.g. \fB500M\fP\&.
 .sp
 The \fBmem\-path\fP provides the path to either a shared memory or
 huge page filesystem mount.
@@ -4207,6 +4838,10 @@ device DAX /dev/dax0.0 requires 2M alignment rather than 4K. In
 such cases, users can specify the required alignment via this
 option.
 .sp
+The \fBoffset\fP option specifies the offset into the target file
+that the region starts at. You can use this parameter to back
+multiple regions with a single file.
+.sp
 The \fBpmem\fP option specifies whether the backing file specified
 by \fBmem\-path\fP is in host persistent memory that can be
 accessed using the SNIA NVM programming model (e.g. Intel
@@ -4222,6 +4857,20 @@ option.
 .sp
 The \fBreadonly\fP option specifies whether the backing file is opened
 read\-only or read\-write (default).
+.sp
+The \fBrom\fP option specifies whether to create Read Only Memory
+(ROM) that cannot be modified by the VM. Any write attempts to such
+ROM will be denied. Most use cases want proper RAM instead of ROM.
+However, selected use cases, like R/O NVDIMMs, can benefit from
+ROM. If set to \fBon\fP, create ROM; if set to \fBoff\fP, create
+writable RAM; if set to \fBauto\fP (default), the value of the
+\fBreadonly\fP option is used. This option is primarily helpful when
+we want to have writable RAM in configurations that would
+traditionally create ROM before the \fBrom\fP option was introduced:
+VM templating, where we want to open a file readonly
+(\fBreadonly=on\fP) and mark the memory to be private for QEMU
+(\fBshare=off\fP). For this use case, we need writable RAM instead
+of ROM, and want to also set \fBrom=off\fP\&.
 .TP
 .B \fB\-object memory\-backend\-ram,id=id,merge=on|off,dump=on|off,share=on|off,prealloc=on|off,size=size,host\-nodes=host\-nodes,policy=default|preferred|bind|interleave\fP
 Creates a memory backend object, which can be used to back the
@@ -4254,6 +4903,18 @@ Please refer to \fBmemory\-backend\-file\fP for a description of the
 other options.
 .sp
 The \fBshare\fP boolean option is on by default with memfd.
+.TP
+.B \fB\-object iommufd,id=id[,fd=fd]\fP
+Creates an iommufd backend which allows control of DMA mapping
+through the \fB/dev/iommu\fP device.
+.sp
+The \fBid\fP parameter is a unique ID which frontends (such as
+vfio\-pci of vdpa) will use to connect with the iommufd backend.
+.sp
+The \fBfd\fP parameter is an optional pre\-opened file descriptor
+resulting from \fB/dev/iommu\fP opening. Usually the iommufd is shared
+across all subsystems, bringing the benefit of centralized
+reference counting.
 .TP
 .B \fB\-object rng\-builtin,id=id\fP
 Creates a random number generator backend which obtains entropy
@@ -4306,10 +4967,10 @@ to access the credentials. The \fBendpoint\fP is either \fBserver\fP
 or \fBclient\fP depending on whether the QEMU network backend that
 uses the credentials will be acting as a client or as a server.
 For clients only, \fBusername\fP is the username which will be
-sent to the server. If omitted it defaults to "qemu".
+sent to the server. If omitted it defaults to \(dqqemu\(dq.
 .sp
 The dir parameter tells QEMU where to find the keys file. It is
-called "dir/keys.psk" and contains "username:key" pairs. This
+called \(dqdir/keys.psk\(dq and contains \(dqusername:key\(dq pairs. This
 file can most easily be created using the GnuTLS \fBpsktool\fP
 program.
 .sp
@@ -4508,7 +5169,7 @@ filter\-redirector and filter\-rewriter.
 KVM COLO
 
 primary:
-\-netdev tap,id=hn0,vhost=off,script=/etc/qemu\-ifup,downscript=/etc/qemu\-ifdown
+\-netdev tap,id=hn0,vhost=off
 \-device e1000,id=e0,netdev=hn0,mac=52:a4:00:12:78:66
 \-chardev socket,id=mirror0,host=3.3.3.3,port=9003,server=on,wait=off
 \-chardev socket,id=compare1,host=3.3.3.3,port=9004,server=on,wait=off
@@ -4523,7 +5184,7 @@ primary:
 \-object colo\-compare,id=comp0,primary_in=compare0\-0,secondary_in=compare1,outdev=compare_out0,iothread=iothread1
 
 secondary:
-\-netdev tap,id=hn0,vhost=off,script=/etc/qemu\-ifup,down script=/etc/qemu\-ifdown
+\-netdev tap,id=hn0,vhost=off
 \-device e1000,netdev=hn0,mac=52:a4:00:12:78:66
 \-chardev socket,id=red0,host=3.3.3.3,port=9003
 \-chardev socket,id=red1,host=3.3.3.3,port=9004
@@ -4534,7 +5195,7 @@ secondary:
 Xen COLO
 
 primary:
-\-netdev tap,id=hn0,vhost=off,script=/etc/qemu\-ifup,downscript=/etc/qemu\-ifdown
+\-netdev tap,id=hn0,vhost=off
 \-device e1000,id=e0,netdev=hn0,mac=52:a4:00:12:78:66
 \-chardev socket,id=mirror0,host=3.3.3.3,port=9003,server=on,wait=off
 \-chardev socket,id=compare1,host=3.3.3.3,port=9004,server=on,wait=off
@@ -4547,10 +5208,10 @@ primary:
 \-object filter\-redirector,netdev=hn0,id=redire0,queue=rx,indev=compare_out
 \-object filter\-redirector,netdev=hn0,id=redire1,queue=rx,outdev=compare0
 \-object iothread,id=iothread1
-\-object colo\-compare,id=comp0,primary_in=compare0\-0,secondary_in=compare1,outdev=compare_out0,notify_dev=nofity_way,iothread=iothread1
+\-object colo\-compare,id=comp0,primary_in=compare0\-0,secondary_in=compare1,outdev=compare_out0,notify_dev=notify_way,iothread=iothread1
 
 secondary:
-\-netdev tap,id=hn0,vhost=off,script=/etc/qemu\-ifup,down script=/etc/qemu\-ifdown
+\-netdev tap,id=hn0,vhost=off
 \-device e1000,netdev=hn0,mac=52:a4:00:12:78:66
 \-chardev socket,id=red0,host=3.3.3.3,port=9003
 \-chardev socket,id=red1,host=3.3.3.3,port=9004
@@ -4565,8 +5226,8 @@ If you want to know the detail of above command line, you can
 read the colo\-compare git log.
 .TP
 .B \fB\-object cryptodev\-backend\-builtin,id=id[,queues=queues]\fP
-Creates a cryptodev backend which executes crypto opreation from
-the QEMU cipher APIS. The id parameter is a unique ID that will
+Creates a cryptodev backend which executes crypto operations from
+the QEMU cipher APIs. The id parameter is a unique ID that will
 be used to reference this cryptodev backend from the
 \fBvirtio\-crypto\fP device. The queues parameter is optional,
 which specify the queue number of cryptodev backend, the default
@@ -4654,7 +5315,7 @@ The simplest (insecure) usage is to provide the secret inline
 .sp
 The simplest secure usage is to provide the secret via a file
 .sp
-# printf "letmein" > mypasswd.txt # QEMU_SYSTEM_MACRO \-object
+# printf \(dqletmein\(dq > mypasswd.txt # QEMU_SYSTEM_MACRO \-object
 secret,id=sec0,file=mypasswd.txt,format=raw
 .sp
 For greater security, AES\-256\-CBC should be used. To illustrate
@@ -4670,7 +5331,7 @@ First a master key needs to be created in base64 encoding:
 .nf
 .ft C
 # openssl rand \-base64 32 > key.b64
-# KEY=$(base64 \-d key.b64 | hexdump  \-v \-e \(aq/1 "%02X"\(aq)
+# KEY=$(base64 \-d key.b64 | hexdump  \-v \-e \(aq/1 \(dq%02X\(dq\(aq)
 .ft P
 .fi
 .UNINDENT
@@ -4685,7 +5346,7 @@ secret
 .nf
 .ft C
 # openssl rand \-base64 16 > iv.b64
-# IV=$(base64 \-d iv.b64 | hexdump  \-v \-e \(aq/1 "%02X"\(aq)
+# IV=$(base64 \-d iv.b64 | hexdump  \-v \-e \(aq/1 \(dq%02X\(dq\(aq)
 .ft P
 .fi
 .UNINDENT
@@ -4699,7 +5360,7 @@ be left as raw bytes if desired.
 .sp
 .nf
 .ft C
-# SECRET=$(printf "letmein" |
+# SECRET=$(printf \(dqletmein\(dq |
            openssl enc \-aes\-256\-cbc \-a \-K $KEY \-iv $IV)
 .ft P
 .fi
@@ -4723,7 +5384,7 @@ password. Pass the contents of \fBiv.b64\fP to the second secret
 .UNINDENT
 .UNINDENT
 .TP
-.B \fB\-object sev\-guest,id=id,cbitpos=cbitpos,reduced\-phys\-bits=val,[sev\-device=string,policy=policy,handle=handle,dh\-cert\-file=file,session\-file=file]\fP
+.B \fB\-object sev\-guest,id=id,cbitpos=cbitpos,reduced\-phys\-bits=val,[sev\-device=string,policy=policy,handle=handle,dh\-cert\-file=file,session\-file=file,kernel\-hashes=on|off]\fP
 Create a Secure Encrypted Virtualization (SEV) guest object,
 which can be used to provide the guest memory encryption support
 on AMD processors.
@@ -4738,7 +5399,7 @@ When memory encryption is enabled, we loose certain bits in
 physical address space. The \fBreduced\-phys\-bits\fP is used to
 provide the number of bits we loose in physical address space.
 Similar to C\-bit, the value is Host family dependent. On EPYC,
-the value should be 5.
+a guest will lose a maximum of 1 bit, so the value should be 1.
 .sp
 The \fBsev\-device\fP provides the device file to use for
 communicating with the SEV firmware running inside AMD Secure
@@ -4763,6 +5424,10 @@ and session parameters are used for establishing a cryptographic
 session with the guest owner to negotiate keys used for
 attestation. The file must be encoded in base64.
 .sp
+The \fBkernel\-hashes\fP adds the hashes of given kernel/initrd/
+cmdline to a designated guest firmware page for measured Linux
+boot with \-kernel. The default is off. (Since 6.2)
+.sp
 e.g to launch a SEV guest
 .INDENT 7.0
 .INDENT 3.5
@@ -4771,7 +5436,7 @@ e.g to launch a SEV guest
 .ft C
 # qemu\-system\-x86_64 \e
     ...... \e
-    \-object sev\-guest,id=sev0,cbitpos=47,reduced\-phys\-bits=5 \e
+    \-object sev\-guest,id=sev0,cbitpos=47,reduced\-phys\-bits=1 \e
     \-machine ...,memory\-encryption=sev0 \e
     .....
 .ft P
@@ -4823,13 +5488,13 @@ look like:
 .nf
 .ft C
 {
-  "rules": [
-     { "match": "fred", "policy": "allow", "format": "exact" },
-     { "match": "bob", "policy": "allow", "format": "exact" },
-     { "match": "danb", "policy": "deny", "format": "glob" },
-     { "match": "dan*", "policy": "allow", "format": "exact" },
+  \(dqrules\(dq: [
+     { \(dqmatch\(dq: \(dqfred\(dq, \(dqpolicy\(dq: \(dqallow\(dq, \(dqformat\(dq: \(dqexact\(dq },
+     { \(dqmatch\(dq: \(dqbob\(dq, \(dqpolicy\(dq: \(dqallow\(dq, \(dqformat\(dq: \(dqexact\(dq },
+     { \(dqmatch\(dq: \(dqdanb\(dq, \(dqpolicy\(dq: \(dqdeny\(dq, \(dqformat\(dq: \(dqglob\(dq },
+     { \(dqmatch\(dq: \(dqdan*\(dq, \(dqpolicy\(dq: \(dqallow\(dq, \(dqformat\(dq: \(dqexact\(dq },
   ],
-  "policy": "deny"
+  \(dqpolicy\(dq: \(dqdeny\(dq
 }
 .ft P
 .fi
@@ -4908,7 +5573,7 @@ account requisite  pam_listfile.so item=user sense=allow \e
 .UNINDENT
 .sp
 Finally the \fB/etc/qemu/vnc.allow\fP file would contain the list
-of x509 distingished names that are permitted access
+of x509 distinguished names that are permitted access
 .INDENT 7.0
 .INDENT 3.5
 .sp
@@ -4920,7 +5585,7 @@ CN=laptop.example.com,O=Example Home,L=London,ST=London,C=GB
 .UNINDENT
 .UNINDENT
 .TP
-.B \fB\-object iothread,id=id,poll\-max\-ns=poll\-max\-ns,poll\-grow=poll\-grow,poll\-shrink=poll\-shrink\fP
+.B \fB\-object iothread,id=id,poll\-max\-ns=poll\-max\-ns,poll\-grow=poll\-grow,poll\-shrink=poll\-shrink,aio\-max\-batch=aio\-max\-batch\fP
 Creates a dedicated event loop thread that devices can be
 assigned to. This is known as an IOThread. By default device
 emulation happens in vCPU threads or the main event loop thread.
@@ -4956,7 +5621,11 @@ The \fBpoll\-shrink\fP parameter is the divisor used to decrease
 the polling time when the algorithm detects it is spending too
 long polling without encountering events.
 .sp
-The polling parameters can be modified at run\-time using the
+The \fBaio\-max\-batch\fP parameter is the maximum number of requests
+in a batch for the AIO engine, 0 means that the engine will use
+its default.
+.sp
+The IOThread parameters can be modified at run\-time using the
 \fBqom\-set\fP command (where \fBiothread1\fP is the IOThread\(aqs
 \fBid\fP):
 .INDENT 7.0
@@ -4972,11 +5641,12 @@ The polling parameters can be modified at run\-time using the
 .UNINDENT
 .UNINDENT
 .sp
-During the graphical emulation, you can use special key combinations to
-change modes. The default key mappings are shown below, but if you use
-\fB\-alt\-grab\fP then the modifier is Ctrl\-Alt\-Shift (instead of Ctrl\-Alt)
-and if you use \fB\-ctrl\-grab\fP then the modifier is the right Ctrl key
-(instead of Ctrl\-Alt):
+During the graphical emulation, you can use special key combinations from
+the following table to change modes. By default the modifier is Ctrl\-Alt
+(used in the table below) which can be changed with \fB\-display\fP suboption
+\fBmod=\fP where appropriate. For example, \fB\-display sdl,
+grab\-mod=lshift\-lctrl\-lalt\fP changes the modifier key to Ctrl\-Alt\-Shift,
+while \fB\-display sdl,grab\-mod=rctrl\fP changes it to the right Ctrl key.
 .INDENT 0.0
 .TP
 .B Ctrl\-Alt\-f
@@ -5005,7 +5675,7 @@ Monitor
 Serial port
 .UNINDENT
 .TP
-.B Ctrl\-Alt
+.B Ctrl\-Alt\-g
 Toggle mouse and keyboard grab.
 .UNINDENT
 .sp
@@ -5054,13 +5724,13 @@ as images for the guest storage. Both disk and cdrom images are
 supported.
 .sp
 Syntax for specifying iSCSI LUNs is
-"iscsi://<target\-ip>[:<port>]/<target\-iqn>/<lun>"
+\(dqiscsi://<target\-ip>[:<port>]/<target\-iqn>/<lun>\(dq
 .sp
 By default qemu will use the iSCSI initiator\-name
 \(aqiqn.2008\-11.org.linux\-kvm[:<name>]\(aq but this can also be set from
 the command line or a configuration file.
 .sp
-Since version Qemu 2.4 it is possible to specify a iSCSI request
+Since version QEMU 2.4 it is possible to specify a iSCSI request
 timeout to detect stalled requests and force a reestablishment of the
 session. The timeout is specified in seconds. The default is 0 which
 means no timeout. Libiscsi 1.15.0 or greater is required for this
@@ -5098,8 +5768,8 @@ Example (CHAP username/password via environment variables):
 .sp
 .nf
 .ft C
-LIBISCSI_CHAP_USERNAME="user" \e
-LIBISCSI_CHAP_PASSWORD="password" \e
+LIBISCSI_CHAP_USERNAME=\(dquser\(dq \e
+LIBISCSI_CHAP_PASSWORD=\(dqpassword\(dq \e
 qemu\-system\-x86_64 \-drive file=iscsi://192.0.2.1/iqn.2001\-04.com.example/1
 .ft P
 .fi
@@ -5111,17 +5781,17 @@ QEMU supports NBD (Network Block Devices) both using TCP protocol as
 well as Unix Domain Sockets. With TCP, the default port is 10809.
 .sp
 Syntax for specifying a NBD device using TCP, in preferred URI form:
-"nbd://<server\-ip>[:<port>]/[<export>]"
+\(dqnbd://<server\-ip>[:<port>]/[<export>]\(dq
 .sp
 Syntax for specifying a NBD device using Unix Domain Sockets;
 remember that \(aq?\(aq is a shell glob character and may need quoting:
-"nbd+unix:///[<export>]?socket=<domain\-socket>"
+\(dqnbd+unix:///[<export>]?socket=<domain\-socket>\(dq
 .sp
 Older syntax that is also recognized:
-"nbd:<server\-ip>:<port>[:exportname=<export>]"
+\(dqnbd:<server\-ip>:<port>[:exportname=<export>]\(dq
 .sp
 Syntax for specifying a NBD device using Unix Domain Sockets
-"nbd:unix:<domain\-socket>[:exportname=<export>]"
+\(dqnbd:unix:<domain\-socket>[:exportname=<export>]\(dq
 .sp
 Example for TCP
 .INDENT 7.0
@@ -5166,36 +5836,6 @@ qemu\-system\-x86_64 \-drive file.driver=ssh,file.user=user,file.host=host,file.
 Currently authentication must be done using ssh\-agent. Other
 authentication methods may be supported in future.
 .TP
-.B \fBSheepdog\fP
-Sheepdog is a distributed storage system for QEMU. QEMU supports
-using either local sheepdog devices or remote networked devices.
-.sp
-Syntax for specifying a sheepdog device
-.INDENT 7.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-sheepdog[+tcp|+unix]://[host:port]/vdiname[?socket=path][#snapid|#tag]
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-Example
-.INDENT 7.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-system\-x86_64 \-\-drive file=sheepdog://192.0.2.1:30000/MyVirtualMachine
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-See also \fI\%https://sheepdog.github.io/sheepdog/\fP\&.
-.TP
 .B \fBGlusterFS\fP
 GlusterFS is a user space distributed file system. QEMU supports the
 use of GlusterFS volumes for hosting VM disk images using TCP, Unix
@@ -5211,9 +5851,9 @@ URI:
 gluster[+type]://[host[:port]]/volume/path[?socket=...][,debug=N][,logfile=...]
 
 JSON:
-\(aqjson:{"driver":"qcow2","file":{"driver":"gluster","volume":"testvol","path":"a.img","debug":N,"logfile":"...",
-\                                 "server":[{"type":"tcp","host":"...","port":"..."},
-\                                           {"type":"unix","socket":"..."}]}}\(aq
+\(aqjson:{\(dqdriver\(dq:\(dqqcow2\(dq,\(dqfile\(dq:{\(dqdriver\(dq:\(dqgluster\(dq,\(dqvolume\(dq:\(dqtestvol\(dq,\(dqpath\(dq:\(dqa.img\(dq,\(dqdebug\(dq:N,\(dqlogfile\(dq:\(dq...\(dq,
+\                                 \(dqserver\(dq:[{\(dqtype\(dq:\(dqtcp\(dq,\(dqhost\(dq:\(dq...\(dq,\(dqport\(dq:\(dq...\(dq},
+\                                           {\(dqtype\(dq:\(dqunix\(dq,\(dqsocket\(dq:\(dq...\(dq}]}}\(aq
 .ft P
 .fi
 .UNINDENT
@@ -5230,12 +5870,12 @@ qemu\-system\-x86_64 \-\-drive file=gluster://192.0.2.1/testvol/a.img,
 \                               file.debug=9,file.logfile=/var/log/qemu\-gluster.log
 
 JSON:
-qemu\-system\-x86_64 \(aqjson:{"driver":"qcow2",
-\                          "file":{"driver":"gluster",
-\                                   "volume":"testvol","path":"a.img",
-\                                   "debug":9,"logfile":"/var/log/qemu\-gluster.log",
-\                                   "server":[{"type":"tcp","host":"1.2.3.4","port":24007},
-\                                             {"type":"unix","socket":"/var/run/glusterd.socket"}]}}\(aq
+qemu\-system\-x86_64 \(aqjson:{\(dqdriver\(dq:\(dqqcow2\(dq,
+\                          \(dqfile\(dq:{\(dqdriver\(dq:\(dqgluster\(dq,
+\                                   \(dqvolume\(dq:\(dqtestvol\(dq,\(dqpath\(dq:\(dqa.img\(dq,
+\                                   \(dqdebug\(dq:9,\(dqlogfile\(dq:\(dq/var/log/qemu\-gluster.log\(dq,
+\                                   \(dqserver\(dq:[{\(dqtype\(dq:\(dqtcp\(dq,\(dqhost\(dq:\(dq1.2.3.4\(dq,\(dqport\(dq:24007},
+\                                             {\(dqtype\(dq:\(dqunix\(dq,\(dqsocket\(dq:\(dq/var/run/glusterd.socket\(dq}]}}\(aq
 qemu\-system\-x86_64 \-drive driver=qcow2,file.driver=gluster,file.volume=testvol,file.path=/path/a.img,
 \                                      file.debug=9,file.logfile=/var/log/qemu\-gluster.log,
 \                                      file.server.0.type=tcp,file.server.0.host=1.2.3.4,file.server.0.port=24007,
@@ -5336,7 +5976,7 @@ overlay for writes, copy\-on\-read, and a readahead of 64k
 .sp
 .nf
 .ft C
-qemu\-img create \-f qcow2 \-o backing_file=\(aqjson:{"file.driver":"http",, "file.url":"\fI\%http://archives.fedoraproject.org/pub/archive/fedora/linux/releases/20/Images/x86_64/Fedora\-x86_64\-20\-20131211.1\-sda.qcow2\fP",, "file.readahead":"64k"}\(aq /tmp/Fedora\-x86_64\-20\-20131211.1\-sda.qcow2
+qemu\-img create \-f qcow2 \-o backing_file=\(aqjson:{\(dqfile.driver\(dq:\(dqhttp\(dq,, \(dqfile.url\(dq:\(dq\fI\%http://archives.fedoraproject.org/pub/archive/fedora/linux/releases/20/Images/x86_64/Fedora\-x86_64\-20\-20131211.1\-sda.qcow2\fP\(dq,, \(dqfile.readahead\(dq:\(dq64k\(dq}\(aq /tmp/Fedora\-x86_64\-20\-20131211.1\-sda.qcow2
 
 qemu\-system\-x86_64 \-drive file=/tmp/Fedora\-x86_64\-20\-20131211.1\-sda.qcow2,copy\-on\-read=on
 .ft P
@@ -5352,7 +5992,7 @@ of 64k and a timeout of 10 seconds.
 .sp
 .nf
 .ft C
-qemu\-img create \-f qcow2 \-o backing_file=\(aqjson:{"file.driver":"https",, "file.url":"\fI\%https://user:password@vsphere.example.com/folder/test/test\-flat.vmdk?dcPath=Datacenter&dsName=datastore1\fP",, "file.sslverify":"off",, "file.readahead":"64k",, "file.timeout":10}\(aq /tmp/test.qcow2
+qemu\-img create \-f qcow2 \-o backing_file=\(aqjson:{\(dqfile.driver\(dq:\(dqhttps\(dq,, \(dqfile.url\(dq:\(dq\fI\%https://user:password@vsphere.example.com/folder/test/test\-flat.vmdk?dcPath=Datacenter&dsName=datastore1\fP\(dq,, \(dqfile.sslverify\(dq:\(dqoff\(dq,, \(dqfile.readahead\(dq:\(dq64k\(dq,, \(dqfile.timeout\(dq:10}\(aq /tmp/test.qcow2
 
 qemu\-system\-x86_64 \-drive file=/tmp/test.qcow2
 .ft P
@@ -5367,6 +6007,6 @@ user mode emulator invocation.
 .SH AUTHOR
 Fabrice Bellard
 .SH COPYRIGHT
-2020, The QEMU Project Developers
+2024, The QEMU Project Developers
 .\" Generated by docutils manpage writer.
 .

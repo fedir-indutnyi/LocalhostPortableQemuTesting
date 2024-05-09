@@ -1,67 +1,135 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QEMU disk image utility &#8212; QEMU  documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QEMU disk image utility &mdash; QEMU  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/qemu_32x32.png"/>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="QEMU Storage Daemon" href="qemu-storage-daemon.html" />
-    <link rel="prev" title="Tools" href="index.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="prev" title="Tools" href="index.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #802400" >
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="qemu-disk-image-utility">
-<h1>QEMU disk image utility<a class="headerlink" href="#qemu-disk-image-utility" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
-<p><strong>qemu-img</strong> [<em>standard options</em>] <em>command</em> [<em>command options</em>]</p>
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            QEMU
+              <img src="../_static/qemu_128x128.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                9.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-<div class="section" id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">QEMU disk image utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-storage-daemon.html">QEMU Storage Daemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-nbd.html">QEMU Disk Network Block Device Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-pr-helper.html">QEMU persistent reservation helper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-trace-stap.html">QEMU SystemTap trace tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">Developer Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #802400" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">QEMU</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tools</a></li>
+      <li class="breadcrumb-item active">QEMU disk image utility</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://gitlab.com/qemu-project/qemu/blob/master/docs/tools/qemu-img.rst" class="fa fa-gitlab"> Edit on GitLab</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="qemu-disk-image-utility">
+<h1>QEMU disk image utility<a class="headerlink" href="#qemu-disk-image-utility" title="Permalink to this heading"></a></h1>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<p><strong>qemu-img</strong> [<em>standard options</em>] <em>command</em> [<em>command options</em>]</p>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <p>qemu-img allows you to create, convert and modify images offline. It can handle
 all image formats supported by QEMU.</p>
 <p><strong>Warning:</strong> Never use qemu-img to modify images in use by a running virtual
 machine or any other process; this may destroy the image. Also, be aware that
 querying an image that is being modified by another process may encounter
 inconsistent state.</p>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this heading"></a></h2>
 <p>Standard options:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-h">
-<span id="cmdoption-qemu-img-help"></span><code class="sig-name descname">-h</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--help</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-h" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-h">
+<span id="cmdoption-qemu-img-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-h" title="Permalink to this definition"></a></dt>
 <dd><p>Display this help and exit</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-V">
-<span id="cmdoption-qemu-img-v"></span><span id="cmdoption-qemu-img-version"></span><code class="sig-name descname">-V</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--version</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-V" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-V">
+<span id="cmdoption-qemu-img-v"></span><span id="cmdoption-qemu-img-version"></span><span class="sig-name descname"><span class="pre">-V</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-V" title="Permalink to this definition"></a></dt>
 <dd><p>Display version information and exit</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-T">
-<span id="cmdoption-qemu-img-t"></span><span id="cmdoption-qemu-img-trace"></span><code class="sig-name descname">-T</code><code class="sig-prename descclassname"></code><code class="sig-prename descclassname">, </code><code class="sig-name descname">--trace</code><code class="sig-prename descclassname"> [[enable=]PATTERN][,events=FILE][,file=FILE]</code><a class="headerlink" href="#cmdoption-qemu-img-T" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-T">
+<span id="cmdoption-qemu-img-t"></span><span id="cmdoption-qemu-img-trace"></span><span class="sig-name descname"><span class="pre">-T</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--trace</span></span><span class="sig-prename descclassname"> <span class="pre">[[enable=]PATTERN][,events=FILE][,file=FILE]</span></span><a class="headerlink" href="#cmdoption-qemu-img-T" title="Permalink to this definition"></a></dt>
 <dd><p>Specify tracing options.</p>
 <p><code class="docutils literal notranslate"><span class="pre">[enable=]PATTERN</span></code></p>
 <blockquote>
@@ -90,78 +158,78 @@ the <code class="docutils literal notranslate"><span class="pre">simple</span></
 
 <p>The following commands are supported:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-amend">
-<code class="sig-name descname">amend</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-p] [-q] [-f FMT] [-t CACHE] [--force] -o OPTIONS FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-amend" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-amend">
+<span class="sig-name descname"><span class="pre">amend</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[--force]</span> <span class="pre">-o</span> <span class="pre">OPTIONS</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-amend" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-bench">
-<code class="sig-name descname">bench</code><code class="sig-prename descclassname"> [-c COUNT] [-d DEPTH] [-f FMT] [--flush-interval=FLUSH_INTERVAL] [-i AIO] [-n] [--no-drain] [-o OFFSET] [--pattern=PATTERN] [-q] [-s BUFFER_SIZE] [-S STEP_SIZE] [-t CACHE] [-w] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-bench" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-bench">
+<span class="sig-name descname"><span class="pre">bench</span></span><span class="sig-prename descclassname"> <span class="pre">[-c</span> <span class="pre">COUNT]</span> <span class="pre">[-d</span> <span class="pre">DEPTH]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--flush-interval=FLUSH_INTERVAL]</span> <span class="pre">[-i</span> <span class="pre">AIO]</span> <span class="pre">[-n]</span> <span class="pre">[--no-drain]</span> <span class="pre">[-o</span> <span class="pre">OFFSET]</span> <span class="pre">[--pattern=PATTERN]</span> <span class="pre">[-q]</span> <span class="pre">[-s</span> <span class="pre">BUFFER_SIZE]</span> <span class="pre">[-S</span> <span class="pre">STEP_SIZE]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-w]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-bench" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-bitmap">
-<code class="sig-name descname">bitmap</code><code class="sig-prename descclassname"> (--merge SOURCE | --add | --remove | --clear | --enable | --disable)... [-b SOURCE_FILE [-F SOURCE_FMT]] [-g GRANULARITY] [--object OBJECTDEF] [--image-opts | -f FMT] FILENAME BITMAP</code><a class="headerlink" href="#cmdoption-qemu-img-arg-bitmap" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-bitmap">
+<span class="sig-name descname"><span class="pre">bitmap</span></span><span class="sig-prename descclassname"> <span class="pre">(--merge</span> <span class="pre">SOURCE</span> <span class="pre">|</span> <span class="pre">--add</span> <span class="pre">|</span> <span class="pre">--remove</span> <span class="pre">|</span> <span class="pre">--clear</span> <span class="pre">|</span> <span class="pre">--enable</span> <span class="pre">|</span> <span class="pre">--disable)...</span> <span class="pre">[-b</span> <span class="pre">SOURCE_FILE</span> <span class="pre">[-F</span> <span class="pre">SOURCE_FMT]]</span> <span class="pre">[-g</span> <span class="pre">GRANULARITY]</span> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts</span> <span class="pre">|</span> <span class="pre">-f</span> <span class="pre">FMT]</span> <span class="pre">FILENAME</span> <span class="pre">BITMAP</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-bitmap" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-check">
-<code class="sig-name descname">check</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-q] [-f FMT] [--output=OFMT] [-r [leaks | all]] [-T SRC_CACHE] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-check" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[-r</span> <span class="pre">[leaks</span> <span class="pre">|</span> <span class="pre">all]]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-check" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-commit">
-<code class="sig-name descname">commit</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-q] [-f FMT] [-t CACHE] [-b BASE] [-r RATE_LIMIT] [-d] [-p] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-commit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-commit">
+<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-b</span> <span class="pre">BASE]</span> <span class="pre">[-r</span> <span class="pre">RATE_LIMIT]</span> <span class="pre">[-d]</span> <span class="pre">[-p]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-commit" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-compare">
-<code class="sig-name descname">compare</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [-F FMT] [-T SRC_CACHE] [-p] [-q] [-s] [-U] FILENAME1 FILENAME2</code><a class="headerlink" href="#cmdoption-qemu-img-arg-compare" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-compare">
+<span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-F</span> <span class="pre">FMT]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-s]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME1</span> <span class="pre">FILENAME2</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-compare" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-convert">
-<code class="sig-name descname">convert</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [--target-image-opts] [--target-is-zero] [--bitmaps] [-U] [-C] [-c] [-p] [-q] [-n] [-f FMT] [-t CACHE] [-T SRC_CACHE] [-O OUTPUT_FMT] [-B BACKING_FILE] [-o OPTIONS] [-l SNAPSHOT_PARAM] [-S SPARSE_SIZE] [-r RATE_LIMIT] [-m NUM_COROUTINES] [-W] [--salvage] FILENAME [FILENAME2 [...]] OUTPUT_FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-convert" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[--target-image-opts]</span> <span class="pre">[--target-is-zero]</span> <span class="pre">[--bitmaps]</span> <span class="pre">[-U]</span> <span class="pre">[-C]</span> <span class="pre">[-c]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-n]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[-B</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">[-l</span> <span class="pre">SNAPSHOT_PARAM]</span> <span class="pre">[-S</span> <span class="pre">SPARSE_SIZE]</span> <span class="pre">[-r</span> <span class="pre">RATE_LIMIT]</span> <span class="pre">[-m</span> <span class="pre">NUM_COROUTINES]</span> <span class="pre">[-W]</span> <span class="pre">[--salvage]</span> <span class="pre">FILENAME</span> <span class="pre">[FILENAME2</span> <span class="pre">[...]]</span> <span class="pre">OUTPUT_FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-convert" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-create">
-<code class="sig-name descname">create</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [-q] [-f FMT] [-b BACKING_FILE] [-F BACKING_FMT] [-u] [-o OPTIONS] FILENAME [SIZE]</code><a class="headerlink" href="#cmdoption-qemu-img-arg-create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-b</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]]</span> <span class="pre">[-u]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">FILENAME</span> <span class="pre">[SIZE]</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-dd">
-<code class="sig-name descname">dd</code><code class="sig-prename descclassname"> [--image-opts] [-U] [-f FMT] [-O OUTPUT_FMT] [bs=BLOCK_SIZE] [count=BLOCKS] [skip=BLOCKS] if=INPUT of=OUTPUT</code><a class="headerlink" href="#cmdoption-qemu-img-arg-dd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-dd">
+<span class="sig-name descname"><span class="pre">dd</span></span><span class="sig-prename descclassname"> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[bs=BLOCK_SIZE]</span> <span class="pre">[count=BLOCKS]</span> <span class="pre">[skip=BLOCKS]</span> <span class="pre">if=INPUT</span> <span class="pre">of=OUTPUT</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-dd" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-info">
-<code class="sig-name descname">info</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--output=OFMT] [--backing-chain] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-info" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[--backing-chain]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-info" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-map">
-<code class="sig-name descname">map</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--start-offset=OFFSET] [--max-length=LEN] [--output=OFMT] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--start-offset=OFFSET]</span> <span class="pre">[--max-length=LEN]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-map" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-measure">
-<code class="sig-name descname">measure</code><code class="sig-prename descclassname"> [--output=OFMT] [-O OUTPUT_FMT] [-o OPTIONS] [--size N | [--object OBJECTDEF] [--image-opts] [-f FMT] [-l SNAPSHOT_PARAM] FILENAME]</code><a class="headerlink" href="#cmdoption-qemu-img-arg-measure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-measure">
+<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-prename descclassname"> <span class="pre">[--output=OFMT]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">[--size</span> <span class="pre">N</span> <span class="pre">|</span> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-l</span> <span class="pre">SNAPSHOT_PARAM]</span> <span class="pre">FILENAME]</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-measure" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-snapshot">
-<code class="sig-name descname">snapshot</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-U] [-q] [-l | -a SNAPSHOT | -c SNAPSHOT | -d SNAPSHOT] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-snapshot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-snapshot">
+<span class="sig-name descname"><span class="pre">snapshot</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-q]</span> <span class="pre">[-l</span> <span class="pre">|</span> <span class="pre">-a</span> <span class="pre">SNAPSHOT</span> <span class="pre">|</span> <span class="pre">-c</span> <span class="pre">SNAPSHOT</span> <span class="pre">|</span> <span class="pre">-d</span> <span class="pre">SNAPSHOT]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-snapshot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-rebase">
-<code class="sig-name descname">rebase</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-U] [-q] [-f FMT] [-t CACHE] [-T SRC_CACHE] [-p] [-u] -b BACKING_FILE [-F BACKING_FMT] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-arg-rebase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-rebase">
+<span class="sig-name descname"><span class="pre">rebase</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-p]</span> <span class="pre">[-u]</span> <span class="pre">[-c]</span> <span class="pre">-b</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-rebase" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-arg-resize">
-<code class="sig-name descname">resize</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--preallocation=PREALLOC] [-q] [--shrink] FILENAME [+ | -]SIZE</code><a class="headerlink" href="#cmdoption-qemu-img-arg-resize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-arg-resize">
+<span class="sig-name descname"><span class="pre">resize</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--preallocation=PREALLOC]</span> <span class="pre">[-q]</span> <span class="pre">[--shrink]</span> <span class="pre">FILENAME</span> <span class="pre">[+</span> <span class="pre">|</span> <span class="pre">-]SIZE</span></span><a class="headerlink" href="#cmdoption-qemu-img-arg-resize" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <p>Command parameters:</p>
@@ -174,13 +242,13 @@ cases. See below for a description of the supported disk formats.</p>
 <p><em>OUTPUT_FILENAME</em> is the destination disk image filename.</p>
 <p><em>OUTPUT_FMT</em> is the destination format.</p>
 <p><em>OPTIONS</em> is a comma separated list of format specific options in a
-name=value format. Use <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">?</span></code> for an overview of the options supported
+name=value format. Use <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">help</span></code> for an overview of the options supported
 by the used format or see the format descriptions below for details.</p>
 <p><em>SNAPSHOT_PARAM</em> is param used for internal snapshot, format is
 ‘snapshot.id=[ID],snapshot.name=[NAME]’ or ‘[ID_OR_NAME]’.</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-object">
-<code class="sig-name descname">--object</code><code class="sig-prename descclassname"> OBJECTDEF</code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-object" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-object">
+<span class="sig-name descname"><span class="pre">--object</span></span><span class="sig-prename descclassname"> <span class="pre">OBJECTDEF</span></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-object" title="Permalink to this definition"></a></dt>
 <dd><p>is a QEMU user creatable object definition. See the <em class="manpage">qemu(1)</em>
 manual page for a description of the object properties. The most common
 object type is a <code class="docutils literal notranslate"><span class="pre">secret</span></code>, which is used to supply passwords and/or
@@ -188,16 +256,16 @@ encryption keys.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-image-opts">
-<code class="sig-name descname">--image-opts</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-image-opts" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-image-opts">
+<span class="sig-name descname"><span class="pre">--image-opts</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-image-opts" title="Permalink to this definition"></a></dt>
 <dd><p>Indicates that the source <em>FILENAME</em> parameter is to be interpreted as a
 full option string, not a plain filename. This parameter is mutually
 exclusive with the <em>-f</em> parameter.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-target-image-opts">
-<code class="sig-name descname">--target-image-opts</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-target-image-opts" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-target-image-opts">
+<span class="sig-name descname"><span class="pre">--target-image-opts</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-target-image-opts" title="Permalink to this definition"></a></dt>
 <dd><p>Indicates that the OUTPUT_FILENAME parameter(s) are to be interpreted as
 a full option string, not a plain filename. This parameter is mutually
 exclusive with the <em>-O</em> parameters. It is currently required to also use
@@ -206,8 +274,8 @@ in a future release.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-force-share">
-<code class="sig-name descname">--force-share</code><code class="sig-prename descclassname"> (-U)</code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-force-share" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-force-share">
+<span class="sig-name descname"><span class="pre">--force-share</span></span><span class="sig-prename descclassname"> <span class="pre">(-U)</span></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-force-share" title="Permalink to this definition"></a></dt>
 <dd><p>If specified, <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> will open the image in shared mode, allowing
 other QEMU processes to open it in write mode. For example, this can be used to
 get the image information (with ‘info’ subcommand) when the image is used by a
@@ -217,27 +285,30 @@ images in read-only mode.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-backing-chain">
-<code class="sig-name descname">--backing-chain</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-backing-chain" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-backing-chain">
+<span class="sig-name descname"><span class="pre">--backing-chain</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-backing-chain" title="Permalink to this definition"></a></dt>
 <dd><p>Will enumerate information about backing files in a disk image chain. Refer
 below for further description.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-c">
-<code class="sig-name descname">-c</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-c" title="Permalink to this definition">¶</a></dt>
-<dd><p>Indicates that target image must be compressed (qcow format only).</p>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-c" title="Permalink to this definition"></a></dt>
+<dd><p>Indicates that target image must be compressed (qcow/qcow2 and vmdk with
+streamOptimized subformat only).</p>
+<p>For qcow2, the compression algorithm can be specified with the <code class="docutils literal notranslate"><span class="pre">-o</span>
+<span class="pre">compression_type=...</span></code> option (see below).</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-h">
-<code class="sig-name descname">-h</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-h" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-h" title="Permalink to this definition"></a></dt>
 <dd><p>With or without a command, shows help and lists the supported formats.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-p">
-<code class="sig-name descname">-p</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-p" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-p">
+<span class="sig-name descname"><span class="pre">-p</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-p" title="Permalink to this definition"></a></dt>
 <dd><p>Display progress bar (compare, convert and rebase commands only).
 If the <em>-p</em> option is not used for a command that supports it, the
 progress is reported when the process receives a <code class="docutils literal notranslate"><span class="pre">SIGUSR1</span></code> or
@@ -245,32 +316,32 @@ progress is reported when the process receives a <code class="docutils literal n
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-q">
-<code class="sig-name descname">-q</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-q" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-q">
+<span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-q" title="Permalink to this definition"></a></dt>
 <dd><p>Quiet mode - do not print any output (except errors). There’s no progress bar
 in case both <em>-q</em> and <em>-p</em> options are used.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-S">
-<span id="cmdoption-qemu-img-common-opts-s"></span><code class="sig-name descname">-S</code><code class="sig-prename descclassname"> SIZE</code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-S" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-S">
+<span id="cmdoption-qemu-img-common-opts-s"></span><span class="sig-name descname"><span class="pre">-S</span></span><span class="sig-prename descclassname"> <span class="pre">SIZE</span></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-S" title="Permalink to this definition"></a></dt>
 <dd><p>Indicates the consecutive number of bytes that must contain only zeros
-for qemu-img to create a sparse image during conversion. This value is rounded
-down to the nearest 512 bytes. You may use the common size suffixes like
-<code class="docutils literal notranslate"><span class="pre">k</span></code> for kilobytes.</p>
+for <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> to create a sparse image during conversion. This value is
+rounded down to the nearest 512 bytes. You may use the common size suffixes
+like <code class="docutils literal notranslate"><span class="pre">k</span></code> for kilobytes.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-t">
-<code class="sig-name descname">-t</code><code class="sig-prename descclassname"> CACHE</code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-t" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-t">
+<span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"> <span class="pre">CACHE</span></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-t" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies the cache mode that should be used with the (destination) file. See
 the documentation of the emulator’s <code class="docutils literal notranslate"><span class="pre">-drive</span> <span class="pre">cache=...</span></code> option for allowed
 values.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-common-opts-T">
-<code class="sig-name descname">-T</code><code class="sig-prename descclassname"> SRC_CACHE</code><a class="headerlink" href="#cmdoption-qemu-img-common-opts-T" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-common-opts-T">
+<span class="sig-name descname"><span class="pre">-T</span></span><span class="sig-prename descclassname"> <span class="pre">SRC_CACHE</span></span><a class="headerlink" href="#cmdoption-qemu-img-common-opts-T" title="Permalink to this definition"></a></dt>
 <dd><p>Specifies the cache mode that should be used with the source file(s). See
 the documentation of the emulator’s <code class="docutils literal notranslate"><span class="pre">-drive</span> <span class="pre">cache=...</span></code> option for allowed
 values.</p>
@@ -278,53 +349,53 @@ values.</p>
 
 <p>Parameters to compare subcommand:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-compare-f">
-<code class="sig-name descname">-f</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-compare-f" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-compare-f">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-compare-f" title="Permalink to this definition"></a></dt>
 <dd><p>First image format</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-compare-F">
-<code class="sig-name descname">-F</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-compare-F" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-compare-F">
+<span class="sig-name descname"><span class="pre">-F</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-compare-F" title="Permalink to this definition"></a></dt>
 <dd><p>Second image format</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-compare-s">
-<code class="sig-name descname">-s</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-compare-s" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-compare-s">
+<span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-compare-s" title="Permalink to this definition"></a></dt>
 <dd><p>Strict mode - fail on different image size or sector allocation</p>
 </dd></dl>
 
 <p>Parameters to convert subcommand:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-bitmaps">
-<code class="sig-name descname">--bitmaps</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-bitmaps" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-bitmaps">
+<span class="sig-name descname"><span class="pre">--bitmaps</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-bitmaps" title="Permalink to this definition"></a></dt>
 <dd><p>Additionally copy all persistent bitmaps from the top layer of the source</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-n">
-<code class="sig-name descname">-n</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-n" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-n">
+<span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-n" title="Permalink to this definition"></a></dt>
 <dd><p>Skip the creation of the target volume</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-m">
-<code class="sig-name descname">-m</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-m" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-m">
+<span class="sig-name descname"><span class="pre">-m</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-m" title="Permalink to this definition"></a></dt>
 <dd><p>Number of parallel coroutines for the convert process</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-W">
-<span id="cmdoption-qemu-img-convert-w"></span><code class="sig-name descname">-W</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-W" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-W">
+<span id="cmdoption-qemu-img-convert-w"></span><span class="sig-name descname"><span class="pre">-W</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-W" title="Permalink to this definition"></a></dt>
 <dd><p>Allow out-of-order writes to the destination. This option improves performance,
 but is only recommended for preallocated devices like host devices or other
 raw block devices.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-C">
-<span id="cmdoption-qemu-img-convert-c"></span><code class="sig-name descname">-C</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-C" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-C">
+<span id="cmdoption-qemu-img-convert-c"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-C" title="Permalink to this definition"></a></dt>
 <dd><p>Try to use copy offloading to move data from source image to target. This may
 improve performance if the data is remote, such as with NFS or iSCSI backends,
 but will not automatically sparsify zero sectors, and may result in a fully
@@ -333,22 +404,22 @@ information.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-r">
-<code class="sig-name descname">-r</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-r" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-r">
+<span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-r" title="Permalink to this definition"></a></dt>
 <dd><p>Rate limit for the convert process</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-salvage">
-<code class="sig-name descname">--salvage</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-salvage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-salvage">
+<span class="sig-name descname"><span class="pre">--salvage</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-salvage" title="Permalink to this definition"></a></dt>
 <dd><p>Try to ignore I/O errors when reading.  Unless in quiet mode (<code class="docutils literal notranslate"><span class="pre">-q</span></code>), errors
 will still be printed.  Areas that cannot be read from the source will be
 treated as containing only zeroes.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-convert-target-is-zero">
-<code class="sig-name descname">--target-is-zero</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-convert-target-is-zero" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-convert-target-is-zero">
+<span class="sig-name descname"><span class="pre">--target-is-zero</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-convert-target-is-zero" title="Permalink to this definition"></a></dt>
 <dd><p>Assume that reading the destination image will always return
 zeros. This parameter is mutually exclusive with a destination image
 that has a backing file. It is required to also use the <code class="docutils literal notranslate"><span class="pre">-n</span></code>
@@ -357,70 +428,70 @@ parameter to skip image creation.</p>
 
 <p>Parameters to dd subcommand:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-dd-arg-bs">
-<code class="sig-name descname">bs</code><code class="sig-prename descclassname">=BLOCK_SIZE</code><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-bs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-dd-arg-bs">
+<span class="sig-name descname"><span class="pre">bs</span></span><span class="sig-prename descclassname"><span class="pre">=BLOCK_SIZE</span></span><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-bs" title="Permalink to this definition"></a></dt>
 <dd><p>Defines the block size</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-dd-arg-count">
-<code class="sig-name descname">count</code><code class="sig-prename descclassname">=BLOCKS</code><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-count" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-dd-arg-count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-prename descclassname"><span class="pre">=BLOCKS</span></span><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-count" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the number of input blocks to copy</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-dd-arg-if">
-<code class="sig-name descname">if</code><code class="sig-prename descclassname">=INPUT</code><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-if" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-dd-arg-if">
+<span class="sig-name descname"><span class="pre">if</span></span><span class="sig-prename descclassname"><span class="pre">=INPUT</span></span><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-if" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the input file</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-dd-arg-of">
-<code class="sig-name descname">of</code><code class="sig-prename descclassname">=OUTPUT</code><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-of" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-dd-arg-of">
+<span class="sig-name descname"><span class="pre">of</span></span><span class="sig-prename descclassname"><span class="pre">=OUTPUT</span></span><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-of" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the output file</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-dd-arg-skip">
-<code class="sig-name descname">skip</code><code class="sig-prename descclassname">=BLOCKS</code><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-skip" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-dd-arg-skip">
+<span class="sig-name descname"><span class="pre">skip</span></span><span class="sig-prename descclassname"><span class="pre">=BLOCKS</span></span><a class="headerlink" href="#cmdoption-qemu-img-dd-arg-skip" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the number of input blocks to skip</p>
 </dd></dl>
 
 <p>Parameters to snapshot subcommand:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-snapshot-arg-snapshot">
-<code class="sig-name descname">snapshot</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-snapshot-arg-snapshot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-snapshot-arg-snapshot">
+<span class="sig-name descname"><span class="pre">snapshot</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-snapshot-arg-snapshot" title="Permalink to this definition"></a></dt>
 <dd><p>Is the name of the snapshot to create, apply or delete</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-snapshot-a">
-<code class="sig-name descname">-a</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-snapshot-a" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-snapshot-a">
+<span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-snapshot-a" title="Permalink to this definition"></a></dt>
 <dd><p>Applies a snapshot (revert disk to saved state)</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-snapshot-c">
-<code class="sig-name descname">-c</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-snapshot-c" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-snapshot-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-snapshot-c" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a snapshot</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-snapshot-d">
-<code class="sig-name descname">-d</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-snapshot-d" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-snapshot-d">
+<span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-snapshot-d" title="Permalink to this definition"></a></dt>
 <dd><p>Deletes a snapshot</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-snapshot-l">
-<code class="sig-name descname">-l</code><code class="sig-prename descclassname"></code><a class="headerlink" href="#cmdoption-qemu-img-snapshot-l" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-snapshot-l">
+<span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-qemu-img-snapshot-l" title="Permalink to this definition"></a></dt>
 <dd><p>Lists all snapshots in the given image</p>
 </dd></dl>
 
 <p>Command description:</p>
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-amend">
-<code class="sig-name descname">amend</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-p] [-q] [-f FMT] [-t CACHE] [--force] -o OPTIONS FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-amend" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-amend">
+<span class="sig-name descname"><span class="pre">amend</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[--force]</span> <span class="pre">-o</span> <span class="pre">OPTIONS</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-amend" title="Permalink to this definition"></a></dt>
 <dd><p>Amends the image format specific <em>OPTIONS</em> for the image file
 <em>FILENAME</em>. Not all file formats support this operation.</p>
 <p>The set of options that can be amended are dependent on the image
@@ -431,8 +502,8 @@ erase the last encryption key, and to overwrite an active encryption key.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-bench">
-<code class="sig-name descname">bench</code><code class="sig-prename descclassname"> [-c COUNT] [-d DEPTH] [-f FMT] [--flush-interval=FLUSH_INTERVAL] [-i AIO] [-n] [--no-drain] [-o OFFSET] [--pattern=PATTERN] [-q] [-s BUFFER_SIZE] [-S STEP_SIZE] [-t CACHE] [-w] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-bench" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-bench">
+<span class="sig-name descname"><span class="pre">bench</span></span><span class="sig-prename descclassname"> <span class="pre">[-c</span> <span class="pre">COUNT]</span> <span class="pre">[-d</span> <span class="pre">DEPTH]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--flush-interval=FLUSH_INTERVAL]</span> <span class="pre">[-i</span> <span class="pre">AIO]</span> <span class="pre">[-n]</span> <span class="pre">[--no-drain]</span> <span class="pre">[-o</span> <span class="pre">OFFSET]</span> <span class="pre">[--pattern=PATTERN]</span> <span class="pre">[-q]</span> <span class="pre">[-s</span> <span class="pre">BUFFER_SIZE]</span> <span class="pre">[-S</span> <span class="pre">STEP_SIZE]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-w]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-bench" title="Permalink to this definition"></a></dt>
 <dd><p>Run a simple sequential I/O benchmark on the specified image. If <code class="docutils literal notranslate"><span class="pre">-w</span></code> is
 specified, a write test is performed, otherwise a read test is performed.</p>
 <p>A total number of <em>COUNT</em> I/O requests is performed, each <em>BUFFER_SIZE</em>
@@ -455,8 +526,8 @@ overridden with a pattern byte specified by <em>PATTERN</em>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-bitmap">
-<code class="sig-name descname">bitmap</code><code class="sig-prename descclassname"> (--merge SOURCE | --add | --remove | --clear | --enable | --disable)... [-b SOURCE_FILE [-F SOURCE_FMT]] [-g GRANULARITY] [--object OBJECTDEF] [--image-opts | -f FMT] FILENAME BITMAP</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-bitmap" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-bitmap">
+<span class="sig-name descname"><span class="pre">bitmap</span></span><span class="sig-prename descclassname"> <span class="pre">(--merge</span> <span class="pre">SOURCE</span> <span class="pre">|</span> <span class="pre">--add</span> <span class="pre">|</span> <span class="pre">--remove</span> <span class="pre">|</span> <span class="pre">--clear</span> <span class="pre">|</span> <span class="pre">--enable</span> <span class="pre">|</span> <span class="pre">--disable)...</span> <span class="pre">[-b</span> <span class="pre">SOURCE_FILE</span> <span class="pre">[-F</span> <span class="pre">SOURCE_FMT]]</span> <span class="pre">[-g</span> <span class="pre">GRANULARITY]</span> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts</span> <span class="pre">|</span> <span class="pre">-f</span> <span class="pre">FMT]</span> <span class="pre">FILENAME</span> <span class="pre">BITMAP</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-bitmap" title="Permalink to this definition"></a></dt>
 <dd><p>Perform one or more modifications of the persistent bitmap <em>BITMAP</em>
 in the disk image <em>FILENAME</em>.  The various modifications are:</p>
 <p><code class="docutils literal notranslate"><span class="pre">--add</span></code> to create <em>BITMAP</em>, enabled to record future edits.</p>
@@ -473,8 +544,8 @@ alternative source file for all <em>SOURCE</em> bitmaps used by
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-check">
-<code class="sig-name descname">check</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-q] [-f FMT] [--output=OFMT] [-r [leaks | all]] [-T SRC_CACHE] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-check" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[-r</span> <span class="pre">[leaks</span> <span class="pre">|</span> <span class="pre">all]]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-check" title="Permalink to this definition"></a></dt>
 <dd><p>Perform a consistency check on the disk image <em>FILENAME</em>. The command can
 output in the format <em>OFMT</em> which is either <code class="docutils literal notranslate"><span class="pre">human</span></code> or <code class="docutils literal notranslate"><span class="pre">json</span></code>.
 The JSON output is an object of QAPI type <code class="docutils literal notranslate"><span class="pre">ImageCheck</span></code>.</p>
@@ -482,8 +553,8 @@ The JSON output is an object of QAPI type <code class="docutils literal notransl
 during the check. <code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">leaks</span></code> repairs only cluster leaks, whereas
 <code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">all</span></code> fixes all kinds of errors, with a higher risk of choosing the
 wrong fix or hiding corruption that has already occurred.</p>
-<p>Only the formats <code class="docutils literal notranslate"><span class="pre">qcow2</span></code>, <code class="docutils literal notranslate"><span class="pre">qed</span></code> and <code class="docutils literal notranslate"><span class="pre">vdi</span></code> support
-consistency checks.</p>
+<p>Only the formats <code class="docutils literal notranslate"><span class="pre">qcow2</span></code>, <code class="docutils literal notranslate"><span class="pre">qed</span></code>, <code class="docutils literal notranslate"><span class="pre">parallels</span></code>, <code class="docutils literal notranslate"><span class="pre">vhdx</span></code>, <code class="docutils literal notranslate"><span class="pre">vmdk</span></code> and
+<code class="docutils literal notranslate"><span class="pre">vdi</span></code> support consistency checks.</p>
 <p>In case the image does not have any inconsistencies, check exits with <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 Other exit codes indicate the kind of inconsistency found or if another error
 occurred. The following table summarizes all exit codes of the check subcommand:</p>
@@ -505,8 +576,8 @@ will yield the exit code 0, independently of the image state before.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-commit">
-<code class="sig-name descname">commit</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-q] [-f FMT] [-t CACHE] [-b BASE] [-r RATE_LIMIT] [-d] [-p] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-commit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-commit">
+<span class="sig-name descname"><span class="pre">commit</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-b</span> <span class="pre">BASE]</span> <span class="pre">[-r</span> <span class="pre">RATE_LIMIT]</span> <span class="pre">[-d]</span> <span class="pre">[-p]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-commit" title="Permalink to this definition"></a></dt>
 <dd><p>Commit the changes recorded in <em>FILENAME</em> in its base image or backing file.
 If the backing file is smaller than the snapshot, then the backing file will be
 resized to be the same size as the snapshot.  If the snapshot is smaller than
@@ -528,8 +599,8 @@ the top image stays valid).</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-compare">
-<code class="sig-name descname">compare</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [-F FMT] [-T SRC_CACHE] [-p] [-q] [-s] [-U] FILENAME1 FILENAME2</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-compare" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-compare">
+<span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-F</span> <span class="pre">FMT]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-s]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME1</span> <span class="pre">FILENAME2</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-compare" title="Permalink to this definition"></a></dt>
 <dd><p>Check if two images have the same content. You can compare images with
 different format or settings.</p>
 <p>The format is probed unless you specify it by <code class="docutils literal notranslate"><span class="pre">-f</span></code> (used for
@@ -548,7 +619,7 @@ Strict mode is used.</p>
 <p>Compare exits with <code class="docutils literal notranslate"><span class="pre">0</span></code> in case the images are equal and with <code class="docutils literal notranslate"><span class="pre">1</span></code>
 in case the images differ. Other exit codes mean an error occurred during
 execution and standard error output should contain an error message.
-The following table sumarizes all exit codes of the compare subcommand:</p>
+The following table summarizes all exit codes of the compare subcommand:</p>
 <dl class="simple">
 <dt>0</dt><dd><p>Images are identical (or requested help was printed)</p>
 </dd>
@@ -564,8 +635,8 @@ The following table sumarizes all exit codes of the compare subcommand:</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-convert">
-<code class="sig-name descname">convert</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [--target-image-opts] [--target-is-zero] [--bitmaps] [-U] [-C] [-c] [-p] [-q] [-n] [-f FMT] [-t CACHE] [-T SRC_CACHE] [-O OUTPUT_FMT] [-B BACKING_FILE] [-o OPTIONS] [-l SNAPSHOT_PARAM] [-S SPARSE_SIZE] [-r RATE_LIMIT] [-m NUM_COROUTINES] [-W] FILENAME [FILENAME2 [...]] OUTPUT_FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-convert" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[--target-image-opts]</span> <span class="pre">[--target-is-zero]</span> <span class="pre">[--bitmaps</span> <span class="pre">[--skip-broken-bitmaps]]</span> <span class="pre">[-U]</span> <span class="pre">[-C]</span> <span class="pre">[-c]</span> <span class="pre">[-p]</span> <span class="pre">[-q]</span> <span class="pre">[-n]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[-B</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">[-l</span> <span class="pre">SNAPSHOT_PARAM]</span> <span class="pre">[-S</span> <span class="pre">SPARSE_SIZE]</span> <span class="pre">[-r</span> <span class="pre">RATE_LIMIT]</span> <span class="pre">[-m</span> <span class="pre">NUM_COROUTINES]</span> <span class="pre">[-W]</span> <span class="pre">FILENAME</span> <span class="pre">[FILENAME2</span> <span class="pre">[...]]</span> <span class="pre">OUTPUT_FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-convert" title="Permalink to this definition"></a></dt>
 <dd><p>Convert the disk image <em>FILENAME</em> or a snapshot <em>SNAPSHOT_PARAM</em>
 to disk image <em>OUTPUT_FILENAME</em> using format <em>OUTPUT_FMT</em>. It can
 be optionally compressed (<code class="docutils literal notranslate"><span class="pre">-c</span></code> option) or use any format specific
@@ -577,38 +648,43 @@ rewritten, then it is rewritten as uncompressed data.</p>
 growable format such as <code class="docutils literal notranslate"><span class="pre">qcow</span></code>: the empty sectors are detected and
 suppressed from the destination image.</p>
 <p><em>SPARSE_SIZE</em> indicates the consecutive number of bytes (defaults to 4k)
-that must contain only zeros for qemu-img to create a sparse image during
+that must contain only zeros for <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> to create a sparse image during
 conversion. If <em>SPARSE_SIZE</em> is 0, the source will not be scanned for
 unallocated or zero sectors, and the destination image will always be
 fully allocated.</p>
 <p>You can use the <em>BACKING_FILE</em> option to force the output image to be
 created as a copy on write image of the specified base image; the
 <em>BACKING_FILE</em> should have the same content as the input’s base image,
-however the path, image format, etc may differ.</p>
+however the path, image format (as given by <em>BACKING_FMT</em>), etc may differ.</p>
 <p>If a relative path name is given, the backing file is looked up relative to
 the directory containing <em>OUTPUT_FILENAME</em>.</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">-n</span></code> option is specified, the target volume creation will be
 skipped. This is useful for formats such as <code class="docutils literal notranslate"><span class="pre">rbd</span></code> if the target
 volume has already been created with site specific options that cannot
-be supplied through qemu-img.</p>
+be supplied through <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code>.</p>
 <p>Out of order writes can be enabled with <code class="docutils literal notranslate"><span class="pre">-W</span></code> to improve performance.
 This is only recommended for preallocated devices like host devices or other
 raw block devices. Out of order write does not work in combination with
 creating compressed images.</p>
 <p><em>NUM_COROUTINES</em> specifies how many coroutines work in parallel during
 the convert process (defaults to 8).</p>
+<p>Use of <code class="docutils literal notranslate"><span class="pre">--bitmaps</span></code> requests that any persistent bitmaps present in
+the original are also copied to the destination.  If any bitmap is
+inconsistent in the source, the conversion will fail unless
+<code class="docutils literal notranslate"><span class="pre">--skip-broken-bitmaps</span></code> is also specified to copy only the
+consistent bitmaps.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-create">
-<code class="sig-name descname">create</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [-q] [-f FMT] [-b BACKING_FILE] [-F BACKING_FMT] [-u] [-o OPTIONS] FILENAME [SIZE]</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-b</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]]</span> <span class="pre">[-u]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">FILENAME</span> <span class="pre">[SIZE]</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-create" title="Permalink to this definition"></a></dt>
 <dd><p>Create the new disk image <em>FILENAME</em> of size <em>SIZE</em> and format
 <em>FMT</em>. Depending on the file format, you can add one or more <em>OPTIONS</em>
 that enable additional features of this format.</p>
 <p>If the option <em>BACKING_FILE</em> is specified, then the image will record
 only the differences from <em>BACKING_FILE</em>. No size needs to be specified in
 this case. <em>BACKING_FILE</em> will never be modified unless you use the
-<code class="docutils literal notranslate"><span class="pre">commit</span></code> monitor command (or qemu-img commit).</p>
+<code class="docutils literal notranslate"><span class="pre">commit</span></code> monitor command (or <code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">commit</span></code>).</p>
 <p>If a relative path name is given, the backing file is looked up relative to
 the directory containing <em>FILENAME</em>.</p>
 <p>Note that a given backing file will be opened to check that it is valid. Use
@@ -622,8 +698,8 @@ it doesn’t need to be specified separately in this case.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-dd">
-<code class="sig-name descname">dd</code><code class="sig-prename descclassname"> [--image-opts] [-U] [-f FMT] [-O OUTPUT_FMT] [bs=BLOCK_SIZE] [count=BLOCKS] [skip=BLOCKS] if=INPUT of=OUTPUT</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-dd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-dd">
+<span class="sig-name descname"><span class="pre">dd</span></span><span class="sig-prename descclassname"> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[bs=BLOCK_SIZE]</span> <span class="pre">[count=BLOCKS]</span> <span class="pre">[skip=BLOCKS]</span> <span class="pre">if=INPUT</span> <span class="pre">of=OUTPUT</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-dd" title="Permalink to this definition"></a></dt>
 <dd><p>dd copies from <em>INPUT</em> file to <em>OUTPUT</em> file converting it from
 <em>FMT</em> format to <em>OUTPUT_FMT</em> format.</p>
 <p>The data is by default read and written using blocks of 512 bytes but can be
@@ -633,8 +709,8 @@ dd will stop reading input after reading <em>BLOCKS</em> input blocks.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-info">
-<code class="sig-name descname">info</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--output=OFMT] [--backing-chain] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-info" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[--backing-chain]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-info" title="Permalink to this definition"></a></dt>
 <dd><p>Give information about the disk image <em>FILENAME</em>. Use it in
 particular to know the size reserved on disk which can be different
 from the displayed size. If VM snapshots are stored in the disk image,
@@ -687,8 +763,8 @@ for qcow2 images).</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-map">
-<code class="sig-name descname">map</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--start-offset=OFFSET] [--max-length=LEN] [--output=OFMT] [-U] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--start-offset=OFFSET]</span> <span class="pre">[--max-length=LEN]</span> <span class="pre">[--output=OFMT]</span> <span class="pre">[-U]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-map" title="Permalink to this definition"></a></dt>
 <dd><p>Dump the metadata of image <em>FILENAME</em> and its backing file chain.
 In particular, this commands dumps the allocation state of every sector
 of <em>FILENAME</em>, together with the topmost file that allocates it in
@@ -716,13 +792,16 @@ in JSON format.  It will include similar information in
 the <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">offset</span></code> fields;
 it will also include other more specific information:</p>
 <ul class="simple">
-<li><p>whether the sectors contain actual data or not (boolean field <code class="docutils literal notranslate"><span class="pre">data</span></code>;
-if false, the sectors are either unallocated or stored as optimized
-all-zero clusters);</p></li>
-<li><p>whether the data is known to read as zero (boolean field <code class="docutils literal notranslate"><span class="pre">zero</span></code>);</p></li>
-<li><p>in order to make the output shorter, the target file is expressed as
-a <code class="docutils literal notranslate"><span class="pre">depth</span></code>; for example, a depth of 2 refers to the backing file
-of the backing file of <em>FILENAME</em>.</p></li>
+<li><p>boolean field <code class="docutils literal notranslate"><span class="pre">data</span></code>: true if the sectors contain actual data,
+false if the sectors are either unallocated or stored as optimized
+all-zero clusters</p></li>
+<li><p>boolean field <code class="docutils literal notranslate"><span class="pre">zero</span></code>: true if the data is known to read as zero</p></li>
+<li><p>boolean field <code class="docutils literal notranslate"><span class="pre">present</span></code>: true if the data belongs to the backing
+chain, false if rebasing the backing chain onto a deeper file
+would pick up data from the deeper file;</p></li>
+<li><p>integer field <code class="docutils literal notranslate"><span class="pre">depth</span></code>: the depth within the backing chain at
+which the data was resolved; for example, a depth of 2 refers to
+the backing file of the backing file of <em>FILENAME</em>.</p></li>
 </ul>
 <p>In JSON format, the <code class="docutils literal notranslate"><span class="pre">offset</span></code> field is optional; it is absent in
 cases where <code class="docutils literal notranslate"><span class="pre">human</span></code> format would omit the entry or exit with an error.
@@ -734,8 +813,8 @@ source code.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-measure">
-<code class="sig-name descname">measure</code><code class="sig-prename descclassname"> [--output=OFMT] [-O OUTPUT_FMT] [-o OPTIONS] [--size N | [--object OBJECTDEF] [--image-opts] [-f FMT] [-l SNAPSHOT_PARAM] FILENAME]</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-measure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-measure">
+<span class="sig-name descname"><span class="pre">measure</span></span><span class="sig-prename descclassname"> <span class="pre">[--output=OFMT]</span> <span class="pre">[-O</span> <span class="pre">OUTPUT_FMT]</span> <span class="pre">[-o</span> <span class="pre">OPTIONS]</span> <span class="pre">[--size</span> <span class="pre">N</span> <span class="pre">|</span> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-l</span> <span class="pre">SNAPSHOT_PARAM]</span> <span class="pre">FILENAME]</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-measure" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the file size required for a new image.  This information
 can be used to size logical volumes or SAN LUNs appropriately for
 the image that will be placed in them.  The values reported are
@@ -768,14 +847,14 @@ to copy.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-snapshot">
-<code class="sig-name descname">snapshot</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-U] [-q] [-l | -a SNAPSHOT | -c SNAPSHOT | -d SNAPSHOT] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-snapshot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-snapshot">
+<span class="sig-name descname"><span class="pre">snapshot</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-q]</span> <span class="pre">[-l</span> <span class="pre">|</span> <span class="pre">-a</span> <span class="pre">SNAPSHOT</span> <span class="pre">|</span> <span class="pre">-c</span> <span class="pre">SNAPSHOT</span> <span class="pre">|</span> <span class="pre">-d</span> <span class="pre">SNAPSHOT]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-snapshot" title="Permalink to this definition"></a></dt>
 <dd><p>List, apply, create or delete snapshots in image <em>FILENAME</em>.</p>
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-rebase">
-<code class="sig-name descname">rebase</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-U] [-q] [-f FMT] [-t CACHE] [-T SRC_CACHE] [-p] [-u] -b BACKING_FILE [-F BACKING_FMT] FILENAME</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-rebase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-rebase">
+<span class="sig-name descname"><span class="pre">rebase</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-U]</span> <span class="pre">[-q]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[-t</span> <span class="pre">CACHE]</span> <span class="pre">[-T</span> <span class="pre">SRC_CACHE]</span> <span class="pre">[-p]</span> <span class="pre">[-u]</span> <span class="pre">[-c]</span> <span class="pre">-b</span> <span class="pre">BACKING_FILE</span> <span class="pre">[-F</span> <span class="pre">BACKING_FMT]</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-rebase" title="Permalink to this definition"></a></dt>
 <dd><p>Changes the backing file of an image. Only the formats <code class="docutils literal notranslate"><span class="pre">qcow2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">qed</span></code> support changing the backing file.</p>
 <p>The backing file is changed to <em>BACKING_FILE</em> and (if the image format of
@@ -790,17 +869,19 @@ the directory containing <em>FILENAME</em>.</p>
 <p>There are two different modes in which <code class="docutils literal notranslate"><span class="pre">rebase</span></code> can operate:</p>
 <dl>
 <dt>Safe mode</dt><dd><p>This is the default mode and performs a real rebase operation. The
-new backing file may differ from the old one and qemu-img rebase
+new backing file may differ from the old one and <code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">rebase</span></code>
 will take care of keeping the guest-visible content of <em>FILENAME</em>
 unchanged.</p>
 <p>In order to achieve this, any clusters that differ between
 <em>BACKING_FILE</em> and the old backing file of <em>FILENAME</em> are merged
-into <em>FILENAME</em> before actually changing the backing file.</p>
+into <em>FILENAME</em> before actually changing the backing file. With the
+<code class="docutils literal notranslate"><span class="pre">-c</span></code> option specified, the clusters which are being merged (but not
+the entire <em>FILENAME</em> image) are compressed when written.</p>
 <p>Note that the safe mode is an expensive operation, comparable to
 converting an image. It only works if the old backing file still
 exists.</p>
 </dd>
-<dt>Unsafe mode</dt><dd><p>qemu-img uses the unsafe mode if <code class="docutils literal notranslate"><span class="pre">-u</span></code> is specified. In this
+<dt>Unsafe mode</dt><dd><p><code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> uses the unsafe mode if <code class="docutils literal notranslate"><span class="pre">-u</span></code> is specified. In this
 mode, only the backing file name and format of <em>FILENAME</em> is changed
 without any checks on the file contents. The user must take care of
 specifying the correct new backing file, or the guest-visible
@@ -828,14 +909,14 @@ image called <code class="docutils literal notranslate"><span class="pre">diff.q
 </dd></dl>
 
 <dl class="std option">
-<dt id="cmdoption-qemu-img-commands-arg-resize">
-<code class="sig-name descname">resize</code><code class="sig-prename descclassname"> [--object OBJECTDEF] [--image-opts] [-f FMT] [--preallocation=PREALLOC] [-q] [--shrink] FILENAME [+ | -]SIZE</code><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-resize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-qemu-img-commands-arg-resize">
+<span class="sig-name descname"><span class="pre">resize</span></span><span class="sig-prename descclassname"> <span class="pre">[--object</span> <span class="pre">OBJECTDEF]</span> <span class="pre">[--image-opts]</span> <span class="pre">[-f</span> <span class="pre">FMT]</span> <span class="pre">[--preallocation=PREALLOC]</span> <span class="pre">[-q]</span> <span class="pre">[--shrink]</span> <span class="pre">FILENAME</span> <span class="pre">[+</span> <span class="pre">|</span> <span class="pre">-]SIZE</span></span><a class="headerlink" href="#cmdoption-qemu-img-commands-arg-resize" title="Permalink to this definition"></a></dt>
 <dd><p>Change the disk image as if it had been created with <em>SIZE</em>.</p>
 <p>Before using this command to shrink a disk image, you MUST use file system and
 partitioning tools inside the VM to reduce allocated file systems and partition
 sizes accordingly.  Failure to do so will result in data loss!</p>
 <p>When shrinking images, the <code class="docutils literal notranslate"><span class="pre">--shrink</span></code> option must be given. This informs
-qemu-img that the user acknowledges all loss of data beyond the truncated
+<code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> that the user acknowledges all loss of data beyond the truncated
 image’s end.</p>
 <p>After using this command to grow a disk image, you must use file system and
 partitioning tools inside the VM to actually begin using the new space on the
@@ -846,9 +927,9 @@ description in the <a class="reference internal" href="#notes"><span class="std 
 option may result in slightly more data being allocated than necessary.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="notes">
-<span id="id1"></span><h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="notes">
+<span id="id1"></span><h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading"></a></h2>
 <p>Supported image file formats:</p>
 <p><code class="docutils literal notranslate"><span class="pre">raw</span></code></p>
 <blockquote>
@@ -872,7 +953,7 @@ may not be zero, depending on the storage location.</p>
 <blockquote>
 <div><p>QEMU image format, the most versatile format. Use it to have smaller
 images (useful if your filesystem does not supports holes, for example
-on Windows), optional AES encryption, zlib based compression and
+on Windows), optional AES encryption, zlib or zstd based compression and
 support of multiple VM snapshots.</p>
 <p>Supported options:</p>
 <dl>
@@ -885,6 +966,15 @@ clusters, which allow efficient copy-on-read for sparse images.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">backing_file</span></code></dt><dd><p>File name of a base image (see <code class="docutils literal notranslate"><span class="pre">create</span></code> subcommand)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">backing_fmt</span></code></dt><dd><p>Image format of the base image</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compression_type</span></code></dt><dd><p>This option configures which compression algorithm will be used for
+compressed clusters on the image. Note that setting this option doesn’t yet
+cause the image to actually receive compressed writes. It is most commonly
+used with the <code class="docutils literal notranslate"><span class="pre">-c</span></code> option of <code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">convert</span></code>, but can also be used
+with the <code class="docutils literal notranslate"><span class="pre">compress</span></code> filter driver or backup block jobs with compression
+enabled.</p>
+<p>Valid values are <code class="docutils literal notranslate"><span class="pre">zlib</span></code> and <code class="docutils literal notranslate"><span class="pre">zstd</span></code>. For images that use
+<code class="docutils literal notranslate"><span class="pre">compat=0.10</span></code>, only <code class="docutils literal notranslate"><span class="pre">zlib</span></code> compression is available.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">encryption</span></code></dt><dd><p>If this option is set to <code class="docutils literal notranslate"><span class="pre">on</span></code>, the image is encrypted with
 128-bit AES-CBC.</p>
@@ -957,6 +1047,31 @@ couldn’t be changed to NOCOW by setting <code class="docutils literal notransl
 issue <code class="docutils literal notranslate"><span class="pre">lsattr</span> <span class="pre">filename</span></code> to check if the NOCOW flag is set or not
 (Capital ‘C’ is NOCOW flag).</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">data_file</span></code></dt><dd><p>Filename where all guest data will be stored. If this option is used,
+the qcow2 file will only contain the image’s metadata.</p>
+<p>Note: Data loss will occur if the given filename already exists when
+using this option with <code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">create</span></code> since <code class="docutils literal notranslate"><span class="pre">qemu-img</span></code> will create
+the data file anew, overwriting the file’s original contents. To simply
+update the reference to point to the given pre-existing file, use
+<code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">amend</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">data_file_raw</span></code></dt><dd><p>If this option is set to <code class="docutils literal notranslate"><span class="pre">on</span></code>, QEMU will always keep the external data
+file consistent as a standalone read-only raw image.</p>
+<p>It does this by forwarding all write accesses to the qcow2 file through to
+the raw data file, including their offsets. Therefore, data that is visible
+on the qcow2 node (i.e., to the guest) at some offset is visible at the same
+offset in the raw data file. This results in a read-only raw image. Writes
+that bypass the qcow2 metadata may corrupt the qcow2 metadata because the
+out-of-band writes may result in the metadata falling out of sync with the
+raw image.</p>
+<p>If this option is <code class="docutils literal notranslate"><span class="pre">off</span></code>, QEMU will use the data file to store data in an
+arbitrary manner. The file’s content will not make sense without the
+accompanying qcow2 metadata. Where data is written will have no relation to
+its offset as seen by the guest, and some writes (specifically zero writes)
+may not be forwarded to the data file at all, but will only be handled by
+modifying qcow2 metadata.</p>
+<p>This option can only be enabled if <code class="docutils literal notranslate"><span class="pre">data_file</span></code> is set.</p>
+</dd>
 </dl>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">Other</span></code></p>
@@ -971,74 +1086,50 @@ documentation.</p>
 conversion.  For running VMs, it is recommended to convert the disk
 images to either raw or qcow2 in order to achieve good performance.</p>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
+           </div>
           </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="qemu-storage-daemon.html" class="btn btn-neutral float-right" title="QEMU Storage Daemon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, The QEMU Project Developers.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+
+<!-- Empty para to force a blank line after "Built with Sphinx ..." -->
+<p></p>
+
+<p>This documentation is for QEMU version 9.0.0.</p>
+
+
+<p><a href="../about/license.html">QEMU and this manual are released under the
+GNU General Public License, version 2.</a></p>
+
+ 
+
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<div id="editpage">
-  <ul>
-    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/tools/qemu-img.rst">Page source</a></li>
-  </ul>
-</div><h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../system/index.html">System Emulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/index.html">User Mode Emulation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tools</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">QEMU disk image utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qemu-storage-daemon.html">QEMU Storage Daemon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qemu-nbd.html">QEMU Disk Network Block Device Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qemu-pr-helper.html">QEMU persistent reservation helper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qemu-trace-stap.html">QEMU SystemTap trace tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="virtiofsd.html">QEMU virtio-fs shared file system daemon</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../interop/index.html">System Emulation Management and Interoperability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../specs/index.html">System Emulation Guest Hardware Specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../devel/index.html">Developer Information</a></li>
-</ul>
-
-
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, The QEMU Project Developers.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

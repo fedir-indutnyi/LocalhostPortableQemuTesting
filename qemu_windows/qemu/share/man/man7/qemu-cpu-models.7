@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "QEMU-CPU-MODELS" "7" "May 06, 2021" "6.0.0" "QEMU"
-.SH NAME
-qemu-cpu-models \- QEMU CPU Models
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU-CPU-MODELS" "7" "Apr 23, 2024" "9.0.0" "QEMU"
+.SH NAME
+qemu-cpu-models \- QEMU CPU Models
 .SH SYNOPSIS
 .sp
 QEMU CPU Modelling Infrastructure manual
@@ -64,13 +64,905 @@ migrating between hosts with differing hardware.  @end table
 In both cases, it is possible to optionally add or remove individual CPU
 features, to alter what is presented to the guest by default.
 .sp
-Libvirt supports a third way to configure CPU models known as "Host
-model".  This uses the QEMU "Named model" feature, automatically picking
+Libvirt supports a third way to configure CPU models known as \(dqHost
+model\(dq.  This uses the QEMU \(dqNamed model\(dq feature, automatically picking
 a CPU model that is similar the host CPU, and then adding extra features
 to approximate the host model as closely as possible. This does not
 guarantee the CPU family, stepping, etc will precisely match the host
-CPU, as they would with "Host passthrough", but gives much of the
+CPU, as they would with \(dqHost passthrough\(dq, but gives much of the
 benefit of passthrough, while making live migration safe.
+.SS ABI compatibility levels for CPU models
+.sp
+The x86_64 architecture has a number of \fI\%ABI compatibility levels\fP
+defined. Traditionally most operating systems and toolchains would
+only target the original baseline ABI. It is expected that in
+future OS and toolchains are likely to target newer ABIs. The
+table that follows illustrates which ABI compatibility levels
+can be satisfied by the QEMU CPU models. Note that the table only
+lists the long term stable CPU model versions (eg Haswell\-v4).
+In addition to what is listed, there are also many CPU model
+aliases which resolve to a different CPU model version,
+depending on the machine type is in use.
+.SS x86\-64 ABI compatibility levels
+.TS
+center;
+|l|l|l|l|l|.
+_
+T{
+Model
+T}	T{
+baseline
+T}	T{
+v2
+T}	T{
+v3
+T}	T{
+v4
+T}
+_
+T{
+486\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+Broadwell\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Broadwell\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Broadwell\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Broadwell\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Cascadelake\-Server\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Cascadelake\-Server\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Cascadelake\-Server\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Cascadelake\-Server\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Cascadelake\-Server\-v5
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Conroe\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+Cooperlake\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Cooperlake\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Denverton\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Denverton\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Denverton\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Dhyana\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Dhyana\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Genoa\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+EPYC\-Milan\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Milan\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Rome\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Rome\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Rome\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-Rome\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+EPYC\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+GraniteRapids\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Haswell\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Haswell\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Haswell\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Haswell\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Icelake\-Server\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Icelake\-Server\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Icelake\-Server\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Icelake\-Server\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Icelake\-Server\-v5
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Icelake\-Server\-v6
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+IvyBridge\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+IvyBridge\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+KnightsMill\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Nehalem\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Nehalem\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Opteron_G1\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+Opteron_G2\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+Opteron_G3\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+Opteron_G4\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Opteron_G5\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Penryn\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+SandyBridge\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+SandyBridge\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+SapphireRapids\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+SapphireRapids\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Skylake\-Client\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Skylake\-Client\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Skylake\-Client\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Skylake\-Client\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}
+_
+T{
+Skylake\-Server\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Skylake\-Server\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Skylake\-Server\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Skylake\-Server\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Skylake\-Server\-v5
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+✅
+T}
+_
+T{
+Snowridge\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Snowridge\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Snowridge\-v3
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Snowridge\-v4
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Westmere\-v1
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+Westmere\-v2
+T}	T{
+✅
+T}	T{
+✅
+T}	T{
+T}	T{
+T}
+_
+T{
+athlon\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+core2duo\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+coreduo\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+kvm32\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+kvm64\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+n270\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+pentium\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+pentium2\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+pentium3\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+phenom\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+qemu32\-v1
+T}	T{
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+T{
+qemu64\-v1
+T}	T{
+✅
+T}	T{
+T}	T{
+T}	T{
+T}
+_
+.TE
 .SS Preferred CPU models for Intel x86 hosts
 .sp
 The following CPU models are preferred for use on Intel hosts.
@@ -82,7 +974,7 @@ across all desired hosts.
 .INDENT 0.0
 .TP
 .B \fBCascadelake\-Server\fP, \fBCascadelake\-Server\-noTSX\fP
-Intel Xeon Processor (Cascade Lake, 2019), with "stepping" levels 6
+Intel Xeon Processor (Cascade Lake, 2019), with \(dqstepping\(dq levels 6
 or 7 only.  (The Cascade Lake Xeon processor with \fIstepping 5 is
 vulnerable to MDS variants\fP\&.)
 .TP
@@ -122,7 +1014,7 @@ The following are important CPU features that should be used on Intel
 x86 hosts, when available in the host CPU. Some of them require explicit
 configuration to enable, as they are not included by default in some, or
 all, of the named CPU models listed above. In general all of these
-features are included if using "Host passthrough" or "Host model".
+features are included if using \(dqHost passthrough\(dq or \(dqHost model\(dq.
 .INDENT 0.0
 .TP
 .B \fBpcid\fP
@@ -233,7 +1125,7 @@ the guest should report \fBMitigation: TSX disabled\fP\&.
 .UNINDENT
 .SS Preferred CPU models for AMD x86 hosts
 .sp
-The following CPU models are preferred for use on Intel hosts.
+The following CPU models are preferred for use on AMD hosts.
 Administrators / applications are recommended to use the CPU model that
 matches the generation of the host CPUs in use. In a deployment with a
 mixture of host CPU models between machines, if live migration
@@ -265,7 +1157,7 @@ The following are important CPU features that should be used on AMD x86
 hosts, when available in the host CPU. Some of them require explicit
 configuration to enable, as they are not included by default in some, or
 all, of the named CPU models listed above. In general all of these
-features are included if using "Host passthrough" or "Host model".
+features are included if using \(dqHost passthrough\(dq or \(dqHost model\(dq.
 .INDENT 0.0
 .TP
 .B \fBibpb\fP
@@ -298,7 +1190,7 @@ This should be provided to guests, even if amd\-ssbd is also provided,
 for maximum guest compatibility.
 .sp
 Note for some QEMU / libvirt versions, this must be force enabled when
-when using "Host model", because this is a virtual feature that
+when using \(dqHost model\(dq, because this is a virtual feature that
 doesn\(aqt exist in the physical host CPUs.
 .TP
 .B \fBamd\-ssbd\fP
@@ -445,7 +1337,7 @@ Host passthrough with feature customization:
 .nf
 .ft C
 <cpu mode=\(aqhost\-passthrough\(aq>
-    <feature name="vmx" policy="disable"/>
+    <feature name=\(dqvmx\(dq policy=\(dqdisable\(dq/>
     ...
 </cpu>
 .ft P
@@ -472,7 +1364,7 @@ Host model with feature customization:
 .nf
 .ft C
 <cpu mode=\(aqhost\-model\(aq>
-    <feature name="vmx" policy="disable"/>
+    <feature name=\(dqvmx\(dq policy=\(dqdisable\(dq/>
     ...
 </cpu>
 .ft P
@@ -487,7 +1379,7 @@ Named model:
 .nf
 .ft C
 <cpu mode=\(aqcustom\(aq>
-    <model name="Westmere"/>
+    <model name=\(dqWestmere\(dq/>
 </cpu>
 .ft P
 .fi
@@ -501,8 +1393,8 @@ Named model with feature customization:
 .nf
 .ft C
 <cpu mode=\(aqcustom\(aq>
-    <model name="Westmere"/>
-    <feature name="pcid" policy="require"/>
+    <model name=\(dqWestmere\(dq/>
+    <feature name=\(dqpcid\(dq policy=\(dqrequire\(dq/>
     ...
 </cpu>
 .ft P
@@ -622,6 +1514,6 @@ The HTML documentation of QEMU for more precise information and Linux user mode 
 .SH AUTHOR
 The QEMU Project developers
 .SH COPYRIGHT
-2020, The QEMU Project Developers
+2024, The QEMU Project Developers
 .\" Generated by docutils manpage writer.
 .

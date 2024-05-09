@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "QEMU-BLOCK-DRIVERS" "7" "May 06, 2021" "6.0.0" "QEMU"
-.SH NAME
-qemu-block-drivers \- QEMU block drivers reference
 .
 .nr rst2man-indent-level 0
 .
@@ -30,6 +27,9 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU-BLOCK-DRIVERS" "7" "Apr 23, 2024" "9.0.0" "QEMU"
+.SH NAME
+qemu-block-drivers \- QEMU block drivers reference
 .SH SYNOPSIS
 .sp
 QEMU block driver reference manual
@@ -503,6 +503,12 @@ see it as a partitioned disk. WARNING: unless you know what you do, it
 is better to only make READ\-ONLY accesses to the hard disk otherwise
 you may corrupt your host data (use the \fB\-snapshot\fP command
 line option or modify the device permissions accordingly).
+.TP
+.B Zoned block devices
+Zoned block devices can be passed through to the guest if the emulated storage
+controller supports zoned storage. Use \fB\-\-blockdev host_device,
+node\-name=drive0,filename=/dev/nullb0,cache.direct=on\fP to pass through
+\fB/dev/nullb0\fP as \fBdrive0\fP\&.
 .UNINDENT
 .SS Windows
 .INDENT 0.0
@@ -581,7 +587,7 @@ What you should \fInever\fP do:
 .IP \(bu 2
 use non\-ASCII filenames
 .IP \(bu 2
-use "\-snapshot" together with ":rw:"
+use \(dq\-snapshot\(dq together with \(dq:rw:\(dq
 .IP \(bu 2
 expect it to work when loadvm\(aqing
 .IP \(bu 2
@@ -615,7 +621,7 @@ qemu\-system\-x86_64 linux.img \-hdb nbd+unix://?socket=/tmp/my_socket
 .UNINDENT
 .UNINDENT
 .sp
-In this case, the block device must be exported using qemu\-nbd:
+In this case, the block device must be exported using \fBqemu\-nbd\fP:
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -627,7 +633,7 @@ qemu\-nbd \-\-socket=/tmp/my_socket my_disk.qcow2
 .UNINDENT
 .UNINDENT
 .sp
-The use of qemu\-nbd allows sharing of a disk between several guests:
+The use of \fBqemu\-nbd\fP allows sharing of a disk between several guests:
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -652,7 +658,7 @@ qemu\-system\-x86_64 linux2.img \-hdb nbd+unix://?socket=/tmp/my_socket
 .UNINDENT
 .UNINDENT
 .sp
-If the nbd\-server uses named exports (supported since NBD 2.9.18, or with QEMU\(aqs
+If the \fBnbd\-server\fP uses named exports (supported since NBD 2.9.18, or with QEMU\(aqs
 own embedded NBD server), you must specify an export name in the URI:
 .INDENT 0.0
 .INDENT 3.5
@@ -676,119 +682,6 @@ also available.  Here are some example of the older syntax:
 qemu\-system\-x86_64 linux.img \-hdb nbd:my_nbd_server.mydomain.org:1024
 qemu\-system\-x86_64 linux2.img \-hdb nbd:unix:/tmp/my_socket
 qemu\-system\-x86_64 \-cdrom nbd:localhost:10809:exportname=debian\-500\-ppc\-netinst
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.SS Sheepdog disk images
-.sp
-Sheepdog is a distributed storage system for QEMU.  It provides highly
-available block level storage volumes that can be attached to
-QEMU\-based virtual machines.
-.sp
-You can create a Sheepdog disk image with the command:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-img create sheepdog:///IMAGE SIZE
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-where \fIIMAGE\fP is the Sheepdog image name and \fISIZE\fP is its
-size.
-.sp
-To import the existing \fIFILENAME\fP to Sheepdog, you can use a
-convert command.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-img convert FILENAME sheepdog:///IMAGE
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-You can boot from the Sheepdog disk image with the command:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-system\-x86_64 sheepdog:///IMAGE
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-You can also create a snapshot of the Sheepdog image like qcow2.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-img snapshot \-c TAG sheepdog:///IMAGE
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-where \fITAG\fP is a tag name of the newly created snapshot.
-.sp
-To boot from the Sheepdog snapshot, specify the tag name of the
-snapshot.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-system\-x86_64 sheepdog:///IMAGE#TAG
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-You can create a cloned image from the existing snapshot.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-img create \-b sheepdog:///BASE#TAG sheepdog:///IMAGE
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-where \fIBASE\fP is an image name of the source snapshot and \fITAG\fP
-is its tag name.
-.sp
-You can use an unix socket instead of an inet socket:
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-system\-x86_64 sheepdog+unix:///IMAGE?socket=PATH
-.ft P
-.fi
-.UNINDENT
-.UNINDENT
-.sp
-If the Sheepdog daemon doesn\(aqt run on the local host, you need to
-specify one of the Sheepdog servers to connect to.
-.INDENT 0.0
-.INDENT 3.5
-.sp
-.nf
-.ft C
-qemu\-img create sheepdog://HOSTNAME:PORT/IMAGE SIZE
-qemu\-system\-x86_64 sheepdog://HOSTNAME:PORT/IMAGE
 .ft P
 .fi
 .UNINDENT
@@ -879,11 +772,11 @@ These can also be set via a configuration file:
 .nf
 .ft C
 [iscsi]
-  user = "CHAP username"
-  password = "CHAP password"
-  initiator\-name = "iqn.qemu.test:my\-initiator"
+  user = \(dqCHAP username\(dq
+  password = \(dqCHAP password\(dq
+  initiator\-name = \(dqiqn.qemu.test:my\-initiator\(dq
   # header digest is one of CRC32C|CRC32C\-NONE|NONE\-CRC32C|NONE
-  header\-digest = "CRC32C"
+  header\-digest = \(dqCRC32C\(dq
 .ft P
 .fi
 .UNINDENT
@@ -895,12 +788,12 @@ Setting the target name allows different options for different targets:
 .sp
 .nf
 .ft C
-[iscsi "iqn.target.name"]
-  user = "CHAP username"
-  password = "CHAP password"
-  initiator\-name = "iqn.qemu.test:my\-initiator"
+[iscsi \(dqiqn.target.name\(dq]
+  user = \(dqCHAP username\(dq
+  password = \(dqCHAP password\(dq
+  initiator\-name = \(dqiqn.qemu.test:my\-initiator\(dq
   # header digest is one of CRC32C|CRC32C\-NONE|NONE\-CRC32C|NONE
-  header\-digest = "CRC32C"
+  header\-digest = \(dqCRC32C\(dq
 .ft P
 .fi
 .UNINDENT
@@ -914,10 +807,10 @@ How to use a configuration file to set iSCSI configuration options:
 .ft C
 cat >iscsi.conf <<EOF
 [iscsi]
-  user = "me"
-  password = "my password"
-  initiator\-name = "iqn.qemu.test:my\-initiator"
-  header\-digest = "CRC32C"
+  user = \(dqme\(dq
+  password = \(dqmy password\(dq
+  initiator\-name = \(dqiqn.qemu.test:my\-initiator\(dq
+  header\-digest = \(dqCRC32C\(dq
 EOF
 
 qemu\-system\-x86_64 \-drive file=iscsi://127.0.0.1/iqn.qemu.test/1 \e
@@ -976,11 +869,11 @@ JSON:
 .sp
 .nf
 .ft C
-qemu\-system\-x86_64 \(aqjson:{"driver":"qcow2",
-                         "file":{"driver":"gluster",
-                                  "volume":"testvol","path":"a.img","debug":9,"logfile":"...",
-                                  "server":[{"type":"tcp","host":"...","port":"..."},
-                                            {"type":"unix","socket":"..."}]}}\(aq
+qemu\-system\-x86_64 \(aqjson:{\(dqdriver\(dq:\(dqqcow2\(dq,
+                         \(dqfile\(dq:{\(dqdriver\(dq:\(dqgluster\(dq,
+                                  \(dqvolume\(dq:\(dqtestvol\(dq,\(dqpath\(dq:\(dqa.img\(dq,\(dqdebug\(dq:9,\(dqlogfile\(dq:\(dq...\(dq,
+                                  \(dqserver\(dq:[{\(dqtype\(dq:\(dqtcp\(dq,\(dqhost\(dq:\(dq...\(dq,\(dqport\(dq:\(dq...\(dq},
+                                            {\(dqtype\(dq:\(dqunix\(dq,\(dqsocket\(dq:\(dq...\(dq}]}}\(aq
 .ft P
 .fi
 .UNINDENT
@@ -1044,12 +937,12 @@ qemu\-system\-x86_64 \-drive file=gluster+tcp://server.domain.com:24007/testvol/
 qemu\-system\-x86_64 \-drive file=gluster+unix:///testvol/dir/a.img?socket=/tmp/glusterd.socket
 qemu\-system\-x86_64 \-drive file=gluster+rdma://1.2.3.4:24007/testvol/a.img
 qemu\-system\-x86_64 \-drive file=gluster://1.2.3.4/testvol/a.img,file.debug=9,file.logfile=/var/log/qemu\-gluster.log
-qemu\-system\-x86_64 \(aqjson:{"driver":"qcow2",
-                         "file":{"driver":"gluster",
-                                  "volume":"testvol","path":"a.img",
-                                  "debug":9,"logfile":"/var/log/qemu\-gluster.log",
-                                  "server":[{"type":"tcp","host":"1.2.3.4","port":24007},
-                                            {"type":"unix","socket":"/var/run/glusterd.socket"}]}}\(aq
+qemu\-system\-x86_64 \(aqjson:{\(dqdriver\(dq:\(dqqcow2\(dq,
+                         \(dqfile\(dq:{\(dqdriver\(dq:\(dqgluster\(dq,
+                                  \(dqvolume\(dq:\(dqtestvol\(dq,\(dqpath\(dq:\(dqa.img\(dq,
+                                  \(dqdebug\(dq:9,\(dqlogfile\(dq:\(dq/var/log/qemu\-gluster.log\(dq,
+                                  \(dqserver\(dq:[{\(dqtype\(dq:\(dqtcp\(dq,\(dqhost\(dq:\(dq1.2.3.4\(dq,\(dqport\(dq:24007},
+                                            {\(dqtype\(dq:\(dqunix\(dq,\(dqsocket\(dq:\(dq/var/run/glusterd.socket\(dq}]}}\(aq
 qemu\-system\-x86_64 \-drive driver=qcow2,file.driver=gluster,file.volume=testvol,file.path=/path/a.img,
                                      file.debug=9,file.logfile=/var/log/qemu\-gluster.log,
                                      file.server.0.type=tcp,file.server.0.host=1.2.3.4,file.server.0.port=24007,
@@ -1103,10 +996,48 @@ The optional \fIHOST_KEY_CHECK\fP parameter controls how the remote
 host\(aqs key is checked.  The default is \fByes\fP which means to use
 the local \fB\&.ssh/known_hosts\fP file.  Setting this to \fBno\fP
 turns off known\-hosts checking.  Or you can check that the host key
-matches a specific fingerprint:
-\fBhost_key_check=md5:78:45:8e:14:57:4f:d5:45:83:0a:0e:f3:49:82:c9:c8\fP
-(\fBsha1:\fP can also be used as a prefix, but note that OpenSSH
-tools only use MD5 to print fingerprints).
+matches a specific fingerprint. The fingerprint can be provided in
+\fBmd5\fP, \fBsha1\fP, or \fBsha256\fP format, however, it is strongly
+recommended to only use \fBsha256\fP, since the other options are
+considered insecure by modern standards. The fingerprint value
+must be given as a hex encoded string:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+host_key_check=sha256:04ce2ae89ff4295a6b9c4111640bdcb3297858ee55cb434d9dd88796e93aa795
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The key string may optionally contain \(dq:\(dq separators between
+each pair of hex digits.
+.sp
+The \fB$HOME/.ssh/known_hosts\fP file contains the base64 encoded
+host keys. These can be converted into the format needed for
+QEMU using a command such as:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ for key in \(gagrep 10.33.8.112 known_hosts | awk \(aq{print $3}\(aq\(ga
+  do
+    echo $key | base64 \-d | sha256sum
+  done
+  6c3aa525beda9dc83eadfbd7e5ba7d976ecb59575d1633c87cd06ed2ed6e366f  \-
+  12214fd9ea5b408086f98ecccd9958609bd9ac7c0ea316734006bc7818b45dc8  \-
+  d36420137bcbd101209ef70c3b15dc07362fbe0fa53c5b135eba6e6afa82f0ce  \-
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Note that there can be multiple keys present per host, each with
+different key ciphers. Care is needed to pick the key fingerprint
+that matches the cipher QEMU will negotiate with the remote server.
 .sp
 Currently authentication must be done using ssh\-agent.  Other
 authentication methods may be supported in future.
@@ -1188,14 +1119,14 @@ This feature is currently supported by the file protocol on Linux with the Open
 File Descriptor (OFD) locking API, and can be configured to fall back to POSIX
 locking if the POSIX host doesn\(aqt support Linux OFD locking.
 .sp
-To explicitly enable image locking, specify "locking=on" in the file protocol
+To explicitly enable image locking, specify \(dqlocking=on\(dq in the file protocol
 driver options. If OFD locking is not possible, a warning will be printed and
 the POSIX locking API will be used. In this case there is a risk that the lock
 will get silently lost when doing hot plugging and block jobs, due to the
 shortcomings of the POSIX locking API.
 .sp
 QEMU transparently handles lock handover during shared storage migration.  For
-shared virtual disk images between multiple VMs, the "share\-rw" device option
+shared virtual disk images between multiple VMs, the \(dqshare\-rw\(dq device option
 should be used.
 .sp
 By default, the guest has exclusive write access to its disk image. If the
@@ -1208,9 +1139,9 @@ Note that share\-rw=on only declares the guest\(aqs ability to share the disk.
 Some QEMU features, such as image file formats, require exclusive write access
 to the disk image and this is unaffected by the share\-rw=on option.
 .sp
-Alternatively, locking can be fully disabled by "locking=off" block device
+Alternatively, locking can be fully disabled by \(dqlocking=off\(dq block device
 option. In the command line, the option is usually in the form of
-"file.locking=off" as the protocol driver is normally placed as a "file" child
+\(dqfile.locking=off\(dq as the protocol driver is normally placed as a \(dqfile\(dq child
 under a format driver. For example:
 .INDENT 0.0
 .INDENT 3.5
@@ -1223,7 +1154,7 @@ under a format driver. For example:
 .UNINDENT
 .UNINDENT
 .sp
-To check if image locking is active, check the output of the "lslocks" command
+To check if image locking is active, check the output of the \(dqlslocks\(dq command
 on host and see if there are locks held by the QEMU process on the image file.
 More than one byte could be locked by the QEMU instance, each byte of which
 reflects a particular permission that is acquired or protected by the running
@@ -1259,6 +1190,6 @@ user mode emulator invocation.
 .SH AUTHOR
 Fabrice Bellard and the QEMU Project developers
 .SH COPYRIGHT
-2020, The QEMU Project Developers
+2024, The QEMU Project Developers
 .\" Generated by docutils manpage writer.
 .

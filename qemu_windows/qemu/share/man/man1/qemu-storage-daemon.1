@@ -1,8 +1,5 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "QEMU-STORAGE-DAEMON" "1" "May 06, 2021" "6.0.0" "QEMU"
-.SH NAME
-qemu-storage-daemon \- QEMU storage daemon
 .
 .nr rst2man-indent-level 0
 .
@@ -30,14 +27,18 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
+.TH "QEMU-STORAGE-DAEMON" "1" "Apr 23, 2024" "9.0.0" "QEMU"
+.SH NAME
+qemu-storage-daemon \- QEMU storage daemon
 .SH SYNOPSIS
 .sp
 \fBqemu\-storage\-daemon\fP [options]
 .SH DESCRIPTION
 .sp
-qemu\-storage\-daemon provides disk image functionality from QEMU, qemu\-img, and
-qemu\-nbd in a long\-running process controlled via QMP commands without running
-a virtual machine. It can export disk images, run block job operations, and
+\fBqemu\-storage\-daemon\fP provides disk image functionality from QEMU,
+\fBqemu\-img\fP, and \fBqemu\-nbd\fP in a long\-running process controlled via QMP
+commands without running a virtual machine.
+It can export disk images, run block job operations, and
 perform other disk\-related operations. The daemon is controlled via a QMP
 monitor and initial configuration from the command\-line.
 .sp
@@ -155,7 +156,9 @@ definition configures a UNIX domain socket:
 .TP
 .B \-\-export [type=]vhost\-user\-blk,id=<id>,node\-name=<node\-name>,addr.type=fd,addr.str=<fd>[,writable=on|off][,logical\-block\-size=<block\-size>][,num\-queues=<num\-queues>]
 .TP
-.B \-\-export [type=]fuse,id=<id>,node\-name=<node\-name>,mountpoint=<file>[,growable=on|off][,writable=on|off]
+.B \-\-export [type=]fuse,id=<id>,node\-name=<node\-name>,mountpoint=<file>[,growable=on|off][,writable=on|off][,allow\-other=on|off|auto]
+.TP
+.B \-\-export [type=]vduse\-blk,id=<id>,node\-name=<node\-name>,name=<vduse\-name>[,writable=on|off][,num\-queues=<num\-queues>][,queue\-size=<queue\-size>][,logical\-block\-size=<block\-size>][,serial=<serial\-number>]
 is a block export definition. \fBnode\-name\fP is the block node that should be
 exported. \fBwritable\fP determines whether or not the export allows write
 requests for modifying data (the default is off).
@@ -164,7 +167,7 @@ The \fBnbd\fP export type requires \fB\-\-nbd\-server\fP (see below). \fBname\fP
 the NBD export name (if not specified, it defaults to the given
 \fBnode\-name\fP). \fBbitmap\fP is the name of a dirty bitmap reachable from the
 block node, so the NBD client can use NBD_OPT_SET_META_CONTEXT with the
-metadata context name "qemu:dirty\-bitmap:BITMAP" to inspect the bitmap.
+metadata context name \(dqqemu:dirty\-bitmap:BITMAP\(dq to inspect the bitmap.
 .sp
 The \fBvhost\-user\-blk\fP export type takes a vhost\-user socket address on which
 it accept incoming connections. Both
@@ -181,7 +184,49 @@ directory contains, it only shows a different content while the filesystem is
 mounted). Consequently, applications that have opened the given file before
 the export became active will continue to see its original content. If
 \fBgrowable\fP is set, writes after the end of the exported file will grow the
-block node to fit.
+block node to fit.  The \fBallow\-other\fP option controls whether users other
+than the user running the process will be allowed to access the export.  Note
+that enabling this option as a non\-root user requires enabling the
+user_allow_other option in the global fuse.conf configuration file.  Setting
+\fBallow\-other\fP to auto (the default) will try enabling this option, and on
+error fall back to disabling it.
+.sp
+The \fBvduse\-blk\fP export type takes a \fBname\fP (must be unique across the host)
+to create the VDUSE device.
+\fBnum\-queues\fP sets the number of virtqueues (the default is 1).
+\fBqueue\-size\fP sets the virtqueue descriptor table size (the default is 256).
+.sp
+The instantiated VDUSE device must then be added to the vDPA bus using the
+vdpa(8) command from the iproute2 project:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# vdpa dev add name <id> mgmtdev vduse
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The device can be removed from the vDPA bus later as follows:
+.INDENT 7.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# vdpa dev del <id>
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+For more information about attaching vDPA devices to the host with
+virtio_vdpa.ko or attaching them to guests with vhost_vdpa.ko, see
+\fI\%https://vdpa\-dev.gitlab.io/\fP\&.
+.sp
+For more information about VDUSE, see
+\fI\%https://docs.kernel.org/userspace\-api/vduse.html\fP\&.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -259,6 +304,14 @@ The pid file is written after chardevs, exports, and NBD servers have been
 created but before accepting connections. The daemon has started successfully
 when the pid file is written and clients may begin connecting.
 .UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-daemonize
+Daemonize the process. The parent process will exit once startup is complete
+(i.e., after the pid file has been or would have been written) or failure
+occurs. Its exit code reflects whether the child has started up successfully
+or failed to do so.
+.UNINDENT
 .SH EXAMPLES
 .sp
 Launch the daemon with QMP monitor socket \fBqmp.sock\fP so clients can execute
@@ -305,7 +358,7 @@ with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as listen_sock:
 
 # listen_sock was automatically closed when leaving the \(aqwith\(aq statement
 # body. If the daemon process terminated early then the following connect()
-# will fail with "Connection refused" because no process has the listen
+# will fail with \(dqConnection refused\(dq because no process has the listen
 # socket open anymore. Launch errors can be detected this way.
 
 qmp_sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -335,7 +388,7 @@ $ qemu\-storage\-daemon \e
 .UNINDENT
 .UNINDENT
 .sp
-Export a qcow2 image file \fBdisk.qcow2\fP as a vhosts\-user\-blk device over UNIX
+Export a qcow2 image file \fBdisk.qcow2\fP as a vhost\-user\-blk device over UNIX
 domain socket \fBvhost\-user\-blk.sock\fP:
 .INDENT 0.0
 .INDENT 3.5
@@ -370,6 +423,6 @@ $ qemu\-storage\-daemon \e
 .sp
 \fBqemu(1)\fP, \fBqemu\-block\-drivers(7)\fP, \fBqemu\-storage\-daemon\-qmp\-ref(7)\fP
 .SH COPYRIGHT
-2020, The QEMU Project Developers
+2024, The QEMU Project Developers
 .\" Generated by docutils manpage writer.
 .
