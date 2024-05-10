@@ -38,7 +38,7 @@ echo QEMUHDD=%QEMUHDD%
 echo "%QEMUDIR%/%QEMUBIN%"
 rem "%QEMUDIR%/%QEMUBIN%" -L "%QEMUDIR%" -m 4G -smp cores=2,threads=1,sockets=1 -hda "%QEMUHDD%" -cdrom "C:\temp\k3os-amd64.iso" -display sdl -vga none -device virtio-vga,xres=640,yres=480 -boot cdrom -usb -usbdevice keyboard        -net nic -net user,id=user0,hostfwd=tcp::8080-:80,hostfwd=tcp::10022-:22,hostfwd=tcp::18080-:18080  -parallel none -serial none -device usb-kbd -usbdevice tablet 
 rem "%QEMUDIR%/%QEMUBIN%" -L "%QEMUDIR%" -m 4G -smp cores=2,threads=1,sockets=1 -hda "%QEMUHDD%" -cdrom "C:\temp\k3os-amd64.iso" -display sdl -vga none -device virtio-vga,xres=640,yres=480 -boot cd -usb -usbdevice keyboard        -net nic -net user,id=user0,hostfwd=tcp::8080-:80,hostfwd=tcp::10022-:22,hostfwd=tcp::18080-:18080  -parallel none -serial none -device usb-kbd -usbdevice tablet 
-"%QEMUDIR%/%QEMUBIN%" -L "%QEMUDIR%" -m 4G -smp cores=2,threads=1,sockets=1 -hda "%QEMUHDD%" -cdrom "C:\temp\ubuntu-22.04.3-live-server-amd64.iso" -display sdl -vga none -device virtio-vga,xres=640,yres=480 -boot c -usb -usbdevice keyboard        -net nic -net user,id=user0,hostfwd=tcp::8080-:80,hostfwd=tcp::10022-:22,hostfwd=tcp::18080-:18080  -parallel none -serial none -device usb-kbd -usbdevice tablet 
+"%QEMUDIR%/%QEMUBIN%" -L "%QEMUDIR%" -m 4G -smp cores=2,threads=1,sockets=1 -hda "%QEMUHDD%" -cdrom "" -display sdl -vga none -device virtio-vga,xres=640,yres=480 -boot c -usb -usbdevice keyboard        -net nic -net user,id=user0,hostfwd=tcp::8080-:80,hostfwd=tcp::10022-:22,hostfwd=tcp::18080-:18080  -parallel none -serial none -device usb-kbd -usbdevice tablet 
 
 rem qemu-img convert -O vmdk Q:\vmachine\mybackup.img vmdkname.vmdk 
 
