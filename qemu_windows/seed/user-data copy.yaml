@@ -1,0 +1,4 @@
+#cloud-config
+password: osboxes.org
+chpasswd:
+  expire: False

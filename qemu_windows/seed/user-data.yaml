@@ -1,0 +1,13 @@
+#cloud-config
+ssh_pwauth: True
+password: ubuntu
+chpasswd:
+  expire: False
+
+runcmd:
+   - echo 'Disable GUI:'
+   - sudo systemctl get-default
+   - sudo systemctl set-default multi-user
+   - echo 'PasswordAuthentication yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
+   - echo 'PermitRootLogin yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
+   - sudo service ssh restart
