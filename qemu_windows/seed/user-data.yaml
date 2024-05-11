@@ -4,10 +4,26 @@ password: ubuntu
 chpasswd:
   expire: False
 
+packages:
+  - openssh-server
+  - mc
+  - sshfs
+
+write_files:
+  - path: /var/lib/cloud/scripts/disable_gui.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      echo 'Disable GUI:'
+      sudo systemctl get-default
+      sudo systemctl set-default multi-user
+      echo 'PasswordAuthentication yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
+      echo 'PermitRootLogin yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
+      sudo service ssh restart
+      # Create a flag file to indicate the script has run
+      sudo touch /var/lib/cloud/scripts/disable_gui_completed
+
 runcmd:
-   - echo 'Disable GUI:'
-   - sudo systemctl get-default
-   - sudo systemctl set-default multi-user
-   - echo 'PasswordAuthentication yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
-   - echo 'PermitRootLogin yes' | sudo tee -a /etc/ssh/sshd_config > /dev/null
-   - sudo service ssh restart
+  - if [ ! -f /var/lib/cloud/scripts/disable_gui_completed ]; then
+      sudo /var/lib/cloud/scripts/disable_gui.sh;
+    fi

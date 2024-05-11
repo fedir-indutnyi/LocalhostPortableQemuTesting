@@ -74,6 +74,10 @@ echo 'password' | sshfs tester@10.0.2.2:/ ./shared -p2222
 sudo reboot
 ```
 
+to resize hdd:
+qemu_windows\qemu\qemu-img resize C:\temp\noble-server-cloudimg-amd64.img 100G
+
+
 Get Docker images:
 docker image ls
 sudo k3s ctr images ls
