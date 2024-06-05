@@ -76,7 +76,13 @@ sudo reboot
 
 to resize hdd:
 qemu_windows\qemu\qemu-img resize C:\temp\noble-server-cloudimg-amd64.img 100G
+qemu-img resize --shrink C:\temp\noble-server-cloudimg-amd64.img 50G
 
+Cloud image can be converted to raw foemat forst before writing to actual disk:
+qemu-img convert -O raw C:\temp\noble-server-cloudimg-amd64.img E:\temp\noble-server-cloudimg-amd64.img
+qemu-img convert -O vmdk C:\temp\noble-server-cloudimg-amd64.img E:\temp\noble-server-cloudimg-amd64.vmdk
+
+Then HDD RAWCopy or Balena Etcher or Rufus can write image to physical disk
 
 Get Docker images:
 docker image ls
